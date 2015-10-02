@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLMPack", "PLMPack\PLMPack.csproj", "{AF6F0156-F33D-479F-B8B1-BD58E7D87452}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{0A64DA26-988D-450F-AED7-FFC59EA2A3C0}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{05770712-4560-4ABB-83C3-DAC1F7BA4DD4}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\PLMPack-WAWS-dev.json = PublishScripts\Configurations\PLMPack-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPLMPackService", "TestPLMPackService\TestPLMPackService.csproj", "{F26484E3-CAA5-48BA-AB20-D045CF16F96A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF6F0156-F33D-479F-B8B1-BD58E7D87452} = {AF6F0156-F33D-479F-B8B1-BD58E7D87452}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF6F0156-F33D-479F-B8B1-BD58E7D87452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6F0156-F33D-479F-B8B1-BD58E7D87452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6F0156-F33D-479F-B8B1-BD58E7D87452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6F0156-F33D-479F-B8B1-BD58E7D87452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26484E3-CAA5-48BA-AB20-D045CF16F96A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26484E3-CAA5-48BA-AB20-D045CF16F96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26484E3-CAA5-48BA-AB20-D045CF16F96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26484E3-CAA5-48BA-AB20-D045CF16F96A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{05770712-4560-4ABB-83C3-DAC1F7BA4DD4} = {0A64DA26-988D-450F-AED7-FFC59EA2A3C0}
+	EndGlobalSection
+EndGlobal
