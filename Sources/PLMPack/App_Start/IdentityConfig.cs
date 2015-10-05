@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region Using directives
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,14 +13,50 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using PLMPack.Models;
 
+using System.Configuration;
+using System.Net;
+using SendGrid;
+using SendGrid.SmtpApi;
+#endregion
+
 namespace PLMPack
 {
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return configSendGridasync(message);
+        }
+        private Task configSendGridasync(IdentityMessage message)
+        {
+            try
+            {
+                var sgMessage = new SendGridMessage();
+                sgMessage.AddTo(message.Destination);
+                sgMessage.From = new System.Net.Mail.MailAddress(
+                                    "support@treedim.com", "Support treeDiM");
+                sgMessage.Subject = message.Subject;
+                sgMessage.Text = message.Body;
+                sgMessage.Html = message.Body;
+
+                var credentials = new NetworkCredential(
+                           ConfigurationManager.AppSettings["mailAccount"],
+                           ConfigurationManager.AppSettings["mailPassword"]
+                           );
+
+                // Create a Web transport for sending email.
+                var transportWeb = new Web(credentials);
+                // Send the email.
+                if (transportWeb != null)
+                    return transportWeb.DeliverAsync(sgMessage);
+                else
+                    return Task.FromResult(0);
+            }
+            catch (Exception ex)
+            {
+                string mess = ex.Message;
+                return Task.FromResult(0);
+            }
         }
     }
 
@@ -31,6 +68,8 @@ namespace PLMPack
             return Task.FromResult(0);
         }
     }
+
+
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -82,7 +121,8 @@ namespace PLMPack
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<ApplicationUser>
+                        (dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
