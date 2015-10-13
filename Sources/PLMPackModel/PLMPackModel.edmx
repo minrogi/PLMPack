@@ -1,0 +1,1856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PLMPackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CardboardFormat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="Length" Type="float" Nullable="false" />
+          <Property Name="Width" Type="float" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CardboardProfiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="Code" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Thickness" Type="float" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CardboardQuality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CardboardProfileId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="SurfacicMass" Type="float" Nullable="false" />
+          <Property Name="RigidityX" Type="float" Nullable="false" />
+          <Property Name="RigidityY" Type="float" Nullable="false" />
+          <Property Name="YoungModulus" Type="float" Nullable="false" />
+          <Property Name="ECT" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DocumentId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="DocumentType" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="FileGuid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="5" />
+          <Property Name="DateCreated" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="GroupDesc" Type="nvarchar" MaxLength="256" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupsOfInterest">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Issues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserNoteId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DocumentId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Majorations">
+          <Key>
+            <PropertyRef Name="MajorationSetId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="MajorationSetId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MajorationSets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ComponentGuid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CardboardProfileId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParamDefaultComponents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ComponentGuid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Thumbnails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FileGuid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="MimeType" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreeNodeDocuments">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="TreeNodeId" />
+          </Key>
+          <Property Name="DocumentId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TreeNodeId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreeNodeGroupShares">
+          <Key>
+            <PropertyRef Name="TreeNodeId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="TreeNodeId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreeNodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="ThumbnailId" Type="int" Nullable="false" />
+          <Property Name="ParentNodeId" Type="nvarchar" MaxLength="128" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserConnections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateConnectIN" Type="datetime" Nullable="false" />
+          <Property Name="DateConnectOUT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserDownloads">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DocumentId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateDownload" Type="datetime" Nullable="false" />
+          <Property Name="FileFormat" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="UserGroupMemberships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserNotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ParentNoteId" Type="nvarchar" MaxLength="128" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardFormat_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CardboardFormat" Type="Self.CardboardFormat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardFormat">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardProfiles_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CardboardProfiles" Type="Self.CardboardProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardProfiles">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id">
+          <End Role="CardboardProfiles" Type="Self.CardboardProfiles" Multiplicity="1" />
+          <End Role="CardboardQuality" Type="Self.CardboardQuality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardboardProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardQuality">
+              <PropertyRef Name="CardboardProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_File_Guid">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="FileGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Groups_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GroupsOfInterest_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="GroupsOfInterest" Type="Self.GroupsOfInterest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupsOfInterest">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GroupsOfInterest_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupsOfInterest" Type="Self.GroupsOfInterest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupsOfInterest">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Majorations_dbo_MajorationSet_Id">
+          <End Role="MajorationSets" Type="Self.MajorationSets" Multiplicity="1" />
+          <End Role="Majorations" Type="Self.Majorations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MajorationSets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Majorations">
+              <PropertyRef Name="MajorationSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MajorationSets_dbo_CardboardProfiles_Id">
+          <End Role="CardboardProfiles" Type="Self.CardboardProfiles" Multiplicity="1" />
+          <End Role="MajorationSets" Type="Self.MajorationSets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardboardProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MajorationSets">
+              <PropertyRef Name="CardboardProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MajorationSets_dbo_Group_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="MajorationSets" Type="Self.MajorationSets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MajorationSets">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="ParamDefaultComponents" Type="Self.ParamDefaultComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ParamDefaultComponents">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Thumbnails_dbo_File_Guid">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="Thumbnails" Type="Self.Thumbnails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Thumbnails">
+              <PropertyRef Name="FileGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="TreeNodeGroupShares" Type="Self.TreeNodeGroupShares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodeGroupShares">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TreeNodes_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TreeNodes" Type="Self.TreeNodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodes">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserConnections_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserConnections" Type="Self.UserConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserConnections">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserDownloads_dbo_Users_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserDownloads" Type="Self.UserDownloads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDownloads">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserGroupMemberships" Type="Self.UserGroupMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroupMemberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserGroupMemberships" Type="Self.UserGroupMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroupMemberships">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserNotes" Type="Self.UserNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserNotes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PLMPackModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardboardFormat" EntityType="Self.CardboardFormat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardboardProfiles" EntityType="Self.CardboardProfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardboardQuality" EntityType="Self.CardboardQuality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupsOfInterest" EntityType="Self.GroupsOfInterest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Issues" EntityType="Self.Issues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Majorations" EntityType="Self.Majorations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MajorationSets" EntityType="Self.MajorationSets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParamDefaultComponents" EntityType="Self.ParamDefaultComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thumbnails" EntityType="Self.Thumbnails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreeNodeDocuments" EntityType="Self.TreeNodeDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreeNodeGroupShares" EntityType="Self.TreeNodeGroupShares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreeNodes" EntityType="Self.TreeNodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserConnections" EntityType="Self.UserConnections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDownloads" EntityType="Self.UserDownloads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroupMemberships" EntityType="Self.UserGroupMemberships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserNotes" EntityType="Self.UserNotes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardFormat_dbo_Groups_Id" Association="Self.FK_dbo_CardboardFormat_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="CardboardFormat" EntitySet="CardboardFormat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardProfiles_dbo_Groups_Id" Association="Self.FK_dbo_CardboardProfiles_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id" Association="Self.FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id">
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+            <End Role="CardboardQuality" EntitySet="CardboardQuality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_File_Guid" Association="Self.FK_dbo_Documents_dbo_File_Guid">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_Groups_Id" Association="Self.FK_dbo_Documents_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Groups_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Groups_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GroupsOfInterest_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_GroupsOfInterest_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GroupsOfInterest" EntitySet="GroupsOfInterest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GroupsOfInterest_dbo_Groups_Id" Association="Self.FK_dbo_GroupsOfInterest_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupsOfInterest" EntitySet="GroupsOfInterest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Majorations_dbo_MajorationSet_Id" Association="Self.FK_dbo_Majorations_dbo_MajorationSet_Id">
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+            <End Role="Majorations" EntitySet="Majorations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MajorationSets_dbo_CardboardProfiles_Id" Association="Self.FK_dbo_MajorationSets_dbo_CardboardProfiles_Id">
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MajorationSets_dbo_Group_Id" Association="Self.FK_dbo_MajorationSets_dbo_Group_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id" Association="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="ParamDefaultComponents" EntitySet="ParamDefaultComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Thumbnails_dbo_File_Guid" Association="Self.FK_dbo_Thumbnails_dbo_File_Guid">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Thumbnails" EntitySet="Thumbnails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="TreeNodeGroupShares" EntitySet="TreeNodeGroupShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TreeNodes_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodes_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="TreeNodes" EntitySet="TreeNodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserConnections_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserConnections_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserConnections" EntitySet="UserConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserDownloads_dbo_Users_Id" Association="Self.FK_dbo_UserDownloads_dbo_Users_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserDownloads" EntitySet="UserDownloads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" Association="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserNotes" EntitySet="UserNotes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PLMPackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_dbo_Groups_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Groups" />
+          <NavigationProperty Name="UserConnections" Relationship="Self.FK_dbo_UserConnections_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="UserConnections" />
+          <NavigationProperty Name="UserDownloads" Relationship="Self.FK_dbo_UserDownloads_dbo_Users_Id" FromRole="AspNetUsers" ToRole="UserDownloads" />
+          <NavigationProperty Name="UserGroupMemberships" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="UserGroupMemberships" />
+          <NavigationProperty Name="UserNotes" Relationship="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="UserNotes" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Groups1" Relationship="Self.GroupsOfInterest" FromRole="AspNetUsers" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="CardboardFormat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="Double" Nullable="false" />
+          <Property Name="Width" Type="Double" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_CardboardFormat_dbo_Groups_Id" FromRole="CardboardFormat" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="CardboardProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Thickness" Type="Double" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_CardboardProfiles_dbo_Groups_Id" FromRole="CardboardProfiles" ToRole="Groups" />
+          <NavigationProperty Name="CardboardQualities" Relationship="Self.FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id" FromRole="CardboardProfiles" ToRole="CardboardQuality" />
+          <NavigationProperty Name="MajorationSets" Relationship="Self.FK_dbo_MajorationSets_dbo_CardboardProfiles_Id" FromRole="CardboardProfiles" ToRole="MajorationSets" />
+        </EntityType>
+        <EntityType Name="CardboardQuality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CardboardProfileId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SurfacicMass" Type="Double" Nullable="false" />
+          <Property Name="RigidityX" Type="Double" Nullable="false" />
+          <Property Name="RigidityY" Type="Double" Nullable="false" />
+          <Property Name="YoungModulus" Type="Double" Nullable="false" />
+          <Property Name="ECT" Type="Double" Nullable="false" />
+          <NavigationProperty Name="CardboardProfile" Relationship="Self.FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id" FromRole="CardboardQuality" ToRole="CardboardProfiles" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentComponent" FromRole="Component" ToRole="Document" />
+          <NavigationProperty Name="MajorationSet" Relationship="PLMPackModel.MajorationSetComponent" FromRole="Component" ToRole="MajorationSet" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileGuid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK_dbo_Documents_dbo_File_Guid" FromRole="Documents" ToRole="Files" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_Documents_dbo_Groups_Id" FromRole="Documents" ToRole="Groups" />
+          <NavigationProperty Name="TreeNodeDocuments" Relationship="PLMPackModel.DocumentTreeNodeDocument" FromRole="Document" ToRole="TreeNodeDocument" />
+          <NavigationProperty Name="Components" Relationship="PLMPackModel.DocumentComponent" FromRole="Document" ToRole="Component" />
+          <NavigationProperty Name="Issues" Relationship="PLMPackModel.DocumentIssue" FromRole="Document" ToRole="Issue" />
+          <NavigationProperty Name="UserDownloads" Relationship="PLMPackModel.DocumentUserDownload" FromRole="Document" ToRole="UserDownload" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Extension" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_File_Guid" FromRole="Files" ToRole="Documents" />
+          <NavigationProperty Name="Thumbnails" Relationship="Self.FK_dbo_Thumbnails_dbo_File_Guid" FromRole="Files" ToRole="Thumbnails" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupDesc" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Groups_dbo_AspNetUsers_UserId" FromRole="Groups" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CardboardFormats" Relationship="Self.FK_dbo_CardboardFormat_dbo_Groups_Id" FromRole="Groups" ToRole="CardboardFormat" />
+          <NavigationProperty Name="CardboardProfiles" Relationship="Self.FK_dbo_CardboardProfiles_dbo_Groups_Id" FromRole="Groups" ToRole="CardboardProfiles" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_Groups_Id" FromRole="Groups" ToRole="Documents" />
+          <NavigationProperty Name="MajorationSets" Relationship="Self.FK_dbo_MajorationSets_dbo_Group_Id" FromRole="Groups" ToRole="MajorationSets" />
+          <NavigationProperty Name="ParamDefaultComponents" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="Groups" ToRole="ParamDefaultComponents" />
+          <NavigationProperty Name="TreeNodeGroupShares" Relationship="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodeGroupShares" />
+          <NavigationProperty Name="TreeNodes" Relationship="Self.FK_dbo_TreeNodes_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodes" />
+          <NavigationProperty Name="UserGroupMemberships" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" FromRole="Groups" ToRole="UserGroupMemberships" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.GroupsOfInterest" FromRole="Groups" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserNoteId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserNote" Relationship="PLMPackModel.UserNoteIssue" FromRole="Issue" ToRole="UserNote" />
+          <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentIssue" FromRole="Issue" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="Majoration">
+          <Key>
+            <PropertyRef Name="MajorationSetId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="MajorationSetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="MajorationSet" Relationship="Self.FK_dbo_Majorations_dbo_MajorationSet_Id" FromRole="Majorations" ToRole="MajorationSets" />
+        </EntityType>
+        <EntityType Name="MajorationSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentGuid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardboardProfileId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CardboardProfile" Relationship="Self.FK_dbo_MajorationSets_dbo_CardboardProfiles_Id" FromRole="MajorationSets" ToRole="CardboardProfiles" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_MajorationSets_dbo_Group_Id" FromRole="MajorationSets" ToRole="Groups" />
+          <NavigationProperty Name="Majorations" Relationship="Self.FK_dbo_Majorations_dbo_MajorationSet_Id" FromRole="MajorationSets" ToRole="Majorations" />
+          <NavigationProperty Name="Components" Relationship="PLMPackModel.MajorationSetComponent" FromRole="MajorationSet" ToRole="Component" />
+        </EntityType>
+        <EntityType Name="ParamDefaultComponent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ComponentGuid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="ParamDefaultComponents" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Thumbnail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FileGuid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="MimeType" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK_dbo_Thumbnails_dbo_File_Guid" FromRole="Thumbnails" ToRole="Files" />
+          <NavigationProperty Name="TreeNodes" Relationship="PLMPackModel.ThumbnailTreeNode" FromRole="Thumbnail" ToRole="TreeNode" />
+        </EntityType>
+        <EntityType Name="TreeNodeDocument">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="TreeNodeId" />
+          </Key>
+          <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TreeNodeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TreeNode" Relationship="PLMPackModel.TreeNodeTreeNodeDocument" FromRole="TreeNodeDocument" ToRole="TreeNode" />
+          <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentTreeNodeDocument" FromRole="TreeNodeDocument" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="TreeNodeGroupShare">
+          <Key>
+            <PropertyRef Name="TreeNodeId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="TreeNodeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" FromRole="TreeNodeGroupShares" ToRole="Groups" />
+          <NavigationProperty Name="TreeNode" Relationship="PLMPackModel.TreeNodeGroupShareTreeNode" FromRole="TreeNodeGroupShares" ToRole="TreeNode" />
+        </EntityType>
+        <EntityType Name="TreeNode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailId" Type="Int32" Nullable="false" />
+          <Property Name="ParentNodeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_TreeNodes_dbo_Groups_Id" FromRole="TreeNodes" ToRole="Groups" />
+          <NavigationProperty Name="TreeNodeDocuments" Relationship="PLMPackModel.TreeNodeTreeNodeDocument" FromRole="TreeNode" ToRole="TreeNodeDocument" />
+          <NavigationProperty Name="TreeNodeGroupShare" Relationship="PLMPackModel.TreeNodeGroupShareTreeNode" FromRole="TreeNode" ToRole="TreeNodeGroupShares" />
+          <NavigationProperty Name="Thumbnail" Relationship="PLMPackModel.ThumbnailTreeNode" FromRole="TreeNode" ToRole="Thumbnail" />
+          <NavigationProperty Name="ParentNode" Relationship="PLMPackModel.TreeNodeTreeNode" FromRole="TreeNode" ToRole="TreeNode1" />
+          <NavigationProperty Name="Childrens" Relationship="PLMPackModel.TreeNodeTreeNode" FromRole="TreeNode1" ToRole="TreeNode" />
+        </EntityType>
+        <EntityType Name="UserConnection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateConnectIN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateConnectOUT" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserConnections_dbo_AspNetUsers_Id" FromRole="UserConnections" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="UserDownload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateDownload" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileFormat" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserDownloads_dbo_Users_Id" FromRole="UserDownloads" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentUserDownload" FromRole="UserDownload" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="UserGroupMembership">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" FromRole="UserGroupMemberships" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" FromRole="UserGroupMemberships" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="UserNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentNoteId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Text" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id" FromRole="UserNotes" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Issues" Relationship="PLMPackModel.UserNoteIssue" FromRole="UserNote" ToRole="Issue" />
+          <NavigationProperty Name="Childrens" Relationship="PLMPackModel.UserNoteUserNote" FromRole="UserNote" ToRole="ParentUserNote" />
+          <NavigationProperty Name="ParentNote" Relationship="PLMPackModel.UserNoteUserNote" FromRole="ParentUserNote" ToRole="UserNote" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Groups_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserConnections_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="UserConnections" Type="Self.UserConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserConnections">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserDownloads_dbo_Users_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="UserDownloads" Type="Self.UserDownload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDownloads">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserGroupMemberships" Type="Self.UserGroupMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroupMemberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="UserNotes" Type="Self.UserNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserNotes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardFormat_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CardboardFormat" Type="Self.CardboardFormat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardFormat">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardProfiles_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CardboardProfiles" Type="Self.CardboardProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardProfiles">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id">
+          <End Role="CardboardProfiles" Type="Self.CardboardProfile" Multiplicity="1" />
+          <End Role="CardboardQuality" Type="Self.CardboardQuality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardboardProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardboardQuality">
+              <PropertyRef Name="CardboardProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MajorationSets_dbo_CardboardProfiles_Id">
+          <End Role="CardboardProfiles" Type="Self.CardboardProfile" Multiplicity="1" />
+          <End Role="MajorationSets" Type="Self.MajorationSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardboardProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MajorationSets">
+              <PropertyRef Name="CardboardProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_File_Guid">
+          <End Role="Files" Type="Self.File" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="FileGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Thumbnails_dbo_File_Guid">
+          <End Role="Files" Type="Self.File" Multiplicity="1" />
+          <End Role="Thumbnails" Type="Self.Thumbnail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Thumbnails">
+              <PropertyRef Name="FileGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MajorationSets_dbo_Group_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="MajorationSets" Type="Self.MajorationSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MajorationSets">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="ParamDefaultComponents" Type="Self.ParamDefaultComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ParamDefaultComponents">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="TreeNodeGroupShares" Type="Self.TreeNodeGroupShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodeGroupShares">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TreeNodes_dbo_Groups_Id">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TreeNodes" Type="Self.TreeNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodes">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserGroupMemberships" Type="Self.UserGroupMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroupMemberships">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Majorations_dbo_MajorationSet_Id">
+          <End Role="MajorationSets" Type="Self.MajorationSet" Multiplicity="1" />
+          <End Role="Majorations" Type="Self.Majoration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MajorationSets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Majorations">
+              <PropertyRef Name="MajorationSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="GroupsOfInterest">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PLMPackEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="CardboardFormats" EntityType="Self.CardboardFormat" />
+          <EntitySet Name="CardboardProfiles" EntityType="Self.CardboardProfile" />
+          <EntitySet Name="CardboardQualities" EntityType="Self.CardboardQuality" />
+          <EntitySet Name="Components" EntityType="Self.Component" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="Files" EntityType="Self.File" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Issues" EntityType="Self.Issue" />
+          <EntitySet Name="Majorations" EntityType="Self.Majoration" />
+          <EntitySet Name="MajorationSets" EntityType="Self.MajorationSet" />
+          <EntitySet Name="ParamDefaultComponents" EntityType="Self.ParamDefaultComponent" />
+          <EntitySet Name="Thumbnails" EntityType="Self.Thumbnail" />
+          <EntitySet Name="TreeNodeDocuments" EntityType="Self.TreeNodeDocument" />
+          <EntitySet Name="TreeNodeGroupShares" EntityType="Self.TreeNodeGroupShare" />
+          <EntitySet Name="TreeNodes" EntityType="Self.TreeNode" />
+          <EntitySet Name="UserConnections" EntityType="Self.UserConnection" />
+          <EntitySet Name="UserDownloads" EntityType="Self.UserDownload" />
+          <EntitySet Name="UserGroupMemberships" EntityType="Self.UserGroupMembership" />
+          <EntitySet Name="UserNotes" EntityType="Self.UserNote" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Groups_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Groups_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserConnections_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserConnections_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserConnections" EntitySet="UserConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserDownloads_dbo_Users_Id" Association="Self.FK_dbo_UserDownloads_dbo_Users_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserDownloads" EntitySet="UserDownloads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserNotes" EntitySet="UserNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardFormat_dbo_Groups_Id" Association="Self.FK_dbo_CardboardFormat_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="CardboardFormat" EntitySet="CardboardFormats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardProfiles_dbo_Groups_Id" Association="Self.FK_dbo_CardboardProfiles_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id" Association="Self.FK_dbo_CardboardQuality_dbo_CardboardProfiles_Id">
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+            <End Role="CardboardQuality" EntitySet="CardboardQualities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MajorationSets_dbo_CardboardProfiles_Id" Association="Self.FK_dbo_MajorationSets_dbo_CardboardProfiles_Id">
+            <End Role="CardboardProfiles" EntitySet="CardboardProfiles" />
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_File_Guid" Association="Self.FK_dbo_Documents_dbo_File_Guid">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_Groups_Id" Association="Self.FK_dbo_Documents_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Thumbnails_dbo_File_Guid" Association="Self.FK_dbo_Thumbnails_dbo_File_Guid">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Thumbnails" EntitySet="Thumbnails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MajorationSets_dbo_Group_Id" Association="Self.FK_dbo_MajorationSets_dbo_Group_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id" Association="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="ParamDefaultComponents" EntitySet="ParamDefaultComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="TreeNodeGroupShares" EntitySet="TreeNodeGroupShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TreeNodes_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodes_dbo_Groups_Id">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="TreeNodes" EntitySet="TreeNodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" Association="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Majorations_dbo_MajorationSet_Id" Association="Self.FK_dbo_Majorations_dbo_MajorationSet_Id">
+            <End Role="MajorationSets" EntitySet="MajorationSets" />
+            <End Role="Majorations" EntitySet="Majorations" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="GroupsOfInterest" Association="Self.GroupsOfInterest">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="TreeNodeTreeNodeDocument" Association="PLMPackModel.TreeNodeTreeNodeDocument">
+            <End Role="TreeNode" EntitySet="TreeNodes" />
+            <End Role="TreeNodeDocument" EntitySet="TreeNodeDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentTreeNodeDocument" Association="PLMPackModel.DocumentTreeNodeDocument">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="TreeNodeDocument" EntitySet="TreeNodeDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="TreeNodeGroupShareTreeNode" Association="PLMPackModel.TreeNodeGroupShareTreeNode">
+            <End Role="TreeNodeGroupShares" EntitySet="TreeNodeGroupShares" />
+            <End Role="TreeNode" EntitySet="TreeNodes" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentComponent" Association="PLMPackModel.DocumentComponent">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="MajorationSetComponent" Association="PLMPackModel.MajorationSetComponent">
+            <End Role="MajorationSet" EntitySet="MajorationSets" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="UserNoteIssue" Association="PLMPackModel.UserNoteIssue">
+            <End Role="UserNote" EntitySet="UserNotes" />
+            <End Role="Issue" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="UserNoteUserNote" Association="PLMPackModel.UserNoteUserNote">
+            <End Role="UserNote" EntitySet="UserNotes" />
+            <End Role="ParentUserNote" EntitySet="UserNotes" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentIssue" Association="PLMPackModel.DocumentIssue">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Issue" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentUserDownload" Association="PLMPackModel.DocumentUserDownload">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="UserDownload" EntitySet="UserDownloads" />
+          </AssociationSet>
+          <AssociationSet Name="ThumbnailTreeNode" Association="PLMPackModel.ThumbnailTreeNode">
+            <End Role="Thumbnail" EntitySet="Thumbnails" />
+            <End Role="TreeNode" EntitySet="TreeNodes" />
+          </AssociationSet>
+          <AssociationSet Name="TreeNodeTreeNode" Association="PLMPackModel.TreeNodeTreeNode">
+            <End Role="TreeNode" EntitySet="TreeNodes" />
+            <End Role="TreeNode1" EntitySet="TreeNodes" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="TreeNodeTreeNodeDocument">
+          <End Type="PLMPackModel.TreeNode" Role="TreeNode" Multiplicity="1" />
+          <End Type="PLMPackModel.TreeNodeDocument" Role="TreeNodeDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreeNode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodeDocument">
+              <PropertyRef Name="TreeNodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentTreeNodeDocument">
+          <End Type="PLMPackModel.Document" Role="Document" Multiplicity="1" />
+          <End Type="PLMPackModel.TreeNodeDocument" Role="TreeNodeDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodeDocument">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TreeNodeGroupShareTreeNode">
+          <End Type="PLMPackModel.TreeNodeGroupShare" Role="TreeNodeGroupShares" Multiplicity="*" />
+          <End Type="PLMPackModel.TreeNode" Role="TreeNode" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TreeNode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNodeGroupShares">
+              <PropertyRef Name="TreeNodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentComponent">
+          <End Type="PLMPackModel.Document" Role="Document" Multiplicity="1" />
+          <End Type="PLMPackModel.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MajorationSetComponent">
+          <End Type="PLMPackModel.MajorationSet" Role="MajorationSet" Multiplicity="*" />
+          <End Type="PLMPackModel.Component" Role="Component" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="MajorationSet">
+              <PropertyRef Name="ComponentGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserNoteIssue">
+          <End Type="PLMPackModel.UserNote" Role="UserNote" Multiplicity="1" />
+          <End Type="PLMPackModel.Issue" Role="Issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserNote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issue">
+              <PropertyRef Name="UserNoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserNoteUserNote">
+          <End Type="PLMPackModel.UserNote" Role="UserNote" Multiplicity="*" />
+          <End Type="PLMPackModel.UserNote" Role="ParentUserNote" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ParentUserNote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserNote">
+              <PropertyRef Name="ParentNoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentIssue">
+          <End Type="PLMPackModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="PLMPackModel.Issue" Role="Issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Issue">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentUserDownload">
+          <End Type="PLMPackModel.Document" Role="Document" Multiplicity="1" />
+          <End Type="PLMPackModel.UserDownload" Role="UserDownload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDownload">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ThumbnailTreeNode">
+          <End Type="PLMPackModel.Thumbnail" Role="Thumbnail" Multiplicity="1" />
+          <End Type="PLMPackModel.TreeNode" Role="TreeNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thumbnail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNode">
+              <PropertyRef Name="ThumbnailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TreeNodeTreeNode">
+          <End Type="PLMPackModel.TreeNode" Role="TreeNode" Multiplicity="*" />
+          <End Type="PLMPackModel.TreeNode" Role="TreeNode1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TreeNode1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreeNode">
+              <PropertyRef Name="ParentNodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PLMPackModelStoreContainer" CdmEntityContainer="PLMPackEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="PLMPackModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="PLMPackModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="PLMPackModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="PLMPackModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="PLMPackModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardboardFormats">
+            <EntityTypeMapping TypeName="PLMPackModel.CardboardFormat">
+              <MappingFragment StoreEntitySet="CardboardFormat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardboardProfiles">
+            <EntityTypeMapping TypeName="PLMPackModel.CardboardProfile">
+              <MappingFragment StoreEntitySet="CardboardProfiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardboardQualities">
+            <EntityTypeMapping TypeName="PLMPackModel.CardboardQuality">
+              <MappingFragment StoreEntitySet="CardboardQuality">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardboardProfileId" ColumnName="CardboardProfileId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SurfacicMass" ColumnName="SurfacicMass" />
+                <ScalarProperty Name="RigidityX" ColumnName="RigidityX" />
+                <ScalarProperty Name="RigidityY" ColumnName="RigidityY" />
+                <ScalarProperty Name="YoungModulus" ColumnName="YoungModulus" />
+                <ScalarProperty Name="ECT" ColumnName="ECT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="PLMPackModel.Component">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="PLMPackModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="FileGuid" ColumnName="FileGuid" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="PLMPackModel.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="PLMPackModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupDesc" ColumnName="GroupDesc" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issues">
+            <EntityTypeMapping TypeName="PLMPackModel.Issue">
+              <MappingFragment StoreEntitySet="Issues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserNoteId" ColumnName="UserNoteId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Majorations">
+            <EntityTypeMapping TypeName="PLMPackModel.Majoration">
+              <MappingFragment StoreEntitySet="Majorations">
+                <ScalarProperty Name="MajorationSetId" ColumnName="MajorationSetId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MajorationSets">
+            <EntityTypeMapping TypeName="PLMPackModel.MajorationSet">
+              <MappingFragment StoreEntitySet="MajorationSets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ComponentGuid" ColumnName="ComponentGuid" />
+                <ScalarProperty Name="CardboardProfileId" ColumnName="CardboardProfileId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParamDefaultComponents">
+            <EntityTypeMapping TypeName="PLMPackModel.ParamDefaultComponent">
+              <MappingFragment StoreEntitySet="ParamDefaultComponents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ComponentGuid" ColumnName="ComponentGuid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thumbnails">
+            <EntityTypeMapping TypeName="PLMPackModel.Thumbnail">
+              <MappingFragment StoreEntitySet="Thumbnails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileGuid" ColumnName="FileGuid" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreeNodeDocuments">
+            <EntityTypeMapping TypeName="PLMPackModel.TreeNodeDocument">
+              <MappingFragment StoreEntitySet="TreeNodeDocuments">
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="TreeNodeId" ColumnName="TreeNodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreeNodeGroupShares">
+            <EntityTypeMapping TypeName="PLMPackModel.TreeNodeGroupShare">
+              <MappingFragment StoreEntitySet="TreeNodeGroupShares">
+                <ScalarProperty Name="TreeNodeId" ColumnName="TreeNodeId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreeNodes">
+            <EntityTypeMapping TypeName="PLMPackModel.TreeNode">
+              <MappingFragment StoreEntitySet="TreeNodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ThumbnailId" ColumnName="ThumbnailId" />
+                <ScalarProperty Name="ParentNodeId" ColumnName="ParentNodeId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserConnections">
+            <EntityTypeMapping TypeName="PLMPackModel.UserConnection">
+              <MappingFragment StoreEntitySet="UserConnections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DateConnectIN" ColumnName="DateConnectIN" />
+                <ScalarProperty Name="DateConnectOUT" ColumnName="DateConnectOUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDownloads">
+            <EntityTypeMapping TypeName="PLMPackModel.UserDownload">
+              <MappingFragment StoreEntitySet="UserDownloads">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DateDownload" ColumnName="DateDownload" />
+                <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupMemberships">
+            <EntityTypeMapping TypeName="PLMPackModel.UserGroupMembership">
+              <MappingFragment StoreEntitySet="UserGroupMemberships">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNotes">
+            <EntityTypeMapping TypeName="PLMPackModel.UserNote">
+              <MappingFragment StoreEntitySet="UserNotes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ParentNoteId" ColumnName="ParentNoteId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="PLMPackModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="GroupsOfInterest" TypeName="PLMPackModel.GroupsOfInterest" StoreEntitySet="GroupsOfInterest">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="Id" ColumnName="GroupId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
