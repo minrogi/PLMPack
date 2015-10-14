@@ -21,5 +21,6 @@ namespace PLMPackModel
         public string GroupId { get; set; }
     
         public virtual Group Group { get; set; }
+        public virtual Component Components { get; set; }
     }
 }

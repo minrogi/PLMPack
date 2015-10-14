@@ -17,6 +17,7 @@ namespace PLMPackModel
         public Component()
         {
             this.MajorationSet = new HashSet<MajorationSet>();
+            this.ParamDefaultComponent = new HashSet<ParamDefaultComponent>();
         }
     
         public string Guid { get; set; }
@@ -24,5 +25,6 @@ namespace PLMPackModel
     
         public virtual Document Document { get; set; }
         public virtual ICollection<MajorationSet> MajorationSet { get; set; }
+        public virtual ICollection<ParamDefaultComponent> ParamDefaultComponent { get; set; }
     }
 }

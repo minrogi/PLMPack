@@ -23,7 +23,6 @@ namespace PLMPackModel
             this.ParamDefaultComponents = new HashSet<ParamDefaultComponent>();
             this.TreeNodeGroupShares = new HashSet<TreeNodeGroupShare>();
             this.TreeNodes = new HashSet<TreeNode>();
-            this.UserGroupMemberships = new HashSet<UserGroupMembership>();
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
@@ -41,7 +40,6 @@ namespace PLMPackModel
         public virtual ICollection<ParamDefaultComponent> ParamDefaultComponents { get; set; }
         public virtual ICollection<TreeNodeGroupShare> TreeNodeGroupShares { get; set; }
         public virtual ICollection<TreeNode> TreeNodes { get; set; }
-        public virtual ICollection<UserGroupMembership> UserGroupMemberships { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

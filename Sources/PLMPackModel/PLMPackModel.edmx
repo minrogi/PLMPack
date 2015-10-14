@@ -242,14 +242,6 @@
           <Property Name="DateDownload" Type="datetime" Nullable="false" />
           <Property Name="FileFormat" Type="nvarchar" MaxLength="5" />
         </EntityType>
-        <EntityType Name="UserGroupMemberships">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserNotes">
           <Key>
             <PropertyRef Name="Id" />
@@ -526,34 +518,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserGroupMemberships" Type="Self.UserGroupMemberships" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserGroupMemberships">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
-          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserGroupMemberships" Type="Self.UserGroupMemberships" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Groups">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserGroupMemberships">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="UserNotes" Type="Self.UserNotes" Multiplicity="*" />
@@ -591,7 +555,6 @@
           <EntitySet Name="TreeNodes" EntityType="Self.TreeNodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserConnections" EntityType="Self.UserConnections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDownloads" EntityType="Self.UserDownloads" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserGroupMemberships" EntityType="Self.UserGroupMemberships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotes" EntityType="Self.UserNotes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -677,14 +640,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserDownloads" EntitySet="UserDownloads" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" Association="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
-            <End Role="Groups" EntitySet="Groups" />
-            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserNotes" EntitySet="UserNotes" />
@@ -755,10 +710,9 @@
           <NavigationProperty Name="Groups" Relationship="Self.FK_dbo_Groups_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Groups" />
           <NavigationProperty Name="UserConnections" Relationship="Self.FK_dbo_UserConnections_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="UserConnections" />
           <NavigationProperty Name="UserDownloads" Relationship="Self.FK_dbo_UserDownloads_dbo_Users_Id" FromRole="AspNetUsers" ToRole="UserDownloads" />
-          <NavigationProperty Name="UserGroupMemberships" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="UserGroupMemberships" />
           <NavigationProperty Name="UserNotes" Relationship="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="UserNotes" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Groups1" Relationship="Self.GroupsOfInterest" FromRole="AspNetUsers" ToRole="Groups" />
+          <NavigationProperty Name="GroupsOfInterest" Relationship="Self.GroupsOfInterest" FromRole="AspNetUsers" ToRole="Groups" />
         </EntityType>
         <EntityType Name="CardboardFormat">
           <Key>
@@ -809,6 +763,7 @@
           <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentComponent" FromRole="Component" ToRole="Document" />
           <NavigationProperty Name="MajorationSet" Relationship="PLMPackModel.MajorationSetComponent" FromRole="Component" ToRole="MajorationSet" />
+          <NavigationProperty Name="ParamDefaultComponent" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="Component" ToRole="ParamDefaultComponent" />
         </EntityType>
         <EntityType Name="Document">
           <Key>
@@ -854,7 +809,6 @@
           <NavigationProperty Name="ParamDefaultComponents" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="Groups" ToRole="ParamDefaultComponents" />
           <NavigationProperty Name="TreeNodeGroupShares" Relationship="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodeGroupShares" />
           <NavigationProperty Name="TreeNodes" Relationship="Self.FK_dbo_TreeNodes_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodes" />
-          <NavigationProperty Name="UserGroupMemberships" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" FromRole="Groups" ToRole="UserGroupMemberships" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.GroupsOfInterest" FromRole="Groups" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Issue">
@@ -903,6 +857,7 @@
           <Property Name="Value" Type="Double" Nullable="false" />
           <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="ParamDefaultComponents" ToRole="Groups" />
+          <NavigationProperty Name="Components" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="ParamDefaultComponent" ToRole="Component" />
         </EntityType>
         <EntityType Name="Thumbnail">
           <Key>
@@ -974,16 +929,6 @@
           <Property Name="FileFormat" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserDownloads_dbo_Users_Id" FromRole="UserDownloads" ToRole="AspNetUsers" />
           <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentUserDownload" FromRole="UserDownload" ToRole="Document" />
-        </EntityType>
-        <EntityType Name="UserGroupMembership">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" FromRole="UserGroupMemberships" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" FromRole="UserGroupMemberships" ToRole="Groups" />
         </EntityType>
         <EntityType Name="UserNote">
           <Key>
@@ -1059,20 +1004,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserDownloads">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserGroupMemberships" Type="Self.UserGroupMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserGroupMemberships">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1227,20 +1158,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
-          <End Role="Groups" Type="Self.Group" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserGroupMemberships" Type="Self.UserGroupMembership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Groups">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserGroupMemberships">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Majorations_dbo_MajorationSet_Id">
           <End Role="MajorationSets" Type="Self.MajorationSet" Multiplicity="1" />
           <End Role="Majorations" Type="Self.Majoration" Multiplicity="*" />
@@ -1284,7 +1201,6 @@
           <EntitySet Name="TreeNodes" EntityType="Self.TreeNode" />
           <EntitySet Name="UserConnections" EntityType="Self.UserConnection" />
           <EntitySet Name="UserDownloads" EntityType="Self.UserDownload" />
-          <EntitySet Name="UserGroupMemberships" EntityType="Self.UserGroupMembership" />
           <EntitySet Name="UserNotes" EntityType="Self.UserNote" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1305,10 +1221,6 @@
           <AssociationSet Name="FK_dbo_UserDownloads_dbo_Users_Id" Association="Self.FK_dbo_UserDownloads_dbo_Users_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserDownloads" EntitySet="UserDownloads" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_UserNotes_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserNotes_dbo_AspNetUsers_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1357,10 +1269,6 @@
           <AssociationSet Name="FK_dbo_TreeNodes_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodes_dbo_Groups_Id">
             <End Role="Groups" EntitySet="Groups" />
             <End Role="TreeNodes" EntitySet="TreeNodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" Association="Self.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId">
-            <End Role="Groups" EntitySet="Groups" />
-            <End Role="UserGroupMemberships" EntitySet="UserGroupMemberships" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Majorations_dbo_MajorationSet_Id" Association="Self.FK_dbo_Majorations_dbo_MajorationSet_Id">
             <End Role="MajorationSets" EntitySet="MajorationSets" />
@@ -1417,6 +1325,10 @@
           <AssociationSet Name="TreeNodeTreeNode" Association="PLMPackModel.TreeNodeTreeNode">
             <End Role="TreeNode" EntitySet="TreeNodes" />
             <End Role="TreeNode1" EntitySet="TreeNodes" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefaultComponentComponent" Association="PLMPackModel.ParamDefaultComponentComponent">
+            <End Role="ParamDefaultComponent" EntitySet="ParamDefaultComponents" />
+            <End Role="Component" EntitySet="Components" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="TreeNodeTreeNodeDocument">
@@ -1548,6 +1460,18 @@
             </Principal>
             <Dependent Role="TreeNode">
               <PropertyRef Name="ParentNodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParamDefaultComponentComponent">
+          <End Type="PLMPackModel.ParamDefaultComponent" Role="ParamDefaultComponent" Multiplicity="*" />
+          <End Type="PLMPackModel.Component" Role="Component" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="ParamDefaultComponent">
+              <PropertyRef Name="ComponentGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1791,15 +1715,6 @@
                 <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
                 <ScalarProperty Name="DateDownload" ColumnName="DateDownload" />
                 <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserGroupMemberships">
-            <EntityTypeMapping TypeName="PLMPackModel.UserGroupMembership">
-              <MappingFragment StoreEntitySet="UserGroupMemberships">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

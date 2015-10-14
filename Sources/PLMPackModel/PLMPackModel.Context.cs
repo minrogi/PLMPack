@@ -47,7 +47,6 @@ namespace PLMPackModel
         public virtual DbSet<TreeNode> TreeNodes { get; set; }
         public virtual DbSet<UserConnection> UserConnections { get; set; }
         public virtual DbSet<UserDownload> UserDownloads { get; set; }
-        public virtual DbSet<UserGroupMembership> UserGroupMemberships { get; set; }
         public virtual DbSet<UserNote> UserNotes { get; set; }
     }
 }

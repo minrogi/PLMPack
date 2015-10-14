@@ -112,6 +112,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PLMPackModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PLMPackModelDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Thumbnail.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
@@ -129,9 +130,6 @@
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDownload.cs">
-      <DependentUpon>PLMPackModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserGroupMembership.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserNote.cs">

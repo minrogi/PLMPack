@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33f166c83d4c44e69d9ef06f9b000e0c" Name="Diagram1" ZoomLevel="59">
-        <EntityTypeShape EntityType="PLMPackModel.C__MigrationHistory" Width="1.5" PointX="0.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.AspNetRole" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.AspNetUserClaim" Width="1.5" PointX="4.375" PointY="12.75" IsExpanded="true" />
+      <Diagram DiagramId="33f166c83d4c44e69d9ef06f9b000e0c" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="PLMPackModel.C__MigrationHistory" Width="1.5" PointX="0.875" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PLMPackModel.AspNetRole" Width="1.5" PointX="1" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PLMPackModel.AspNetUserClaim" Width="1.5" PointX="4.375" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.AspNetUserLogin" Width="1.5" PointX="4.5" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.AspNetUser" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.CardboardFormat" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
@@ -15,26 +15,24 @@
         <EntityTypeShape EntityType="PLMPackModel.CardboardQuality" Width="1.5" PointX="9.75" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Component" Width="1.5" PointX="14.875" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Document" Width="1.5" PointX="12.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.File" Width="1.5" PointX="10.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PLMPackModel.File" Width="1.5" PointX="10.25" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Group" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Issue" Width="1.5" PointX="7.5" PointY="33.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Majoration" Width="1.5" PointX="9.75" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.MajorationSet" Width="1.5" PointX="9.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PLMPackModel.MajorationSet" Width="1.5" PointX="9.75" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.ParamDefaultComponent" Width="1.5" PointX="7.5" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.Thumbnail" Width="1.5" PointX="12.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PLMPackModel.Thumbnail" Width="1.5" PointX="12.5" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.TreeNodeDocument" Width="1.5" PointX="9.875" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.TreeNodeGroupShare" Width="1.5" PointX="7.5" PointY="25.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.TreeNode" Width="1.5" PointX="7.5" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.UserConnection" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.UserDownload" Width="1.5" PointX="5.25" PointY="30.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.UserGroupMembership" Width="1.5" PointX="7.5" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.UserNote" Width="1.5" PointX="5.25" PointY="33.375" IsExpanded="true" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Groups_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_UserConnections_dbo_AspNetUsers_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_UserDownloads_dbo_Users_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="PLMPackModel.FK_dbo_UserGroupMemberships_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_UserNotes_dbo_AspNetUsers_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_CardboardFormat_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_CardboardProfiles_dbo_Groups_Id" ManuallyRouted="false" />
@@ -47,7 +45,6 @@
         <AssociationConnector Association="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodes_dbo_Groups_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="PLMPackModel.FK_dbo_UserGroupMemberships_dbo_Groups_GroupId" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Majorations_dbo_MajorationSet_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.GroupsOfInterest" ManuallyRouted="false" />
@@ -62,6 +59,7 @@
         <AssociationConnector Association="PLMPackModel.DocumentUserDownload" />
         <AssociationConnector Association="PLMPackModel.ThumbnailTreeNode" />
         <AssociationConnector Association="PLMPackModel.TreeNodeTreeNode" />
+        <AssociationConnector Association="PLMPackModel.ParamDefaultComponentComponent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
