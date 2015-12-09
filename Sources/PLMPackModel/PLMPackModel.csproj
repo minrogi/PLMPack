@@ -70,6 +70,7 @@
     <Compile Include="CardboardQuality.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComparerTreeNode.cs" />
     <Compile Include="Component.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>
@@ -94,6 +95,7 @@
     <Compile Include="MajorationSet.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelException.cs" />
     <Compile Include="ParamDefaultComponent.cs">
       <DependentUpon>PLMPackModel.tt</DependentUpon>
     </Compile>

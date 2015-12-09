@@ -9,17 +9,1280 @@
 //------------------------------------------------------------------------------
 
 namespace TestPLMPackService.PLMPack {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCUser", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupID {
+            get {
+                return this.GroupIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupIDField, value) != true)) {
+                    this.GroupIDField = value;
+                    this.RaisePropertyChanged("GroupID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCGroup", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCUser[] MembersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCUser[] Members {
+            get {
+                return this.MembersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MembersField, value) != true)) {
+                    this.MembersField = value;
+                    this.RaisePropertyChanged("Members");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCCardboadFormat", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCCardboadFormat : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double LengthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double WidthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Length {
+            get {
+                return this.LengthField;
+            }
+            set {
+                if ((this.LengthField.Equals(value) != true)) {
+                    this.LengthField = value;
+                    this.RaisePropertyChanged("Length");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Width {
+            get {
+                return this.WidthField;
+            }
+            set {
+                if ((this.WidthField.Equals(value) != true)) {
+                    this.WidthField = value;
+                    this.RaisePropertyChanged("Width");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCCardboardProfile", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCCardboardProfile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ThicknessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Thickness {
+            get {
+                return this.ThicknessField;
+            }
+            set {
+                if ((this.ThicknessField.Equals(value) != true)) {
+                    this.ThicknessField = value;
+                    this.RaisePropertyChanged("Thickness");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCTreeNode", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCTreeNode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCComponent ComponentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCFile DocumentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasChildrensField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.NodeType NodeTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParentNodeIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCThumbnail ThumbnailField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCComponent Component {
+            get {
+                return this.ComponentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ComponentField, value) != true)) {
+                    this.ComponentField = value;
+                    this.RaisePropertyChanged("Component");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCFile Document {
+            get {
+                return this.DocumentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentField, value) != true)) {
+                    this.DocumentField = value;
+                    this.RaisePropertyChanged("Document");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasChildrens {
+            get {
+                return this.HasChildrensField;
+            }
+            set {
+                if ((this.HasChildrensField.Equals(value) != true)) {
+                    this.HasChildrensField = value;
+                    this.RaisePropertyChanged("HasChildrens");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.NodeType NodeType {
+            get {
+                return this.NodeTypeField;
+            }
+            set {
+                if ((this.NodeTypeField.Equals(value) != true)) {
+                    this.NodeTypeField = value;
+                    this.RaisePropertyChanged("NodeType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ParentNodeID {
+            get {
+                return this.ParentNodeIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParentNodeIDField, value) != true)) {
+                    this.ParentNodeIDField = value;
+                    this.RaisePropertyChanged("ParentNodeID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCThumbnail Thumbnail {
+            get {
+                return this.ThumbnailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThumbnailField, value) != true)) {
+                    this.ThumbnailField = value;
+                    this.RaisePropertyChanged("Thumbnail");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCComponent", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCComponent : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCFile FileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCMajorationSet[] MajoSetsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCParamDefaultValue[] ParamDefaultsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CGuid {
+            get {
+                return this.CGuidField;
+            }
+            set {
+                if ((this.CGuidField.Equals(value) != true)) {
+                    this.CGuidField = value;
+                    this.RaisePropertyChanged("CGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCFile File {
+            get {
+                return this.FileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileField, value) != true)) {
+                    this.FileField = value;
+                    this.RaisePropertyChanged("File");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCMajorationSet[] MajoSets {
+            get {
+                return this.MajoSetsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MajoSetsField, value) != true)) {
+                    this.MajoSetsField = value;
+                    this.RaisePropertyChanged("MajoSets");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCParamDefaultValue[] ParamDefaults {
+            get {
+                return this.ParamDefaultsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParamDefaultsField, value) != true)) {
+                    this.ParamDefaultsField = value;
+                    this.RaisePropertyChanged("ParamDefaults");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCFile", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateCreatedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExtensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GuidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateCreated {
+            get {
+                return this.DateCreatedField;
+            }
+            set {
+                if ((this.DateCreatedField.Equals(value) != true)) {
+                    this.DateCreatedField = value;
+                    this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Extension {
+            get {
+                return this.ExtensionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExtensionField, value) != true)) {
+                    this.ExtensionField = value;
+                    this.RaisePropertyChanged("Extension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Guid {
+            get {
+                return this.GuidField;
+            }
+            set {
+                if ((this.GuidField.Equals(value) != true)) {
+                    this.GuidField = value;
+                    this.RaisePropertyChanged("Guid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCThumbnail", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCThumbnail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCFile FileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MimeTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WidthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCFile File {
+            get {
+                return this.FileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileField, value) != true)) {
+                    this.FileField = value;
+                    this.RaisePropertyChanged("File");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Height {
+            get {
+                return this.HeightField;
+            }
+            set {
+                if ((this.HeightField.Equals(value) != true)) {
+                    this.HeightField = value;
+                    this.RaisePropertyChanged("Height");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MimeType {
+            get {
+                return this.MimeTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MimeTypeField, value) != true)) {
+                    this.MimeTypeField = value;
+                    this.RaisePropertyChanged("MimeType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Width {
+            get {
+                return this.WidthField;
+            }
+            set {
+                if ((this.WidthField.Equals(value) != true)) {
+                    this.WidthField = value;
+                    this.RaisePropertyChanged("Width");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NodeType", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    public enum NodeType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NTBranch = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NTDocument = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NTComponent = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCMajorationSet", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCMajorationSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCMajoration[] MajorationsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestPLMPackService.PLMPack.DCCardboardProfile ProfileField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCMajoration[] Majorations {
+            get {
+                return this.MajorationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MajorationsField, value) != true)) {
+                    this.MajorationsField = value;
+                    this.RaisePropertyChanged("Majorations");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestPLMPackService.PLMPack.DCCardboardProfile Profile {
+            get {
+                return this.ProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
+                    this.ProfileField = value;
+                    this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCParamDefaultValue", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCParamDefaultValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCMajoration", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCMajoration : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PLMPack.IPLMPackService")]
     public interface IPLMPackService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UserDescription", ReplyAction="http://tempuri.org/IPLMPackService/UserDescriptionResponse")]
-        string UserDescription();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/get_UserName", ReplyAction="http://tempuri.org/IPLMPackService/get_UserNameResponse")]
+        string get_UserName();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UserDescription", ReplyAction="http://tempuri.org/IPLMPackService/UserDescriptionResponse")]
-        System.Threading.Tasks.Task<string> UserDescriptionAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/get_UserName", ReplyAction="http://tempuri.org/IPLMPackService/get_UserNameResponse")]
+        System.Threading.Tasks.Task<string> get_UserNameAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetUser", ReplyAction="http://tempuri.org/IPLMPackService/GetUserResponse")]
+        TestPLMPackService.PLMPack.DCUser GetUser();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetUser", ReplyAction="http://tempuri.org/IPLMPackService/GetUserResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCUser> GetUserAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/Connect", ReplyAction="http://tempuri.org/IPLMPackService/ConnectResponse")]
+        TestPLMPackService.PLMPack.DCUser Connect();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/Connect", ReplyAction="http://tempuri.org/IPLMPackService/ConnectResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCUser> ConnectAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/DisConnect", ReplyAction="http://tempuri.org/IPLMPackService/DisConnectResponse")]
+        void DisConnect();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/DisConnect", ReplyAction="http://tempuri.org/IPLMPackService/DisConnectResponse")]
+        System.Threading.Tasks.Task DisConnectAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCurrentGroup", ReplyAction="http://tempuri.org/IPLMPackService/GetCurrentGroupResponse")]
+        TestPLMPackService.PLMPack.DCGroup GetCurrentGroup();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCurrentGroup", ReplyAction="http://tempuri.org/IPLMPackService/GetCurrentGroupResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCGroup> GetCurrentGroupAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/SetCurrentGroup", ReplyAction="http://tempuri.org/IPLMPackService/SetCurrentGroupResponse")]
+        void SetCurrentGroup(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/SetCurrentGroup", ReplyAction="http://tempuri.org/IPLMPackService/SetCurrentGroupResponse")]
+        System.Threading.Tasks.Task SetCurrentGroupAsync(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/AddInterest", ReplyAction="http://tempuri.org/IPLMPackService/AddInterestResponse")]
+        void AddInterest(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/AddInterest", ReplyAction="http://tempuri.org/IPLMPackService/AddInterestResponse")]
+        System.Threading.Tasks.Task AddInterestAsync(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveInterest", ReplyAction="http://tempuri.org/IPLMPackService/RemoveInterestResponse")]
+        void RemoveInterest(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveInterest", ReplyAction="http://tempuri.org/IPLMPackService/RemoveInterestResponse")]
+        System.Threading.Tasks.Task RemoveInterestAsync(string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormats", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardFormatsResponse")]
+        TestPLMPackService.PLMPack.DCCardboadFormat[] GetAllCardboardFormats();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormats", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardFormatsResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat[]> GetAllCardboardFormatsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByID", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByIDResponse")]
+        TestPLMPackService.PLMPack.DCCardboadFormat GetCardboardFormatByID(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByID", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByIDResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> GetCardboardFormatByIDAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CardboardFormatExists", ReplyAction="http://tempuri.org/IPLMPackService/CardboardFormatExistsResponse")]
+        bool CardboardFormatExists(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CardboardFormatExists", ReplyAction="http://tempuri.org/IPLMPackService/CardboardFormatExistsResponse")]
+        System.Threading.Tasks.Task<bool> CardboardFormatExistsAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByName", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByNameResponse")]
+        TestPLMPackService.PLMPack.DCCardboadFormat GetCardboardFormatByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByName", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByNameResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> GetCardboardFormatByNameAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewCardboardFormatResponse")]
+        TestPLMPackService.PLMPack.DCCardboadFormat CreateNewCardboardFormat(string name, string description, double length, double width);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewCardboardFormatResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> CreateNewCardboardFormatAsync(string name, string description, double length, double width);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardFormatResponse")]
+        void RemoveCardboardFormat(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardFormatResponse")]
+        System.Threading.Tasks.Task RemoveCardboardFormatAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardFormatResponse")]
+        TestPLMPackService.PLMPack.DCCardboadFormat UpdateCardboardFormat(TestPLMPackService.PLMPack.DCCardboadFormat cbFormat);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardFormatResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> UpdateCardboardFormatAsync(TestPLMPackService.PLMPack.DCCardboadFormat cbFormat);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardProfileResponse")]
+        TestPLMPackService.PLMPack.DCCardboardProfile[] GetAllCardboardProfile();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardProfileResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile[]> GetAllCardboardProfileAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByID", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByIDResponse")]
+        TestPLMPackService.PLMPack.DCCardboardProfile GetCardboardProfileByID(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByID", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByIDResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> GetCardboardProfileByIDAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CardboardProfileExists", ReplyAction="http://tempuri.org/IPLMPackService/CardboardProfileExistsResponse")]
+        bool CardboardProfileExists(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CardboardProfileExists", ReplyAction="http://tempuri.org/IPLMPackService/CardboardProfileExistsResponse")]
+        System.Threading.Tasks.Task<bool> CardboardProfileExistsAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByName", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByNameResponse")]
+        TestPLMPackService.PLMPack.DCCardboardProfile GetCardboardProfileByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByName", ReplyAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByNameResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> GetCardboardProfileByNameAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewCardboardProfileResponse")]
+        TestPLMPackService.PLMPack.DCCardboardProfile CreateNewCardboardProfile(string name, string description, string code, double thickness);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewCardboardProfileResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> CreateNewCardboardProfileAsync(string name, string description, string code, double thickness);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardProfileResponse")]
+        void RemoveCardboardProfile(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardProfileResponse")]
+        System.Threading.Tasks.Task RemoveCardboardProfileAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse")]
+        TestPLMPackService.PLMPack.DCCardboardProfile UpdateCardboardProfile(TestPLMPackService.PLMPack.DCCardboardProfile cbProfile);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> UpdateCardboardProfileAsync(TestPLMPackService.PLMPack.DCCardboardProfile cbProfile);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetRootNodes", ReplyAction="http://tempuri.org/IPLMPackService/GetRootNodesResponse")]
+        TestPLMPackService.PLMPack.DCTreeNode[] GetRootNodes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetRootNodes", ReplyAction="http://tempuri.org/IPLMPackService/GetRootNodesResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode[]> GetRootNodesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens", ReplyAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse")]
+        TestPLMPackService.PLMPack.DCTreeNode[] GetTreeNodeChildrens(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens", ReplyAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode[]> GetTreeNodeChildrensAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranch", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeBranchResponse")]
+        TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeBranch(string parentNodeId, string name, string description, int thumbnailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranch", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeBranchResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeBranchAsync(string parentNodeId, string name, string description, int thumbnailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
+        TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeDocument(string parentNodeId, string name, string description, int thumbnailId, string docType, TestPLMPackService.PLMPack.DCFile docFile);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeDocumentAsync(string parentNodeId, string name, string description, int thumbnailId, string docType, TestPLMPackService.PLMPack.DCFile docFile);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
+        TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, TestPLMPackService.PLMPack.DCFile compFile, System.Guid compGuid, TestPLMPackService.PLMPack.DCMajorationSet[] majorationSets, TestPLMPackService.PLMPack.DCParamDefaultValue defaultValue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, TestPLMPackService.PLMPack.DCFile compFile, System.Guid compGuid, TestPLMPackService.PLMPack.DCMajorationSet[] majorationSets, TestPLMPackService.PLMPack.DCParamDefaultValue defaultValue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
+        void ShareTreeNode(string treeNodeId, string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
+        System.Threading.Tasks.Task ShareTreeNodeAsync(string treeNodeId, string grpId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
+        TestPLMPackService.PLMPack.DCComponent GetComponentByGuid(System.Guid g);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCComponent> GetComponentByGuidAsync(System.Guid g);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse")]
+        void UpdateParamDefaultComponent(System.Guid g, TestPLMPackService.PLMPack.DCParamDefaultValue[] paramDefaultValue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse")]
+        System.Threading.Tasks.Task UpdateParamDefaultComponentAsync(System.Guid g, TestPLMPackService.PLMPack.DCParamDefaultValue[] paramDefaultValue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse")]
+        TestPLMPackService.PLMPack.DCParamDefaultValue[] GetParamDefaultValue(System.Guid g);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCParamDefaultValue[]> GetParamDefaultValueAsync(System.Guid g);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse")]
+        TestPLMPackService.PLMPack.DCMajorationSet UpdateMajorationSet(System.Guid g, int profileId, TestPLMPackService.PLMPack.DCMajoration[] majorations);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, int profileId, TestPLMPackService.PLMPack.DCMajoration[] majorations);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/GetMajorationSetResponse")]
+        TestPLMPackService.PLMPack.DCMajorationSet GetMajorationSet(System.Guid g, int profileId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/GetMajorationSetResponse")]
+        System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCMajorationSet> GetMajorationSetAsync(System.Guid g, int profileId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +1312,268 @@ namespace TestPLMPackService.PLMPack {
                 base(binding, remoteAddress) {
         }
         
-        public string UserDescription() {
-            return base.Channel.UserDescription();
+        public string get_UserName() {
+            return base.Channel.get_UserName();
         }
         
-        public System.Threading.Tasks.Task<string> UserDescriptionAsync() {
-            return base.Channel.UserDescriptionAsync();
+        public System.Threading.Tasks.Task<string> get_UserNameAsync() {
+            return base.Channel.get_UserNameAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCUser GetUser() {
+            return base.Channel.GetUser();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCUser> GetUserAsync() {
+            return base.Channel.GetUserAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCUser Connect() {
+            return base.Channel.Connect();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCUser> ConnectAsync() {
+            return base.Channel.ConnectAsync();
+        }
+        
+        public void DisConnect() {
+            base.Channel.DisConnect();
+        }
+        
+        public System.Threading.Tasks.Task DisConnectAsync() {
+            return base.Channel.DisConnectAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCGroup GetCurrentGroup() {
+            return base.Channel.GetCurrentGroup();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCGroup> GetCurrentGroupAsync() {
+            return base.Channel.GetCurrentGroupAsync();
+        }
+        
+        public void SetCurrentGroup(string grpId) {
+            base.Channel.SetCurrentGroup(grpId);
+        }
+        
+        public System.Threading.Tasks.Task SetCurrentGroupAsync(string grpId) {
+            return base.Channel.SetCurrentGroupAsync(grpId);
+        }
+        
+        public void AddInterest(string grpId) {
+            base.Channel.AddInterest(grpId);
+        }
+        
+        public System.Threading.Tasks.Task AddInterestAsync(string grpId) {
+            return base.Channel.AddInterestAsync(grpId);
+        }
+        
+        public void RemoveInterest(string grpId) {
+            base.Channel.RemoveInterest(grpId);
+        }
+        
+        public System.Threading.Tasks.Task RemoveInterestAsync(string grpId) {
+            return base.Channel.RemoveInterestAsync(grpId);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboadFormat[] GetAllCardboardFormats() {
+            return base.Channel.GetAllCardboardFormats();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat[]> GetAllCardboardFormatsAsync() {
+            return base.Channel.GetAllCardboardFormatsAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboadFormat GetCardboardFormatByID(int id) {
+            return base.Channel.GetCardboardFormatByID(id);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> GetCardboardFormatByIDAsync(int id) {
+            return base.Channel.GetCardboardFormatByIDAsync(id);
+        }
+        
+        public bool CardboardFormatExists(string name) {
+            return base.Channel.CardboardFormatExists(name);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CardboardFormatExistsAsync(string name) {
+            return base.Channel.CardboardFormatExistsAsync(name);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboadFormat GetCardboardFormatByName(string name) {
+            return base.Channel.GetCardboardFormatByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> GetCardboardFormatByNameAsync(string name) {
+            return base.Channel.GetCardboardFormatByNameAsync(name);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboadFormat CreateNewCardboardFormat(string name, string description, double length, double width) {
+            return base.Channel.CreateNewCardboardFormat(name, description, length, width);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> CreateNewCardboardFormatAsync(string name, string description, double length, double width) {
+            return base.Channel.CreateNewCardboardFormatAsync(name, description, length, width);
+        }
+        
+        public void RemoveCardboardFormat(int id) {
+            base.Channel.RemoveCardboardFormat(id);
+        }
+        
+        public System.Threading.Tasks.Task RemoveCardboardFormatAsync(int id) {
+            return base.Channel.RemoveCardboardFormatAsync(id);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboadFormat UpdateCardboardFormat(TestPLMPackService.PLMPack.DCCardboadFormat cbFormat) {
+            return base.Channel.UpdateCardboardFormat(cbFormat);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboadFormat> UpdateCardboardFormatAsync(TestPLMPackService.PLMPack.DCCardboadFormat cbFormat) {
+            return base.Channel.UpdateCardboardFormatAsync(cbFormat);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboardProfile[] GetAllCardboardProfile() {
+            return base.Channel.GetAllCardboardProfile();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile[]> GetAllCardboardProfileAsync() {
+            return base.Channel.GetAllCardboardProfileAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboardProfile GetCardboardProfileByID(int id) {
+            return base.Channel.GetCardboardProfileByID(id);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> GetCardboardProfileByIDAsync(int id) {
+            return base.Channel.GetCardboardProfileByIDAsync(id);
+        }
+        
+        public bool CardboardProfileExists(string name) {
+            return base.Channel.CardboardProfileExists(name);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CardboardProfileExistsAsync(string name) {
+            return base.Channel.CardboardProfileExistsAsync(name);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboardProfile GetCardboardProfileByName(string name) {
+            return base.Channel.GetCardboardProfileByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> GetCardboardProfileByNameAsync(string name) {
+            return base.Channel.GetCardboardProfileByNameAsync(name);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboardProfile CreateNewCardboardProfile(string name, string description, string code, double thickness) {
+            return base.Channel.CreateNewCardboardProfile(name, description, code, thickness);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> CreateNewCardboardProfileAsync(string name, string description, string code, double thickness) {
+            return base.Channel.CreateNewCardboardProfileAsync(name, description, code, thickness);
+        }
+        
+        public void RemoveCardboardProfile(int id) {
+            base.Channel.RemoveCardboardProfile(id);
+        }
+        
+        public System.Threading.Tasks.Task RemoveCardboardProfileAsync(int id) {
+            return base.Channel.RemoveCardboardProfileAsync(id);
+        }
+        
+        public TestPLMPackService.PLMPack.DCCardboardProfile UpdateCardboardProfile(TestPLMPackService.PLMPack.DCCardboardProfile cbProfile) {
+            return base.Channel.UpdateCardboardProfile(cbProfile);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCCardboardProfile> UpdateCardboardProfileAsync(TestPLMPackService.PLMPack.DCCardboardProfile cbProfile) {
+            return base.Channel.UpdateCardboardProfileAsync(cbProfile);
+        }
+        
+        public TestPLMPackService.PLMPack.DCTreeNode[] GetRootNodes() {
+            return base.Channel.GetRootNodes();
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode[]> GetRootNodesAsync() {
+            return base.Channel.GetRootNodesAsync();
+        }
+        
+        public TestPLMPackService.PLMPack.DCTreeNode[] GetTreeNodeChildrens(string id) {
+            return base.Channel.GetTreeNodeChildrens(id);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode[]> GetTreeNodeChildrensAsync(string id) {
+            return base.Channel.GetTreeNodeChildrensAsync(id);
+        }
+        
+        public TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeBranch(string parentNodeId, string name, string description, int thumbnailId) {
+            return base.Channel.CreateNewNodeBranch(parentNodeId, name, description, thumbnailId);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeBranchAsync(string parentNodeId, string name, string description, int thumbnailId) {
+            return base.Channel.CreateNewNodeBranchAsync(parentNodeId, name, description, thumbnailId);
+        }
+        
+        public TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeDocument(string parentNodeId, string name, string description, int thumbnailId, string docType, TestPLMPackService.PLMPack.DCFile docFile) {
+            return base.Channel.CreateNewNodeDocument(parentNodeId, name, description, thumbnailId, docType, docFile);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeDocumentAsync(string parentNodeId, string name, string description, int thumbnailId, string docType, TestPLMPackService.PLMPack.DCFile docFile) {
+            return base.Channel.CreateNewNodeDocumentAsync(parentNodeId, name, description, thumbnailId, docType, docFile);
+        }
+        
+        public TestPLMPackService.PLMPack.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, TestPLMPackService.PLMPack.DCFile compFile, System.Guid compGuid, TestPLMPackService.PLMPack.DCMajorationSet[] majorationSets, TestPLMPackService.PLMPack.DCParamDefaultValue defaultValue) {
+            return base.Channel.CreateNewNodeComponent(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValue);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, TestPLMPackService.PLMPack.DCFile compFile, System.Guid compGuid, TestPLMPackService.PLMPack.DCMajorationSet[] majorationSets, TestPLMPackService.PLMPack.DCParamDefaultValue defaultValue) {
+            return base.Channel.CreateNewNodeComponentAsync(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValue);
+        }
+        
+        public void ShareTreeNode(string treeNodeId, string grpId) {
+            base.Channel.ShareTreeNode(treeNodeId, grpId);
+        }
+        
+        public System.Threading.Tasks.Task ShareTreeNodeAsync(string treeNodeId, string grpId) {
+            return base.Channel.ShareTreeNodeAsync(treeNodeId, grpId);
+        }
+        
+        public TestPLMPackService.PLMPack.DCComponent GetComponentByGuid(System.Guid g) {
+            return base.Channel.GetComponentByGuid(g);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCComponent> GetComponentByGuidAsync(System.Guid g) {
+            return base.Channel.GetComponentByGuidAsync(g);
+        }
+        
+        public void UpdateParamDefaultComponent(System.Guid g, TestPLMPackService.PLMPack.DCParamDefaultValue[] paramDefaultValue) {
+            base.Channel.UpdateParamDefaultComponent(g, paramDefaultValue);
+        }
+        
+        public System.Threading.Tasks.Task UpdateParamDefaultComponentAsync(System.Guid g, TestPLMPackService.PLMPack.DCParamDefaultValue[] paramDefaultValue) {
+            return base.Channel.UpdateParamDefaultComponentAsync(g, paramDefaultValue);
+        }
+        
+        public TestPLMPackService.PLMPack.DCParamDefaultValue[] GetParamDefaultValue(System.Guid g) {
+            return base.Channel.GetParamDefaultValue(g);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCParamDefaultValue[]> GetParamDefaultValueAsync(System.Guid g) {
+            return base.Channel.GetParamDefaultValueAsync(g);
+        }
+        
+        public TestPLMPackService.PLMPack.DCMajorationSet UpdateMajorationSet(System.Guid g, int profileId, TestPLMPackService.PLMPack.DCMajoration[] majorations) {
+            return base.Channel.UpdateMajorationSet(g, profileId, majorations);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, int profileId, TestPLMPackService.PLMPack.DCMajoration[] majorations) {
+            return base.Channel.UpdateMajorationSetAsync(g, profileId, majorations);
+        }
+        
+        public TestPLMPackService.PLMPack.DCMajorationSet GetMajorationSet(System.Guid g, int profileId) {
+            return base.Channel.GetMajorationSet(g, profileId);
+        }
+        
+        public System.Threading.Tasks.Task<TestPLMPackService.PLMPack.DCMajorationSet> GetMajorationSetAsync(System.Guid g, int profileId) {
+            return base.Channel.GetMajorationSetAsync(g, profileId);
         }
     }
 }

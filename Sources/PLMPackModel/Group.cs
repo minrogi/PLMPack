@@ -19,11 +19,11 @@ namespace PLMPackModel
             this.CardboardFormats = new HashSet<CardboardFormat>();
             this.CardboardProfiles = new HashSet<CardboardProfile>();
             this.Documents = new HashSet<Document>();
-            this.MajorationSets = new HashSet<MajorationSet>();
             this.ParamDefaultComponents = new HashSet<ParamDefaultComponent>();
             this.TreeNodeGroupShares = new HashSet<TreeNodeGroupShare>();
             this.TreeNodes = new HashSet<TreeNode>();
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.AspNetUsers1 = new HashSet<AspNetUser>();
         }
     
         public string Id { get; set; }
@@ -36,10 +36,10 @@ namespace PLMPackModel
         public virtual ICollection<CardboardFormat> CardboardFormats { get; set; }
         public virtual ICollection<CardboardProfile> CardboardProfiles { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
-        public virtual ICollection<MajorationSet> MajorationSets { get; set; }
         public virtual ICollection<ParamDefaultComponent> ParamDefaultComponents { get; set; }
         public virtual ICollection<TreeNodeGroupShare> TreeNodeGroupShares { get; set; }
         public virtual ICollection<TreeNode> TreeNodes { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers1 { get; set; }
     }
 }

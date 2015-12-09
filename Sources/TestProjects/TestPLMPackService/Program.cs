@@ -27,7 +27,7 @@ namespace TestPLMPackService
                     PLMPack.PLMPackServiceClient client = new PLMPack.PLMPackServiceClient();
                     client.ClientCredentials.UserName.UserName = usrName;
                     client.ClientCredentials.UserName.Password = usrPwd;
-                    Console.WriteLine(client.UserDescription());
+                    Console.WriteLine(client.get_UserName());
                     client.Close();
                 }
                 catch (System.ServiceModel.Security.MessageSecurityException ex)

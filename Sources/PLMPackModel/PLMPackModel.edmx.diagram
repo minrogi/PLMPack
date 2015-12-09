@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33f166c83d4c44e69d9ef06f9b000e0c" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="PLMPackModel.C__MigrationHistory" Width="1.5" PointX="0.875" PointY="12.5" IsExpanded="true" />
+      <Diagram DiagramId="33f166c83d4c44e69d9ef06f9b000e0c" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="PLMPackModel.C__MigrationHistory" Width="1.5" PointX="1.875" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.AspNetRole" Width="1.5" PointX="1" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.AspNetUserClaim" Width="1.5" PointX="4.375" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.AspNetUserLogin" Width="1.5" PointX="4.5" PointY="15.125" IsExpanded="true" />
@@ -41,7 +41,6 @@
         <AssociationConnector Association="PLMPackModel.FK_dbo_Documents_dbo_File_Guid" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Documents_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Thumbnails_dbo_File_Guid" ManuallyRouted="false" />
-        <AssociationConnector Association="PLMPackModel.FK_dbo_MajorationSets_dbo_Group_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodes_dbo_Groups_Id" ManuallyRouted="false" />
@@ -60,6 +59,7 @@
         <AssociationConnector Association="PLMPackModel.ThumbnailTreeNode" />
         <AssociationConnector Association="PLMPackModel.TreeNodeTreeNode" />
         <AssociationConnector Association="PLMPackModel.ParamDefaultComponentComponent" />
+        <AssociationConnector Association="PLMPackModel.UserGroupMemberships" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

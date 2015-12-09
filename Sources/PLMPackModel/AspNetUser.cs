@@ -24,6 +24,7 @@ namespace PLMPackModel
             this.UserNotes = new HashSet<UserNote>();
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.GroupsOfInterest = new HashSet<Group>();
+            this.Groups2 = new HashSet<Group>();
         }
     
         public string Id { get; set; }
@@ -48,5 +49,6 @@ namespace PLMPackModel
         public virtual ICollection<UserNote> UserNotes { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<Group> GroupsOfInterest { get; set; }
+        public virtual ICollection<Group> Groups2 { get; set; }
     }
 }

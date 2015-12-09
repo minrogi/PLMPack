@@ -22,10 +22,8 @@ namespace PLMPackModel
         public string Id { get; set; }
         public string ComponentGuid { get; set; }
         public int CardboardProfileId { get; set; }
-        public string GroupId { get; set; }
     
         public virtual CardboardProfile CardboardProfile { get; set; }
-        public virtual Group Group { get; set; }
         public virtual ICollection<Majoration> Majorations { get; set; }
         public virtual Component Components { get; set; }
     }

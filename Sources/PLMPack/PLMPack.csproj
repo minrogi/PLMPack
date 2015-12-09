@@ -172,14 +172,24 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="IPLMPackService\DCCardboardQuality.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="IPLMPackService\DCCardboardProfile.cs" />
+    <Compile Include="IPLMPackService\DCComponent.cs" />
+    <Compile Include="IPLMPackService\DCFile.cs" />
+    <Compile Include="IPLMPackService\DCGroup.cs" />
+    <Compile Include="IPLMPackService\DCMajoration.cs" />
+    <Compile Include="IPLMPackService\DCParamDefaultValue.cs" />
+    <Compile Include="IPLMPackService\DCThumbnail.cs" />
+    <Compile Include="IPLMPackService\DCTreeNode.cs" />
+    <Compile Include="IPLMPackService\DCUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IdentityValidator.cs" />
-    <Compile Include="IPLMPackService.cs" />
+    <Compile Include="IPLMPackService\IPLMPackService.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -188,6 +198,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="IPLMPackService\DCCardboadFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -260,6 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PLMPackModel\PLMPackModel.csproj">
+      <Project>{a9572760-6675-4786-8c96-fd98a29c7228}</Project>
+      <Name>PLMPackModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

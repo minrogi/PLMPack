@@ -15,7 +15,7 @@ namespace PLMPack
 {
     public class IdentityValidator : UserNamePasswordValidator
     {
-        public override void Validate(string userName, string password)
+        public override void Validate(string userNameOrEmail, string password)
         {
             try
             {
@@ -23,10 +23,19 @@ namespace PLMPack
                 {
                     using (var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context)))
                     {
+                        string userName = userNameOrEmail;
+                        if (userNameOrEmail.Contains('@'))
+                        {
+                            var userForEmail = userManager.FindByEmail(userNameOrEmail);
+                            if (userForEmail != null)
+                            {
+                                userName = userForEmail.UserName;
+                            }
+                        }
                         var user = userManager.Find(userName, password);
                         if (user == null)
                         {
-                            var msg = String.Format("Unknown Username {0} or incorrect password {1}", userName, password);
+                            var msg = String.Format("Unknown Username {0} or incorrect password {1}", userNameOrEmail, password);
                             Trace.TraceWarning(msg);
                             throw new FaultException(msg);
                         }

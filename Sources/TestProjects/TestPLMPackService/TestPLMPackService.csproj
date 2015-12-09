@@ -57,6 +57,36 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Service References\PLMPack\PLMPackService.wsdl" />
+    <None Include="Service References\PLMPack\PLMPackService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PLMPack\PLMPackService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCCardboadFormat.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCCardboardProfile.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCComponent.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCMajorationSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCParamDefaultValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCTreeNode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCUser.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -65,12 +95,18 @@
     <WCFMetadataStorage Include="Service References\PLMPack\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\PLMPack\PLMPackService.disco" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Service References\PLMPack\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\PLMPack\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\PLMPack\PLMPackService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\PLMPack\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
