@@ -12,13 +12,13 @@ namespace PLMPack
     public class DCTreeNode
     {
         [DataMember]
-        public string ID { get; set; }
+        public Guid ID { get; set; }
+        [DataMember]
+        public Guid ParentNodeID { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
         public string Description { get; set; }
-        [DataMember]
-        public string ParentNodeID { get; set; }
         [DataMember]
         public DCNodeTypeEnum NodeType { get; set; }
         [DataMember]

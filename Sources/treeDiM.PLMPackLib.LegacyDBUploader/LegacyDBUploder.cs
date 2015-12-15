@@ -8,6 +8,7 @@ using System.IO;
 
 using log4net;
 
+using treeDiM.FileTransfer;
 using Pic.DAL.SQLite;
 #endregion
 
@@ -68,23 +69,37 @@ namespace treeDiM.PLMPackLib
             if (null != callback) callback.Info("Tree nodes...");
             List<TreeNode> rootNodes = TreeNode.GetRootNodes(db);
             string offset = string.Empty;
+            PLMPackSR.DCTreeNode userRootNode = _client.GetUserRootNode();
             foreach (TreeNode tn in rootNodes)
-                RecursiveInsert(db, tn, offset, callback);
+                RecursiveInsert(db, tn, userRootNode, string.Empty, callback);
 
         }
 
-        private void RecursiveInsert(PPDataContext db, TreeNode tn, string offset, IProcessingCallback callback)
+        private void RecursiveInsert(PPDataContext db, TreeNode tn, PLMPackSR.DCTreeNode wsNode, string offset, IProcessingCallback callback)
         {
+            // create node thumbnail
+            PLMPackSR.DCThumbnail wsThumbnail = _client.CreateNewThumbnail(
+                tn.Thumbnail.File.Guid, tn.Thumbnail.File.Extension);
+
             string docType = string.Empty;
+            PLMPackSR.DCTreeNode wsNodeChild = null;
             if (tn.IsDocument)
             {
                 // get document
                 Document doc = tn.Documents(db)[0];
 
+                string filePath = string.Empty;
+                Guid g = FileTransferUtility.UploadFile(filePath);
+
+
+                PLMPackSR.DCFile wsDocFile = _client.CreateNewFile(doc.File.Guid, doc.File.Extension);
+
                 if (tn.IsComponent)
                 {
                     docType = "COMPONENT";
                     Component comp = doc.Components[0];
+                    List<PLMPackSR.DCMajorationSet> majorationSets = new List<PLMPackSR.DCMajorationSet>();
+                    List<PLMPackSR.DCParamDefaultValue> paramDefaultValues = new List<PLMPackSR.DCParamDefaultValue>();
                     foreach (MajorationSet majoSet in comp.MajorationSets)
                     {
                         string sMajo = string.Empty;
@@ -96,22 +111,29 @@ namespace treeDiM.PLMPackLib
                         if (null != callback)
                             callback.Info(string.Format("{0} - {1}", majoSet.CardboardProfile.Name, sMajo));
                     }
+                    PLMPackSR.DCTreeNode wsNodeComp = _client.CreateNewNodeComponent(
+                        wsNode.ParentNodeID, tn.Name, tn.Description
+                        , wsThumbnail.ID, wsDocFile, doc.Components[0].Guid
+                        , majorationSets.ToArray(), paramDefaultValues.ToArray());
                 }
                 else
                 {
                     docType = "DOCUMENT";
+                    wsNodeChild = _client.CreateNewNodeDocument(wsNode.ParentNodeID, tn.Name, tn.Description
+                        , wsThumbnail.ID, docType, wsDocFile);
                 }                    
             }
             else
             {
                 docType = "BRANCH";
+                wsNodeChild = _client.CreateNewNodeBranch(wsNode.ParentNodeID, tn.Name, tn.Description, wsThumbnail.ID);
             }
+
             if (null != callback)
                 callback.Info(string.Format("{0}-> {1} ({2})", offset, tn.Name, docType));
-
             offset += "   ";
             foreach (TreeNode tnChild in tn.Childrens(db))
-                RecursiveInsert(db, tnChild, offset, callback);
+                RecursiveInsert(db, tnChild, wsNodeChild, offset, callback);
         }
         #endregion
 

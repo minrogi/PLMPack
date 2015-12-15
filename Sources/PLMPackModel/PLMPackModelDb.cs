@@ -138,6 +138,7 @@ namespace PLMPackModel
         public static TreeNode GetById(PLMPackEntities db
             , Guid id)
         {
+            if (Guid.Empty == id) return null;
             return db.TreeNodes.Single(tn => tn.Id == id.ToString());
         }
 
@@ -153,6 +154,12 @@ namespace PLMPackModel
                     rootNodes.Add(tn);
             }
             return rootNodes.ToArray();
+        }
+        public static TreeNode GetUserRootNode(PLMPackEntities db, AspNetUser user)
+        {
+            return db.TreeNodes.Single(
+                tn => string.IsNullOrEmpty(tn.ParentNodeId) && (tn.GroupId == user.GroupId)
+                );
         }
         #endregion
 
@@ -274,7 +281,7 @@ namespace PLMPackModel
         #endregion
 
         #region Insertion methods
-        public TreeNode CreateChild(PLMPackEntities db, string grpId
+        public TreeNode InsertBranch(PLMPackEntities db, string grpId
             , string name, string description
             , Thumbnail thumb)
         {
@@ -305,7 +312,7 @@ namespace PLMPackModel
             , Thumbnail thumb)
         {
             // create TreeNode
-            TreeNode tn = CreateChild(db, grpId, name, description, thumb);
+            TreeNode tn = InsertBranch(db, grpId, name, description, thumb);
             // create document
             Document doc = Document.CreateNew(db, grpId
                 , docType
@@ -326,7 +333,7 @@ namespace PLMPackModel
             , Thumbnail thumb)
         {
             // create TreeNode
-            TreeNode tn = CreateChild(db, grpId, name, description, thumb);
+            TreeNode tn = InsertBranch(db, grpId, name, description, thumb);
 
             // create component
             Component cp = Component.CreateNew(db, grpId, name, description, docGuid, compGuid);
@@ -338,6 +345,29 @@ namespace PLMPackModel
             db.TreeNodeDocuments.Add(tnd);
             db.SaveChanges();
             return tn;
+        }
+
+        public Document FirstDocument
+        {
+            get
+            {
+                if (TreeNodeDocuments.Count > 0)
+                    return TreeNodeDocuments.First().Document;
+                else
+                    return null;
+            }
+        }
+
+        public Component FirstComponent
+        {
+            get
+            {
+                Document doc = FirstDocument;
+                if (null != doc)
+                    return doc.Components.First();
+                else
+                    return null;
+            }
         }
         #endregion
 
@@ -468,9 +498,8 @@ namespace PLMPackModel
         {
             if (0 == db.Thumbnails.Count())
             {
-                Guid g = new Guid("{6F997414-CA04-49A8-BCFE-7ECFB6222B1D}");
-                // create thumbnail
-                Thumbnail tb = Thumbnail.CreateNew(db, g, "png");
+                foreach (KeyValuePair<string, string> entry in _tbDictionary)
+                    Thumbnail.CreateNew(db, new Guid(entry.Value), "bmp");
             }
         }
 
@@ -499,6 +528,11 @@ namespace PLMPackModel
             return db.Thumbnails.Single(tb => tb.Id == id);
         }
 
+        public static Thumbnail GetByGuid(PLMPackEntities db, Guid g)
+        {
+            return db.Thumbnails.Single(tb => tb.FileGuid == g.ToString());
+        }
+
         public static void DeleteIfNotRefered(PLMPackEntities db, int id)
         {
             if (0 == db.TreeNodes.Count(tn => tn.ThumbnailId == id))
@@ -513,6 +547,31 @@ namespace PLMPackModel
                 f.Delete(db);
             }
         }
+
+        public static Thumbnail GetDefaultThumbnail(PLMPackEntities db, string defName)
+        {
+            return db.Thumbnails.Single(tb => tb.FileGuid == _tbDictionary[defName]);
+        }
+        #endregion
+        #region Data members
+        private static Dictionary<string, string> _tbDictionary = new Dictionary<string, string>()
+        {
+            {"AI", "170d61ac-f1fe-47c4-91d2-34fa77809a80"},
+            {"ARD", "a35e4d06-4690-4b39-937c-f82c97f83ed7"},
+            {"CALC", "affbf3ec-cca4-4ebe-87c7-03960a7134d6"},
+            {"CCF2", "12b59ba9-6367-4e4f-98d8-11abaa26ba5d"},
+            {"DXF", "527bfef2-db22-4189-93d1-27ce43443fc3"},
+            {"EPS", "9742cede-798c-4ad0-9481-7cd8373ad1df"},
+            {"EXCEL", "a35e4d06-4690-4b39-937c-f82c97f83ed7"},
+            {"FOLDER", "affbf3ec-cca4-4ebe-87c7-03960a7134d6"},
+            {"IMAGE", "12b59ba9-6367-4e4f-98d8-11abaa26ba5d"},
+            {"PDF", "527bfef2-db22-4189-93d1-27ce43443fc3"},
+            {"DES3", "50195740-8652-41b0-a767-c11c08c44acd"},
+            {"DES", "bd2dffaf-a48c-40c8-9754-010d6e1bb665"},
+            {"PPT", "60dc54c0-c872-4bf9-9e6d-3bf89ac0433f"},
+            {"WORD", "f9c38346-8484-4c7b-b92f-ba1b54446348"},
+            {"WRITER", "bcc3b88b-efa8-4885-813f-4d9cbedc6831"}
+        };
         #endregion
     }
     #endregion

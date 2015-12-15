@@ -1,0 +1,15 @@
+Local SQL Server DB
+===================
+Connection string 			: Data Source=(localdb)\v11.0;Initial Catalog=aspnet-PLMPack-20151001052832;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+MICROSOFT AZURE SQL DATABASE
+============================
+Connection string 			: Data Source=tcp:igmw1day5e.database.windows.net,1433;Initial Catalog=PLMPackDB;Persist Security Info=True;User ID=PLMPackDB@igmw1day5e;Password=***********
+Target database connection 	: igmw1day5e.database.windows.net
+Database name				: PLMPackDB
+User ID 					: PLMPackDB@igmw1day5e
+Password					: Knowledge_1
+
+DEPLOYMENT
+==========
+See : http://www.asp.net/mvc/overview/getting-started/database-first-development/publish-to-azure

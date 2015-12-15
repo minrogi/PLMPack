@@ -85,7 +85,7 @@ namespace PLMPackModel
                     roots[0].Share(db, user);
 
                     // insert new node with default folder
-                    TreeNode tnNew = roots[0].CreateChild(db, grp1.Id, name, description, Thumbnail.DefaultFolder(db));
+                    TreeNode tnNew = roots[0].InsertBranch(db, grp1.Id, name, description, Thumbnail.DefaultFolder(db));
                     tnNew.Share(db, user);
                     // insert document
                     string docName = "TestDoc";

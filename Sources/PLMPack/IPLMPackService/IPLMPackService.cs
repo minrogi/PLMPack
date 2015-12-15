@@ -67,18 +67,34 @@ namespace PLMPack
         DCCardboardProfile UpdateCardboardProfile(DCCardboardProfile cbProfile);
         #endregion
 
+        #region File
+        [OperationContract]
+        DCFile CreateNewFile(Guid g, string ext);
+        #endregion
+
+        #region Thumbnail
+        [OperationContract]
+        DCThumbnail CreateNewThumbnail(Guid g, string ext);
+        [OperationContract]
+        DCThumbnail GetDefaultThumbnail(string defName);
+        [OperationContract]
+        DCThumbnail GetThumbnailById(int thumbnailId);
+        #endregion
+
         #region Tree nodes
         [OperationContract]
         DCTreeNode[] GetRootNodes();
         [OperationContract]
-        DCTreeNode[] GetTreeNodeChildrens(string id);
+        DCTreeNode GetUserRootNode();
         [OperationContract]
-        DCTreeNode CreateNewNodeBranch(string parentNodeId, string name, string description, int thumbnailId);
+        DCTreeNode[] GetTreeNodeChildrens(Guid id);
         [OperationContract]
-        DCTreeNode CreateNewNodeDocument(string parentNodeId, string name, string description, int thumbnailId, string docType, DCFile docFile);
+        DCTreeNode CreateNewNodeBranch(Guid parentNodeId, string name, string description, int thumbnailId);
         [OperationContract]
-        DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, DCFile compFile, Guid compGuid,
-            DCMajorationSet[] majorationSets, DCParamDefaultValue defaultValue);
+        DCTreeNode CreateNewNodeDocument(Guid parentNodeId, string name, string description, int thumbnailId, string docType, DCFile docFile);
+        [OperationContract]
+        DCTreeNode CreateNewNodeComponent(Guid parentNodeId, string name, string description, int thumbnailId, DCFile compFile, Guid compGuid,
+            DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues);
         [OperationContract]
         void ShareTreeNode(string treeNodeId, string grpId);
         #endregion

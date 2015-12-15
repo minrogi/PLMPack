@@ -58,6 +58,24 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DCCardboardProfile" nillable="true" type="tns:DCCardboardProfile" />
+  <xs:complexType name="DCFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCFile" nillable="true" type="tns:DCFile" />
+  <xs:complexType name="DCThumbnail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="File" nillable="true" type="tns:DCFile" />
+      <xs:element minOccurs="0" name="Height" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="MimeType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Width" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCThumbnail" nillable="true" type="tns:DCThumbnail" />
   <xs:complexType name="ArrayOfDCTreeNode">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DCTreeNode" nillable="true" type="tns:DCTreeNode" />
@@ -87,14 +105,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DCComponent" nillable="true" type="tns:DCComponent" />
-  <xs:complexType name="DCFile">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" type="ser:guid" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DCFile" nillable="true" type="tns:DCFile" />
   <xs:complexType name="ArrayOfDCMajorationSet">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DCMajorationSet" nillable="true" type="tns:DCMajorationSet" />
@@ -142,14 +152,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="NodeType" nillable="true" type="tns:NodeType" />
-  <xs:complexType name="DCThumbnail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="File" nillable="true" type="tns:DCFile" />
-      <xs:element minOccurs="0" name="Height" type="xs:int" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="MimeType" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Width" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DCThumbnail" nillable="true" type="tns:DCThumbnail" />
 </xs:schema>

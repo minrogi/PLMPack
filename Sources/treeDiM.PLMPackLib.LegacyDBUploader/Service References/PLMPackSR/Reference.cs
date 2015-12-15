@@ -435,6 +435,192 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCFile", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateCreatedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExtensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GuidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateCreated {
+            get {
+                return this.DateCreatedField;
+            }
+            set {
+                if ((this.DateCreatedField.Equals(value) != true)) {
+                    this.DateCreatedField = value;
+                    this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Extension {
+            get {
+                return this.ExtensionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExtensionField, value) != true)) {
+                    this.ExtensionField = value;
+                    this.RaisePropertyChanged("Extension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Guid {
+            get {
+                return this.GuidField;
+            }
+            set {
+                if ((this.GuidField.Equals(value) != true)) {
+                    this.GuidField = value;
+                    this.RaisePropertyChanged("Guid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DCThumbnail", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
+    [System.SerializableAttribute()]
+    public partial class DCThumbnail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private treeDiM.PLMPackLib.PLMPackSR.DCFile FileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MimeTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WidthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public treeDiM.PLMPackLib.PLMPackSR.DCFile File {
+            get {
+                return this.FileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileField, value) != true)) {
+                    this.FileField = value;
+                    this.RaisePropertyChanged("File");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Height {
+            get {
+                return this.HeightField;
+            }
+            set {
+                if ((this.HeightField.Equals(value) != true)) {
+                    this.HeightField = value;
+                    this.RaisePropertyChanged("Height");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MimeType {
+            get {
+                return this.MimeTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MimeTypeField, value) != true)) {
+                    this.MimeTypeField = value;
+                    this.RaisePropertyChanged("MimeType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Width {
+            get {
+                return this.WidthField;
+            }
+            set {
+                if ((this.WidthField.Equals(value) != true)) {
+                    this.WidthField = value;
+                    this.RaisePropertyChanged("Width");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DCTreeNode", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
     [System.SerializableAttribute()]
     public partial class DCTreeNode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -685,192 +871,6 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
                 if ((object.ReferenceEquals(this.ParamDefaultsField, value) != true)) {
                     this.ParamDefaultsField = value;
                     this.RaisePropertyChanged("ParamDefaults");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DCFile", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
-    [System.SerializableAttribute()]
-    public partial class DCFile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime DateCreatedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExtensionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid GuidField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime DateCreated {
-            get {
-                return this.DateCreatedField;
-            }
-            set {
-                if ((this.DateCreatedField.Equals(value) != true)) {
-                    this.DateCreatedField = value;
-                    this.RaisePropertyChanged("DateCreated");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Extension {
-            get {
-                return this.ExtensionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExtensionField, value) != true)) {
-                    this.ExtensionField = value;
-                    this.RaisePropertyChanged("Extension");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Guid {
-            get {
-                return this.GuidField;
-            }
-            set {
-                if ((this.GuidField.Equals(value) != true)) {
-                    this.GuidField = value;
-                    this.RaisePropertyChanged("Guid");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DCThumbnail", Namespace="http://schemas.datacontract.org/2004/07/PLMPack")]
-    [System.SerializableAttribute()]
-    public partial class DCThumbnail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private treeDiM.PLMPackLib.PLMPackSR.DCFile FileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int HeightField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MimeTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int WidthField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public treeDiM.PLMPackLib.PLMPackSR.DCFile File {
-            get {
-                return this.FileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileField, value) != true)) {
-                    this.FileField = value;
-                    this.RaisePropertyChanged("File");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Height {
-            get {
-                return this.HeightField;
-            }
-            set {
-                if ((this.HeightField.Equals(value) != true)) {
-                    this.HeightField = value;
-                    this.RaisePropertyChanged("Height");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MimeType {
-            get {
-                return this.MimeTypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MimeTypeField, value) != true)) {
-                    this.MimeTypeField = value;
-                    this.RaisePropertyChanged("MimeType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Width {
-            get {
-                return this.WidthField;
-            }
-            set {
-                if ((this.WidthField.Equals(value) != true)) {
-                    this.WidthField = value;
-                    this.RaisePropertyChanged("Width");
                 }
             }
         }
@@ -1218,11 +1218,41 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse")]
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile> UpdateCardboardProfileAsync(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewFileResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCFile CreateNewFile(System.Guid g, string ext);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewFileResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCFile> CreateNewFileAsync(System.Guid g, string ext);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnail(System.Guid g, string ext);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> CreateNewThumbnailAsync(System.Guid g, string ext);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnail", ReplyAction="http://tempuri.org/IPLMPackService/GetDefaultThumbnailResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCThumbnail GetDefaultThumbnail(string defName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnail", ReplyAction="http://tempuri.org/IPLMPackService/GetDefaultThumbnailResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> GetDefaultThumbnailAsync(string defName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetThumbnailById", ReplyAction="http://tempuri.org/IPLMPackService/GetThumbnailByIdResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCThumbnail GetThumbnailById(int thumbnailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetThumbnailById", ReplyAction="http://tempuri.org/IPLMPackService/GetThumbnailByIdResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> GetThumbnailByIdAsync(int thumbnailId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetRootNodes", ReplyAction="http://tempuri.org/IPLMPackService/GetRootNodesResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetRootNodes();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetRootNodes", ReplyAction="http://tempuri.org/IPLMPackService/GetRootNodesResponse")]
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetRootNodesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetUserRootNode", ReplyAction="http://tempuri.org/IPLMPackService/GetUserRootNodeResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode GetUserRootNode();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetUserRootNode", ReplyAction="http://tempuri.org/IPLMPackService/GetUserRootNodeResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> GetUserRootNodeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens", ReplyAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(string id);
@@ -1243,10 +1273,10 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(string parentNodeId, string name, string description, int thumbnailId, string docType, treeDiM.PLMPackLib.PLMPackSR.DCFile docFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue defaultValue);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue defaultValue);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
         void ShareTreeNode(string treeNodeId, string grpId);
@@ -1488,12 +1518,52 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.UpdateCardboardProfileAsync(cbProfile);
         }
         
+        public treeDiM.PLMPackLib.PLMPackSR.DCFile CreateNewFile(System.Guid g, string ext) {
+            return base.Channel.CreateNewFile(g, ext);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCFile> CreateNewFileAsync(System.Guid g, string ext) {
+            return base.Channel.CreateNewFileAsync(g, ext);
+        }
+        
+        public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnail(System.Guid g, string ext) {
+            return base.Channel.CreateNewThumbnail(g, ext);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> CreateNewThumbnailAsync(System.Guid g, string ext) {
+            return base.Channel.CreateNewThumbnailAsync(g, ext);
+        }
+        
+        public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail GetDefaultThumbnail(string defName) {
+            return base.Channel.GetDefaultThumbnail(defName);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> GetDefaultThumbnailAsync(string defName) {
+            return base.Channel.GetDefaultThumbnailAsync(defName);
+        }
+        
+        public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail GetThumbnailById(int thumbnailId) {
+            return base.Channel.GetThumbnailById(thumbnailId);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> GetThumbnailByIdAsync(int thumbnailId) {
+            return base.Channel.GetThumbnailByIdAsync(thumbnailId);
+        }
+        
         public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetRootNodes() {
             return base.Channel.GetRootNodes();
         }
         
         public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetRootNodesAsync() {
             return base.Channel.GetRootNodesAsync();
+        }
+        
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode GetUserRootNode() {
+            return base.Channel.GetUserRootNode();
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> GetUserRootNodeAsync() {
+            return base.Channel.GetUserRootNodeAsync();
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(string id) {
@@ -1520,12 +1590,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewNodeDocumentAsync(parentNodeId, name, description, thumbnailId, docType, docFile);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue defaultValue) {
-            return base.Channel.CreateNewNodeComponent(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValue);
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
+            return base.Channel.CreateNewNodeComponent(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValues);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue defaultValue) {
-            return base.Channel.CreateNewNodeComponentAsync(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValue);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
+            return base.Channel.CreateNewNodeComponentAsync(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValues);
         }
         
         public void ShareTreeNode(string treeNodeId, string grpId) {

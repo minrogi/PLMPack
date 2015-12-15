@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="treeDiM.FileTransfer" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CacheDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">%TEMP%\treeDiM\PLMPackLib\FileCache</Value>
+    </Setting>
+    <Setting Name="StorageConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DefaultEndpointsProtocol=https;AccountName=plmpack;AccountKey=zw7HFWD7dTKwqlRiSIsNViNSi8Kx7ljpfT1yIYOCenj//mdRpPEveOmjuHPoLSI6AdYJ9O9gc2MlJR1PIa0lLw==</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

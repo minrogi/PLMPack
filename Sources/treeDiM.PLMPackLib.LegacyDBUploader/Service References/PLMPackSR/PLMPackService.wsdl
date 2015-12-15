@@ -240,11 +240,41 @@
   <wsdl:message name="IPLMPackService_UpdateCardboardProfile_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateCardboardProfileResponse" />
   </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewFile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnail" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetDefaultThumbnail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultThumbnail" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetDefaultThumbnail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultThumbnailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetThumbnailById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetThumbnailById" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetThumbnailById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetThumbnailByIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IPLMPackService_GetRootNodes_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRootNodes" />
   </wsdl:message>
   <wsdl:message name="IPLMPackService_GetRootNodes_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRootNodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUserRootNode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRootNode" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUserRootNode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRootNodeResponse" />
   </wsdl:message>
   <wsdl:message name="IPLMPackService_GetTreeNodeChildrens_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTreeNodeChildrens" />
@@ -395,9 +425,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile" message="tns:IPLMPackService_UpdateCardboardProfile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse" message="tns:IPLMPackService_UpdateCardboardProfile_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CreateNewFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFile" message="tns:IPLMPackService_CreateNewFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFileResponse" message="tns:IPLMPackService_CreateNewFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail" message="tns:IPLMPackService_CreateNewThumbnail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailResponse" message="tns:IPLMPackService_CreateNewThumbnail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultThumbnail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnail" message="tns:IPLMPackService_GetDefaultThumbnail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnailResponse" message="tns:IPLMPackService_GetDefaultThumbnail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThumbnailById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetThumbnailById" message="tns:IPLMPackService_GetThumbnailById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetThumbnailByIdResponse" message="tns:IPLMPackService_GetThumbnailById_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRootNodes">
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetRootNodes" message="tns:IPLMPackService_GetRootNodes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetRootNodesResponse" message="tns:IPLMPackService_GetRootNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRootNode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetUserRootNode" message="tns:IPLMPackService_GetUserRootNode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetUserRootNodeResponse" message="tns:IPLMPackService_GetUserRootNode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetTreeNodeChildrens">
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens" message="tns:IPLMPackService_GetTreeNodeChildrens_InputMessage" />
@@ -641,8 +691,53 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CreateNewFile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnail">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewThumbnail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultThumbnail">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetDefaultThumbnail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThumbnailById">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetThumbnailById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRootNodes">
       <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetRootNodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRootNode">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetUserRootNode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
