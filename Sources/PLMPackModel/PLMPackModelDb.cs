@@ -24,7 +24,7 @@ namespace PLMPackModel
             catch (Exception ex)
             {
                 string message = ex.ToString();
-                return null;
+                throw ex;
             }
         }
 
@@ -138,7 +138,7 @@ namespace PLMPackModel
         public static TreeNode GetById(PLMPackEntities db
             , Guid id)
         {
-            if (Guid.Empty == id) return null;
+            if (Guid.Empty == id) throw new ModelException("TreeNode.GetById() cannot handle NULL TreeNode Id");
             return db.TreeNodes.Single(tn => tn.Id == id.ToString());
         }
 
@@ -303,7 +303,7 @@ namespace PLMPackModel
             db.TreeNodes.Add(tn);
             db.SaveChanges();
 
-            return tn;
+            return TreeNode.GetById(db, Guid.Parse(tn.Id));
         }
 
         public TreeNode InsertDocument(PLMPackEntities db, string grpId
@@ -324,31 +324,31 @@ namespace PLMPackModel
             tnd.DocumentId = doc.Id;
             db.TreeNodeDocuments.Add(tnd);
             db.SaveChanges();
-            return tn;
+
+            return TreeNode.GetById(db, Guid.Parse(tn.Id));
         }
 
         public TreeNode InsertComponent(PLMPackEntities db, string grpId
             , string name, string description
-            , Guid docGuid, Guid compGuid
+            , Guid fileGuid, Guid compGuid
             , Thumbnail thumb)
         {
             // create TreeNode
             TreeNode tn = InsertBranch(db, grpId, name, description, thumb);
-
             // create component
-            Component cp = Component.CreateNew(db, grpId, name, description, docGuid, compGuid);
-
+            Component cp = Component.CreateNew(db, grpId, name, description, fileGuid, compGuid);
             // create treeNode document
-            TreeNodeDocument tnd = new TreeNodeDocument();
-            tnd.TreeNodeId = tn.Id;
-            tnd.DocumentId = cp.DocumentId;
-            db.TreeNodeDocuments.Add(tnd);
+            db.TreeNodeDocuments.Add(new TreeNodeDocument() { TreeNodeId = tn.Id, DocumentId = cp.DocumentId });
             db.SaveChanges();
-            return tn;
+
+            return TreeNode.GetById(db, Guid.Parse(tn.Id));
         }
 
-        public Document FirstDocument
+        public Document FirstDocument(PLMPackEntities db)
         {
+            TreeNodeDocument treeNodeDoc = db.TreeNodeDocuments.Single(tnd => tnd.TreeNodeId == this.Id);
+            return db.Documents.Single(d => d.Id == treeNodeDoc.DocumentId);
+            /*
             get
             {
                 if (TreeNodeDocuments.Count > 0)
@@ -356,18 +356,16 @@ namespace PLMPackModel
                 else
                     return null;
             }
+            */ 
         }
 
-        public Component FirstComponent
+        public Component FirstComponent(PLMPackEntities db)
         {
-            get
-            {
-                Document doc = FirstDocument;
+                Document doc = FirstDocument(db);
                 if (null != doc)
-                    return doc.Components.First();
+                    return db.Components.Single(comp => comp.DocumentId == doc.Id);
                 else
                     return null;
-            }
         }
         #endregion
 
@@ -476,9 +474,9 @@ namespace PLMPackModel
             // return file
             return db.Files.Single(f => f.Guid == sGuid);
         }
-        public static File GetById(PLMPackEntities db, string guid)
+        public static File GetById(PLMPackEntities db, Guid g)
         {
-            return db.Files.Single(f => f.Guid == guid);
+            return db.Files.Single(f => f.Guid == g.ToString());
         }
         #endregion
         #region Delete method
@@ -499,7 +497,7 @@ namespace PLMPackModel
             if (0 == db.Thumbnails.Count())
             {
                 foreach (KeyValuePair<string, string> entry in _tbDictionary)
-                    Thumbnail.CreateNew(db, new Guid(entry.Value), "bmp");
+                    Thumbnail.CreateNew(db, new Guid(entry.Value), "png");
             }
         }
 
@@ -510,7 +508,18 @@ namespace PLMPackModel
             tb.File = File.CreateNew(db, g, ext);
             tb.Width = 150;
             tb.Height = 150;
-            tb.MimeType = "image/png";
+            tb.MimeType = Ext2MimeType(ext);
+            db.Thumbnails.Add(tb);
+            db.SaveChanges();
+
+            int tid = tb.Id;
+            return db.Thumbnails.Single(t => t.Id == tid);
+        }
+
+        public static Thumbnail CreateNew(PLMPackEntities db, Guid fileGuid)
+        {
+            File f = File.GetById(db, fileGuid);
+            Thumbnail tb = new Thumbnail() { Width = 150, Height = 150, FileGuid = fileGuid.ToString(), MimeType = Ext2MimeType(f.Extension) };
             db.Thumbnails.Add(tb);
             db.SaveChanges();
 
@@ -543,7 +552,7 @@ namespace PLMPackModel
                 db.Thumbnails.Remove(thumb);
                 db.SaveChanges();
                 // delete file
-                File f = File.GetById(db, fileGuid);
+                File f = File.GetById(db, Guid.Parse(fileGuid));
                 f.Delete(db);
             }
         }
@@ -551,6 +560,18 @@ namespace PLMPackModel
         public static Thumbnail GetDefaultThumbnail(PLMPackEntities db, string defName)
         {
             return db.Thumbnails.Single(tb => tb.FileGuid == _tbDictionary[defName]);
+        }
+
+        public static string Ext2MimeType(string fileExt)
+        {
+            switch (fileExt.ToLower().Trim('.'))
+            {
+                case "bmp": return "image/bmp";
+                case "jpg": return "image/jpeg";
+                case "jpeg": return "image/jpeg";
+                case "png": return "image/png";
+                default: throw new ModelException(string.Format("Unknown image extension : {0}", fileExt));
+            }
         }
         #endregion
         #region Data members
@@ -584,16 +605,16 @@ namespace PLMPackModel
             , string docType, string name, string description
             , Guid fileGuid, string fileExt)
         {
-            // create file
-            File f = File.CreateNew(db, fileGuid, fileExt);
             // create document
-            Document doc = new Document();
-            doc.Name = name;
-            doc.Description = description;
-            doc.DocumentType = docType;
-            doc.Id = Guid.NewGuid().ToString();
-            doc.FileGuid = f.Guid;
-            doc.GroupId = groupId;
+            Document doc = new Document()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = name,
+                Description = description,
+                DocumentType = docType,
+                FileGuid = fileGuid.ToString(),
+                GroupId = groupId
+            };
             db.Documents.Add(doc);
             db.SaveChanges();
             return doc;
@@ -620,12 +641,12 @@ namespace PLMPackModel
                 db.TreeNodes.Remove(db.TreeNodes.Single(tn => tn.Id == tnd.TreeNodeId));
                 db.SaveChanges();
             }
-            string sFileGuid = FileGuid;
+            Guid fGuid = Guid.Parse(FileGuid);
             // actually remove document
             db.Documents.Remove(this);
             db.SaveChanges();
             // remove file
-            File f = File.GetById(db, sFileGuid);
+            File f = File.GetById(db, fGuid);
             f.Delete(db);
         }
         #endregion
@@ -640,12 +661,12 @@ namespace PLMPackModel
             , string name, string description
             , Guid fileGuid, Guid compGuid)
         {
-            Document doc = Document.CreateNew(db, grpId, "COMPONENT", name, description, fileGuid, "dll");
-            Component cp = new Component();
-            cp.DocumentId = doc.Id;
-            cp.Guid = compGuid.ToString();
+            Document doc = Document.CreateNew(db, grpId, "DT_COMPONENT", name, description, fileGuid, "dll");
+            Component cp = new Component() { DocumentId = doc.Id, Guid = compGuid.ToString() };
+            db.Components.Add(cp);
             db.SaveChanges();
-            return cp;
+
+            return GetByGuid(db, compGuid);
         }
         public static Component GetByGuid(PLMPackEntities db, Guid g)
         {
@@ -702,15 +723,29 @@ namespace PLMPackModel
         }
         public void UpdateMajorationSet(PLMPackEntities db, CardboardProfile cp, Dictionary<string, double> majorations)
         {
+            // create majoration set if it does not exists
             if (db.MajorationSets.Count(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cp.Id)) == 0)
             {
                 db.MajorationSets.Add(new MajorationSet()
                     {
+                        Id = System.Guid.NewGuid().ToString(),
                         ComponentGuid = this.Guid,
                         CardboardProfileId = cp.Id
                     });
                 db.SaveChanges();
             }
+            // retrieve majoration set
+            MajorationSet majoSet = db.MajorationSets.Single(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cp.Id));
+
+            // delete any existing majorations
+            foreach (Majoration majo in db.Majorations.Where(m => m.MajorationSetId == majoSet.Id))
+                db.Majorations.Remove(majo);
+            db.SaveChanges();
+
+            // (re)create majorations
+            foreach (KeyValuePair<string, double> entry in majorations)
+                majoSet.Majorations.Add(new Majoration() { Name = entry.Key, Value = entry.Value });
+            db.SaveChanges();
         }
         #endregion
         #region Param default value
@@ -737,7 +772,7 @@ namespace PLMPackModel
                 db.SaveChanges();
             }
             Dictionary<string, double> defaultParamValues = new Dictionary<string, double>();
-            var paramDefaults2 = this.ParamDefaultComponent.Where(
+            var paramDefaults2 = this.ParamDefaultComponents.Where(
                 pdc => (pdc.GroupId == grpId) && (pdc.ComponentGuid == this.Guid)
                 );
             foreach (ParamDefaultComponent pdc in paramDefaults2)
@@ -746,26 +781,30 @@ namespace PLMPackModel
         }
         public double GetParamDefaultValueDouble(string grpId, string name)
         {
-            ParamDefaultComponent paramDefValue = this.ParamDefaultComponent.Single(
+            ParamDefaultComponent paramDefValue = this.ParamDefaultComponents.Single(
                 pdc => pdc.GroupId == grpId
                 && pdc.Name == name);
             return paramDefValue.Value;
         }
         public void InsertParamDefaultValue(PLMPackEntities db, string grpId, string name, double value)
         {
-            if (db.ParamDefaultComponents.Count(pdc => (pdc.GroupId == grpId) && (pdc.Name == name)) > 0)
+            if (db.ParamDefaultComponents.Count(
+                pdc => (pdc.ComponentGuid == Guid) && (pdc.GroupId == grpId) && (pdc.Name == name)) > 0)
             {
-                ParamDefaultComponent paramDefValue = db.ParamDefaultComponents.Single(pdc => (pdc.GroupId == grpId) && (pdc.Name == name));
+                ParamDefaultComponent paramDefValue = db.ParamDefaultComponents.Single(
+                    pdc => (pdc.ComponentGuid == Guid) && (pdc.GroupId == grpId) && (pdc.Name == name));
                 paramDefValue.Value = value;
             }
             else
             {
-                ParamDefaultComponent paramDefValue = new ParamDefaultComponent();
-                paramDefValue.ComponentGuid = Guid;
-                paramDefValue.GroupId = grpId;
-                paramDefValue.Name = name;
-                paramDefValue.Value = value;
-                db.ParamDefaultComponents.Add(paramDefValue);
+                db.ParamDefaultComponents.Add( new ParamDefaultComponent()
+                    {
+                        ComponentGuid = Guid,
+                        GroupId = grpId,
+                        Name = name,
+                        Value = value
+                    }
+                );
             }
             db.SaveChanges();
         }

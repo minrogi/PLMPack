@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PLMPackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PLMPackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -177,13 +177,14 @@
         </EntityType>
         <EntityType Name="ParamDefaultComponents">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ComponentGuid" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ComponentGuid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
-          <Property Name="GroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Thumbnails">
           <Key>
@@ -794,7 +795,7 @@
           <Property Name="DocumentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Document" Relationship="PLMPackModel.DocumentComponent" FromRole="Component" ToRole="Document" />
           <NavigationProperty Name="MajorationSet" Relationship="PLMPackModel.MajorationSetComponent" FromRole="Component" ToRole="MajorationSet" />
-          <NavigationProperty Name="ParamDefaultComponent" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="Component" ToRole="ParamDefaultComponent" />
+          <NavigationProperty Name="ParamDefaultComponents" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="Component" ToRole="ParamDefaultComponent" />
         </EntityType>
         <EntityType Name="Document">
           <Key>
@@ -836,11 +837,11 @@
           <NavigationProperty Name="CardboardFormats" Relationship="Self.FK_dbo_CardboardFormat_dbo_Groups_Id" FromRole="Groups" ToRole="CardboardFormat" />
           <NavigationProperty Name="CardboardProfiles" Relationship="Self.FK_dbo_CardboardProfiles_dbo_Groups_Id" FromRole="Groups" ToRole="CardboardProfiles" />
           <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_Groups_Id" FromRole="Groups" ToRole="Documents" />
-          <NavigationProperty Name="ParamDefaultComponents" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="Groups" ToRole="ParamDefaultComponents" />
           <NavigationProperty Name="TreeNodeGroupShares" Relationship="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodeGroupShares" />
           <NavigationProperty Name="TreeNodes" Relationship="Self.FK_dbo_TreeNodes_dbo_Groups_Id" FromRole="Groups" ToRole="TreeNodes" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.GroupsOfInterest" FromRole="Groups" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="PLMPackModel.UserGroupMemberships" FromRole="Group" ToRole="AspNetUser" />
+          <NavigationProperty Name="ParamDefaultComponents" Relationship="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="Group" ToRole="ParamDefaultComponent" />
         </EntityType>
         <EntityType Name="Issue">
           <Key>
@@ -875,18 +876,6 @@
           <NavigationProperty Name="CardboardProfile" Relationship="Self.FK_dbo_MajorationSets_dbo_CardboardProfiles_Id" FromRole="MajorationSets" ToRole="CardboardProfiles" />
           <NavigationProperty Name="Majorations" Relationship="Self.FK_dbo_Majorations_dbo_MajorationSet_Id" FromRole="MajorationSets" ToRole="Majorations" />
           <NavigationProperty Name="Components" Relationship="PLMPackModel.MajorationSetComponent" FromRole="MajorationSet" ToRole="Component" />
-        </EntityType>
-        <EntityType Name="ParamDefaultComponent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ComponentGuid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Value" Type="Double" Nullable="false" />
-          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Group" Relationship="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="ParamDefaultComponents" ToRole="Groups" />
-          <NavigationProperty Name="Components" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="ParamDefaultComponent" ToRole="Component" />
         </EntityType>
         <EntityType Name="Thumbnail">
           <Key>
@@ -1137,18 +1126,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
-          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
-          <End Role="ParamDefaultComponents" Type="Self.ParamDefaultComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Groups">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ParamDefaultComponents">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
           <End Role="Groups" Type="Self.Group" Multiplicity="1" />
           <End Role="TreeNodeGroupShares" Type="Self.TreeNodeGroupShare" Multiplicity="*" />
@@ -1211,7 +1188,6 @@
           <EntitySet Name="Issues" EntityType="Self.Issue" />
           <EntitySet Name="Majorations" EntityType="Self.Majoration" />
           <EntitySet Name="MajorationSets" EntityType="Self.MajorationSet" />
-          <EntitySet Name="ParamDefaultComponents" EntityType="Self.ParamDefaultComponent" />
           <EntitySet Name="Thumbnails" EntityType="Self.Thumbnail" />
           <EntitySet Name="TreeNodeDocuments" EntityType="Self.TreeNodeDocument" />
           <EntitySet Name="TreeNodeGroupShares" EntityType="Self.TreeNodeGroupShare" />
@@ -1270,10 +1246,6 @@
           <AssociationSet Name="FK_dbo_Thumbnails_dbo_File_Guid" Association="Self.FK_dbo_Thumbnails_dbo_File_Guid">
             <End Role="Files" EntitySet="Files" />
             <End Role="Thumbnails" EntitySet="Thumbnails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id" Association="Self.FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
-            <End Role="Groups" EntitySet="Groups" />
-            <End Role="ParamDefaultComponents" EntitySet="ParamDefaultComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" Association="Self.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id">
             <End Role="Groups" EntitySet="Groups" />
@@ -1339,13 +1311,18 @@
             <End Role="TreeNode" EntitySet="TreeNodes" />
             <End Role="TreeNode1" EntitySet="TreeNodes" />
           </AssociationSet>
-          <AssociationSet Name="ParamDefaultComponentComponent" Association="PLMPackModel.ParamDefaultComponentComponent">
-            <End Role="ParamDefaultComponent" EntitySet="ParamDefaultComponents" />
-            <End Role="Component" EntitySet="Components" />
-          </AssociationSet>
           <AssociationSet Name="UserGroupMemberships" Association="PLMPackModel.UserGroupMemberships">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <EntitySet Name="ParamDefaultComponents" EntityType="PLMPackModel.ParamDefaultComponent" />
+          <AssociationSet Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id" Association="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="ParamDefaultComponent" EntitySet="ParamDefaultComponents" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefaultComponentComponent" Association="PLMPackModel.ParamDefaultComponentComponent">
+            <End Role="ParamDefaultComponent" EntitySet="ParamDefaultComponents" />
+            <End Role="Component" EntitySet="Components" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="TreeNodeTreeNodeDocument">
@@ -1480,8 +1457,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ParamDefaultComponentComponent">
+        <Association Name="UserGroupMemberships">
+          <End Type="PLMPackModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="PLMPackModel.Group" Role="Group" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ParamDefaultComponent">
+          <Key>
+            <PropertyRef Name="ComponentGuid" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ComponentGuid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" FromRole="ParamDefaultComponent" ToRole="Group" />
+          <NavigationProperty Name="Component" Relationship="PLMPackModel.ParamDefaultComponentComponent" FromRole="ParamDefaultComponent" ToRole="Component" />
+        </EntityType>
+        <Association Name="FK_dbo_ParamDefaultComponents_dbo_Groups_Id">
+          <End Type="PLMPackModel.Group" Role="Group" Multiplicity="1" />
           <End Type="PLMPackModel.ParamDefaultComponent" Role="ParamDefaultComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ParamDefaultComponent">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParamDefaultComponentComponent">
+          <End Type="PLMPackModel.ParamDefaultComponent" Role="ParamDefaultComponent" Multiplicity="*" >
+          </End>
           <End Type="PLMPackModel.Component" Role="Component" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Component">
@@ -1491,10 +1498,6 @@
               <PropertyRef Name="ComponentGuid" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="UserGroupMemberships">
-          <End Type="PLMPackModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-          <End Type="PLMPackModel.Group" Role="Group" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1667,17 +1670,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ParamDefaultComponents">
-            <EntityTypeMapping TypeName="PLMPackModel.ParamDefaultComponent">
-              <MappingFragment StoreEntitySet="ParamDefaultComponents">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ComponentGuid" ColumnName="ComponentGuid" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Thumbnails">
             <EntityTypeMapping TypeName="PLMPackModel.Thumbnail">
               <MappingFragment StoreEntitySet="Thumbnails">
@@ -1773,6 +1765,16 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ParamDefaultComponents">
+            <EntityTypeMapping TypeName="PLMPackModel.ParamDefaultComponent">
+              <MappingFragment StoreEntitySet="ParamDefaultComponents">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="ComponentGuid" ColumnName="ComponentGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

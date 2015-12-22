@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="PLMPackModel.Issue" Width="1.5" PointX="7.5" PointY="33.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Majoration" Width="1.5" PointX="9.75" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.MajorationSet" Width="1.5" PointX="9.75" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="PLMPackModel.ParamDefaultComponent" Width="1.5" PointX="7.5" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.Thumbnail" Width="1.5" PointX="12.5" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.TreeNodeDocument" Width="1.5" PointX="9.875" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PLMPackModel.TreeNodeGroupShare" Width="1.5" PointX="7.5" PointY="25.625" IsExpanded="true" />
@@ -41,7 +40,6 @@
         <AssociationConnector Association="PLMPackModel.FK_dbo_Documents_dbo_File_Guid" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Documents_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Thumbnails_dbo_File_Guid" ManuallyRouted="false" />
-        <AssociationConnector Association="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodeGroupShares_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_TreeNodes_dbo_Groups_Id" ManuallyRouted="false" />
         <AssociationConnector Association="PLMPackModel.FK_dbo_Majorations_dbo_MajorationSet_Id" ManuallyRouted="false" />
@@ -58,8 +56,11 @@
         <AssociationConnector Association="PLMPackModel.DocumentUserDownload" />
         <AssociationConnector Association="PLMPackModel.ThumbnailTreeNode" />
         <AssociationConnector Association="PLMPackModel.TreeNodeTreeNode" />
-        <AssociationConnector Association="PLMPackModel.ParamDefaultComponentComponent" />
         <AssociationConnector Association="PLMPackModel.UserGroupMemberships" />
+        <EntityTypeShape EntityType="PLMPackModel.ParamDefaultComponent" Width="2" PointX="7.625" PointY="21.75" />
+        <AssociationConnector Association="PLMPackModel.FK_dbo_ParamDefaultComponents_dbo_Groups_Id" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="PLMPackModel.ParamDefaultComponentComponent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

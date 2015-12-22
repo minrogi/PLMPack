@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b9c6f9e1-6cb4-4986-aee0-c4ce4bd782a5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="daf3dc60-620a-4d2d-b45c-7ea1508063e9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="https://localhost:44302/PLMPackService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PLMPackService.wsdl" MetadataType="Wsdl" ID="493964a3-b272-4ec8-9b41-6e173b33927b" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?wsdl" />
-    <MetadataFile FileName="PLMPackService.xsd" MetadataType="Schema" ID="beb37643-afe2-486b-9ce4-7373b5a10617" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd1" />
-    <MetadataFile FileName="PLMPackService1.xsd" MetadataType="Schema" ID="a6d0ffad-a4c1-4512-9c9e-d5bd41156469" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd0" />
-    <MetadataFile FileName="PLMPackService.disco" MetadataType="Disco" ID="dd6e7952-ee60-4a81-a752-821951737c68" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?disco" />
-    <MetadataFile FileName="PLMPackService2.xsd" MetadataType="Schema" ID="0b8dbf00-4864-42d3-9cb2-b0d773b1fa66" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PLMPackService.wsdl" MetadataType="Wsdl" ID="f1d942e2-99bd-46ff-a8e9-253c91972279" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?wsdl" />
+    <MetadataFile FileName="PLMPackService.xsd" MetadataType="Schema" ID="f4b60972-03ce-4a9c-afd5-290179830015" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PLMPackService1.xsd" MetadataType="Schema" ID="7264a76f-f74f-4776-82a9-be4d773262cc" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PLMPackService.disco" MetadataType="Disco" ID="2e1641b9-359f-47c9-a373-7f2d75704d37" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?disco" />
+    <MetadataFile FileName="PLMPackService2.xsd" MetadataType="Schema" ID="6a86a03e-109e-4e50-a30d-59d804544edb" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

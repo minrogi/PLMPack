@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[MajorationSets] (
-    [Id]                 NVARCHAR (128) NOT NULL,
+	[Id] NVARCHAR (128) NOT NULL,
     [ComponentGuid]      NVARCHAR (128) NOT NULL,
     [CardboardProfileId] INT            NOT NULL,
     CONSTRAINT [PK_dbo.MajorationSets] PRIMARY KEY CLUSTERED ([Id] ASC),

@@ -13,7 +13,7 @@ namespace treeDiM.PLMPackLib
     public class LoggingCallback : IProcessingCallback
     {
         #region IProcessingCallback implementation
-        public void Begin() { _log.Info("Begining..."); }
+        public void Begin() { _log.Info("Beginning..."); }
         public void End() { _log.Info("Ending..."); }
         public void Info(string text) { _log.Info(text); }
         public void Error(string text) { _log.Error(text); ++iErrorCount; }

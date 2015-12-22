@@ -32,6 +32,10 @@ namespace TestLegacyDBUploader
                 HelpText = "User password.")]
             public string Password { get; set; }
 
+            [Option('t', "test", Required = false,
+                DefaultValue = true, HelpText = "Test : if true, files will not be actually uploaded.")]
+            public bool Test { get; set; }
+
             [ParserState]
             public IParserState LastParserState { get; set; }
 
@@ -66,6 +70,7 @@ namespace TestLegacyDBUploader
                 uploader.DatabasePath = dbPath;
                 uploader.UserName = options.UserName;
                 uploader.Password = options.Password;
+                uploader.ActuallyUpload = !options.Test;
                 uploader.Upload(callback);
             }
             catch (Exception ex)

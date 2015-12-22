@@ -14,13 +14,12 @@ namespace PLMPackModel
     
     public partial class ParamDefaultComponent
     {
-        public int Id { get; set; }
         public string ComponentGuid { get; set; }
+        public string GroupId { get; set; }
         public string Name { get; set; }
         public double Value { get; set; }
-        public string GroupId { get; set; }
     
         public virtual Group Group { get; set; }
-        public virtual Component Components { get; set; }
+        public virtual Component Component { get; set; }
     }
 }

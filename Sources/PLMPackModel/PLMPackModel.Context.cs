@@ -40,7 +40,6 @@ namespace PLMPackModel
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<Majoration> Majorations { get; set; }
         public virtual DbSet<MajorationSet> MajorationSets { get; set; }
-        public virtual DbSet<ParamDefaultComponent> ParamDefaultComponents { get; set; }
         public virtual DbSet<Thumbnail> Thumbnails { get; set; }
         public virtual DbSet<TreeNodeDocument> TreeNodeDocuments { get; set; }
         public virtual DbSet<TreeNodeGroupShare> TreeNodeGroupShares { get; set; }
@@ -48,5 +47,6 @@ namespace PLMPackModel
         public virtual DbSet<UserConnection> UserConnections { get; set; }
         public virtual DbSet<UserDownload> UserDownloads { get; set; }
         public virtual DbSet<UserNote> UserNotes { get; set; }
+        public virtual DbSet<ParamDefaultComponent> ParamDefaultComponents { get; set; }
     }
 }

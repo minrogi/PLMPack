@@ -1,6 +1,6 @@
 Local SQL Server DB
 ===================
-Connection string 			: Data Source=(localdb)\v11.0;Initial Catalog=aspnet-PLMPack-20151001052832;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+Connection string 			: Data Source=(localdb)\v11.0;Initial Catalog=PLMPackDB;Integrated Security=True;Pooling=False
 
 MICROSOFT AZURE SQL DATABASE
 ============================
@@ -9,6 +9,8 @@ Target database connection 	: igmw1day5e.database.windows.net
 Database name				: PLMPackDB
 User ID 					: PLMPackDB@igmw1day5e
 Password					: Knowledge_1
+
+Connection string 			: Data Source=igmw1day5e.database.windows.net;Initial Catalog=PLMPackDB;Persist Security Info=True;User ID=PLMPackDB@igmw1day5e;Pooling=False
 
 DEPLOYMENT
 ==========

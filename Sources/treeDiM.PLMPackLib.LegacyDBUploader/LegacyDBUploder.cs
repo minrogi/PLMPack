@@ -8,8 +8,10 @@ using System.IO;
 
 using log4net;
 
-using treeDiM.FileTransfer;
 using Pic.DAL.SQLite;
+
+using treeDiM.PLMPackLib.PLMPackSR;
+using treeDiM.FileTransfer;
 #endregion
 
 namespace treeDiM.PLMPackLib
@@ -19,25 +21,36 @@ namespace treeDiM.PLMPackLib
         #region Public methods
         public void Upload(IProcessingCallback callback)
         {
+            // check that database actually exist
+            if (!System.IO.File.Exists(_dbPath))
+            {
+                if (null != callback)
+                    callback.Error(string.Format("Input database path ({0}) could not be found.", _dbPath));
+                return;
+            }
+            // begin
             if (null != callback) callback.Begin();
-
             // connect
             _client = new PLMPackSR.PLMPackServiceClient();
             _client.ClientCredentials.UserName.UserName = UserName;
             _client.ClientCredentials.UserName.Password = Password;
 
             PLMPackSR.DCUser user = _client.Connect();
-            if (null != callback)
-                callback.Info(string.Format("Connection successful: {0}", user.Email));
+            if (user != null)
+            {   if (null != callback)   callback.Info(string.Format("Connection successful: {0}", user.Email));  }
+            else
+            {
+                if (null != callback) callback.Info(string.Format("Failed to connect with user credentials ({0} + {1})", UserName, Password));
+                return;
+            }
 
-            string repositoryPath = Path.Combine(Directory.GetParent(Path.GetDirectoryName(_dbPath)).FullName, "Documents");
-            PPDataContext db = new PPDataContext(_dbPath, repositoryPath);
+            PPDataContext db = new PPDataContext(_dbPath, RepositoryPath);
             CopyCardboardFormat(db, callback);
             CopyCardboardProfiles(db, callback);
             CopyTreeNodeRecursively(db, callback);
 
             _client.Close();
-
+            // end
             if (null != callback) callback.End();
         }
 
@@ -78,8 +91,9 @@ namespace treeDiM.PLMPackLib
         private void RecursiveInsert(PPDataContext db, TreeNode tn, PLMPackSR.DCTreeNode wsNode, string offset, IProcessingCallback callback)
         {
             // create node thumbnail
-            PLMPackSR.DCThumbnail wsThumbnail = _client.CreateNewThumbnail(
-                tn.Thumbnail.File.Guid, tn.Thumbnail.File.Extension);
+            string thumbPath = tn.Thumbnail.File.PathWRepo( RepositoryPath );
+            DCFile thFile = Upload(thumbPath, callback);
+            PLMPackSR.DCThumbnail wsThumbnail = _client.CreateNewThumbnailFromFile(thFile);
 
             string docType = string.Empty;
             PLMPackSR.DCTreeNode wsNodeChild = null;
@@ -87,47 +101,62 @@ namespace treeDiM.PLMPackLib
             {
                 // get document
                 Document doc = tn.Documents(db)[0];
-
-                string filePath = string.Empty;
-                Guid g = FileTransferUtility.UploadFile(filePath);
-
-
-                PLMPackSR.DCFile wsDocFile = _client.CreateNewFile(doc.File.Guid, doc.File.Extension);
+                string docPath = doc.File.PathWRepo(RepositoryPath);
+                // upload document
+                PLMPackSR.DCFile wsDocFile = Upload(docPath, callback);
 
                 if (tn.IsComponent)
                 {
                     docType = "COMPONENT";
                     Component comp = doc.Components[0];
+
+                    // get majorations
                     List<PLMPackSR.DCMajorationSet> majorationSets = new List<PLMPackSR.DCMajorationSet>();
-                    List<PLMPackSR.DCParamDefaultValue> paramDefaultValues = new List<PLMPackSR.DCParamDefaultValue>();
                     foreach (MajorationSet majoSet in comp.MajorationSets)
                     {
+                        DCCardboardProfile cbProfile = _client.GetCardboardProfileByName(majoSet.CardboardProfile.Name);
                         string sMajo = string.Empty;
+                        List<DCMajoration> dcMajorationList = new List<DCMajoration>();
                         foreach (Majoration majo in majoSet.Majorations)
                         {
                             sMajo += string.Format("({0}={1})", majo.Name, majo.Value);
+                            dcMajorationList.Add(new DCMajoration() { Name = majo.Name, Value = majo.Value });
                         }
+                        majorationSets.Add(
+                            new DCMajorationSet()
+                            {
+                                Profile = cbProfile,
+                                Majorations = dcMajorationList.ToArray()
+                            }
+                            );
 
                         if (null != callback)
                             callback.Info(string.Format("{0} - {1}", majoSet.CardboardProfile.Name, sMajo));
                     }
+                    // get default parameter values
+                    List<PLMPackSR.DCParamDefaultValue> paramDefaultValues = new List<PLMPackSR.DCParamDefaultValue>();
+                    foreach (ParamDefaultValue pdv in comp.ParamDefaultValues)
+                        paramDefaultValues.Add(new DCParamDefaultValue() { Name = pdv.Name, Value = pdv.Value });
+
                     PLMPackSR.DCTreeNode wsNodeComp = _client.CreateNewNodeComponent(
-                        wsNode.ParentNodeID, tn.Name, tn.Description
-                        , wsThumbnail.ID, wsDocFile, doc.Components[0].Guid
+                        wsNode, tn.Name, tn.Description
+                        , wsThumbnail, wsDocFile, doc.Components[0].Guid
                         , majorationSets.ToArray(), paramDefaultValues.ToArray());
                 }
                 else
                 {
                     docType = "DOCUMENT";
-                    wsNodeChild = _client.CreateNewNodeDocument(wsNode.ParentNodeID, tn.Name, tn.Description
-                        , wsThumbnail.ID, docType, wsDocFile);
+                    PLMPackSR.DCTreeNode wsNodeDocument = _client.CreateNewNodeDocument(wsNode, tn.Name, tn.Description
+                        , wsThumbnail, wsDocFile, docType);
                 }                    
             }
             else
             {
                 docType = "BRANCH";
-                wsNodeChild = _client.CreateNewNodeBranch(wsNode.ParentNodeID, tn.Name, tn.Description, wsThumbnail.ID);
+                wsNodeChild = _client.CreateNewNodeBranch(wsNode, tn.Name, tn.Description, wsThumbnail);
             }
+            if (null == wsNodeChild)
+                return;
 
             if (null != callback)
                 callback.Info(string.Format("{0}-> {1} ({2})", offset, tn.Name, docType));
@@ -153,11 +182,36 @@ namespace treeDiM.PLMPackLib
             get { return _password; }
             set { _password = value; }
         }
+        public bool ActuallyUpload
+        {
+            get { return _actuallyUpload; }
+            set { _actuallyUpload = value; }
+        }
+        #endregion
+
+        #region Helpers
+        private PLMPackSR.DCFile Upload(string filePath, IProcessingCallback callback)
+        {
+            if (null != callback)
+                callback.Info(string.Format(_actuallyUpload ? "Uploading {0}..." : "Not actually uploading {0}...", Path.GetFileName(filePath)));
+            return _client.CreateNewFile(
+                _actuallyUpload ? FileTransferUtility.UploadFile(filePath) : Guid.NewGuid()
+                , Path.GetExtension(filePath)
+                );
+        }
+        private string RepositoryPath
+        {
+            get
+            {
+                return Path.Combine(Directory.GetParent(Path.GetDirectoryName(_dbPath)).FullName, "Documents");
+            }
+        }
         #endregion
 
         #region Data members
         private string _dbPath;
         private string _userName, _password;
+        private bool _actuallyUpload = true;
         private PLMPackSR.PLMPackServiceClient _client;
         #endregion
     }

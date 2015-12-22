@@ -246,6 +246,12 @@
   <wsdl:message name="IPLMPackService_CreateNewFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateNewFileResponse" />
   </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnailFromFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailFromFile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnailFromFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailFromFileResponse" />
+  </wsdl:message>
   <wsdl:message name="IPLMPackService_CreateNewThumbnail_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateNewThumbnail" />
   </wsdl:message>
@@ -428,6 +434,10 @@
     <wsdl:operation name="CreateNewFile">
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFile" message="tns:IPLMPackService_CreateNewFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFileResponse" message="tns:IPLMPackService_CreateNewFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnailFromFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile" message="tns:IPLMPackService_CreateNewThumbnailFromFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse" message="tns:IPLMPackService_CreateNewThumbnailFromFile_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateNewThumbnail">
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail" message="tns:IPLMPackService_CreateNewThumbnail_InputMessage" />
@@ -693,6 +703,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateNewFile">
       <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnailFromFile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

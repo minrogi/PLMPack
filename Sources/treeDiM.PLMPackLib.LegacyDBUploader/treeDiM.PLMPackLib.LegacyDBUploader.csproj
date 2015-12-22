@@ -54,9 +54,9 @@
     <Reference Include="DbLinq.Sqlite">
       <HintPath>..\..\..\PLMPackLib4Azure\Sources\Client\LegacyDBUploader\Sqlite\DbLinq.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.5\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Pic.DAL">
       <HintPath>..\..\..\PLMPackLib4Azure\Sources\Client\LegacyDBUploader\Sqlite\Pic.DAL.dll</HintPath>
@@ -131,6 +131,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\treeDiM.FileTransfer\treeDiM.FileTransfer.csproj">
+      <Project>{137e9088-dda2-43d7-8816-7eda096c6a9e}</Project>
+      <Name>treeDiM.FileTransfer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\PLMPackSR\" />
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +153,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\treeDiM.FileTransfer\treeDiM.FileTransfer.csproj">
-      <Project>{137e9088-dda2-43d7-8816-7eda096c6a9e}</Project>
-      <Name>treeDiM.FileTransfer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -88,10 +88,10 @@
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Document" nillable="true" type="tns:DCFile" />
       <xs:element minOccurs="0" name="HasChildrens" type="xs:boolean" />
-      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NodeType" type="tns:NodeType" />
-      <xs:element minOccurs="0" name="ParentNodeID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentNodeID" type="ser:guid" />
       <xs:element minOccurs="0" name="Thumbnail" nillable="true" type="tns:DCThumbnail" />
     </xs:sequence>
   </xs:complexType>

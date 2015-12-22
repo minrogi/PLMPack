@@ -9,14 +9,7 @@
     CONSTRAINT [FK_dbo.Documents_dbo.File_Guid] FOREIGN KEY ([FileGuid]) REFERENCES [dbo].[Files] ([Guid]),
     CONSTRAINT [FK_dbo.Documents_dbo.Groups_Id] FOREIGN KEY ([GroupId]) REFERENCES [dbo].[Groups] ([Id])
 );
-
-
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [DocumentsIdIndex]
     ON [dbo].[Documents]([Id] ASC);
-
-
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [MajorationSetsIdIndex]
-    ON [dbo].[Documents]([Id] ASC);
-

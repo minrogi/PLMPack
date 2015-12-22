@@ -641,7 +641,7 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         private bool HasChildrensField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IDField;
+        private System.Guid IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -650,7 +650,7 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         private treeDiM.PLMPackLib.PLMPackSR.NodeType NodeTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ParentNodeIDField;
+        private System.Guid ParentNodeIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private treeDiM.PLMPackLib.PLMPackSR.DCThumbnail ThumbnailField;
@@ -718,12 +718,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ID {
+        public System.Guid ID {
             get {
                 return this.IDField;
             }
             set {
-                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                if ((this.IDField.Equals(value) != true)) {
                     this.IDField = value;
                     this.RaisePropertyChanged("ID");
                 }
@@ -757,12 +757,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ParentNodeID {
+        public System.Guid ParentNodeID {
             get {
                 return this.ParentNodeIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.ParentNodeIDField, value) != true)) {
+                if ((this.ParentNodeIDField.Equals(value) != true)) {
                     this.ParentNodeIDField = value;
                     this.RaisePropertyChanged("ParentNodeID");
                 }
@@ -1224,6 +1224,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewFileResponse")]
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCFile> CreateNewFileAsync(System.Guid g, string ext);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(treeDiM.PLMPackLib.PLMPackSR.DCFile file);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> CreateNewThumbnailFromFileAsync(treeDiM.PLMPackLib.PLMPackSR.DCFile file);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnail(System.Guid g, string ext);
         
@@ -1255,34 +1261,34 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> GetUserRootNodeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens", ReplyAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(string id);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens", ReplyAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetTreeNodeChildrensAsync(string id);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetTreeNodeChildrensAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranch", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeBranchResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeBranch(string parentNodeId, string name, string description, int thumbnailId);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeBranch(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranch", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeBranchResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeBranchAsync(string parentNodeId, string name, string description, int thumbnailId);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeBranchAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(string parentNodeId, string name, string description, int thumbnailId, string docType, treeDiM.PLMPackLib.PLMPackSR.DCFile docFile);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(string parentNodeId, string name, string description, int thumbnailId, string docType, treeDiM.PLMPackLib.PLMPackSR.DCFile docFile);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
-        void ShareTreeNode(string treeNodeId, string grpId);
+        void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
-        System.Threading.Tasks.Task ShareTreeNodeAsync(string treeNodeId, string grpId);
+        System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g);
@@ -1526,6 +1532,14 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewFileAsync(g, ext);
         }
         
+        public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(treeDiM.PLMPackLib.PLMPackSR.DCFile file) {
+            return base.Channel.CreateNewThumbnailFromFile(file);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCThumbnail> CreateNewThumbnailFromFileAsync(treeDiM.PLMPackLib.PLMPackSR.DCFile file) {
+            return base.Channel.CreateNewThumbnailFromFileAsync(file);
+        }
+        
         public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnail(System.Guid g, string ext) {
             return base.Channel.CreateNewThumbnail(g, ext);
         }
@@ -1566,44 +1580,44 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.GetUserRootNodeAsync();
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(string id) {
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[] GetTreeNodeChildrens(System.Guid id) {
             return base.Channel.GetTreeNodeChildrens(id);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetTreeNodeChildrensAsync(string id) {
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode[]> GetTreeNodeChildrensAsync(System.Guid id) {
             return base.Channel.GetTreeNodeChildrensAsync(id);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeBranch(string parentNodeId, string name, string description, int thumbnailId) {
-            return base.Channel.CreateNewNodeBranch(parentNodeId, name, description, thumbnailId);
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeBranch(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb) {
+            return base.Channel.CreateNewNodeBranch(parentNode, name, description, thumb);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeBranchAsync(string parentNodeId, string name, string description, int thumbnailId) {
-            return base.Channel.CreateNewNodeBranchAsync(parentNodeId, name, description, thumbnailId);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeBranchAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb) {
+            return base.Channel.CreateNewNodeBranchAsync(parentNode, name, description, thumb);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(string parentNodeId, string name, string description, int thumbnailId, string docType, treeDiM.PLMPackLib.PLMPackSR.DCFile docFile) {
-            return base.Channel.CreateNewNodeDocument(parentNodeId, name, description, thumbnailId, docType, docFile);
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType) {
+            return base.Channel.CreateNewNodeDocument(parentNode, name, description, thumb, dFile, docType);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(string parentNodeId, string name, string description, int thumbnailId, string docType, treeDiM.PLMPackLib.PLMPackSR.DCFile docFile) {
-            return base.Channel.CreateNewNodeDocumentAsync(parentNodeId, name, description, thumbnailId, docType, docFile);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType) {
+            return base.Channel.CreateNewNodeDocumentAsync(parentNode, name, description, thumb, dFile, docType);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
-            return base.Channel.CreateNewNodeComponent(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValues);
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
+            return base.Channel.CreateNewNodeComponent(parentNode, name, description, thumb, compFile, compGuid, majorationSets, defaultValues);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(string parentNodeId, string name, string description, int thumbnailId, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
-            return base.Channel.CreateNewNodeComponentAsync(parentNodeId, name, description, thumbnailId, compFile, compGuid, majorationSets, defaultValues);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
+            return base.Channel.CreateNewNodeComponentAsync(parentNode, name, description, thumb, compFile, compGuid, majorationSets, defaultValues);
         }
         
-        public void ShareTreeNode(string treeNodeId, string grpId) {
-            base.Channel.ShareTreeNode(treeNodeId, grpId);
+        public void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId) {
+            base.Channel.ShareTreeNode(dcNode, grpId);
         }
         
-        public System.Threading.Tasks.Task ShareTreeNodeAsync(string treeNodeId, string grpId) {
-            return base.Channel.ShareTreeNodeAsync(treeNodeId, grpId);
+        public System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId) {
+            return base.Channel.ShareTreeNodeAsync(dcNode, grpId);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g) {

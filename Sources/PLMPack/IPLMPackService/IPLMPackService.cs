@@ -74,6 +74,8 @@ namespace PLMPack
 
         #region Thumbnail
         [OperationContract]
+        DCThumbnail CreateNewThumbnailFromFile(DCFile file);
+        [OperationContract]
         DCThumbnail CreateNewThumbnail(Guid g, string ext);
         [OperationContract]
         DCThumbnail GetDefaultThumbnail(string defName);
@@ -89,14 +91,15 @@ namespace PLMPack
         [OperationContract]
         DCTreeNode[] GetTreeNodeChildrens(Guid id);
         [OperationContract]
-        DCTreeNode CreateNewNodeBranch(Guid parentNodeId, string name, string description, int thumbnailId);
+        DCTreeNode CreateNewNodeBranch(DCTreeNode parentNode, string name, string description, DCThumbnail thumb);
         [OperationContract]
-        DCTreeNode CreateNewNodeDocument(Guid parentNodeId, string name, string description, int thumbnailId, string docType, DCFile docFile);
+        DCTreeNode CreateNewNodeDocument(DCTreeNode parentNode, string name, string description, DCThumbnail thumb
+            , DCFile dFile);
         [OperationContract]
-        DCTreeNode CreateNewNodeComponent(Guid parentNodeId, string name, string description, int thumbnailId, DCFile compFile, Guid compGuid,
-            DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues);
+        DCTreeNode CreateNewNodeComponent(DCTreeNode parentNode, string name, string description, DCThumbnail thumb
+            , DCFile compFile, Guid compGuid, DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues);
         [OperationContract]
-        void ShareTreeNode(string treeNodeId, string grpId);
+        void ShareTreeNode(DCTreeNode dcNode, string grpId);
         #endregion
 
         #region Components

@@ -12,7 +12,6 @@
     CONSTRAINT [FK_dbo.CardboardQuality_dbo.CardboardProfiles_Id] FOREIGN KEY ([CardboardProfileId]) REFERENCES [dbo].[CardboardProfiles] ([Id]) ON DELETE CASCADE
 );
 
-
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [CardboardQualityIdIndex]
     ON [dbo].[CardboardQuality]([Id] ASC);

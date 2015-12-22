@@ -24,6 +24,8 @@ namespace PLMPack
             // save connection in database
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser aspNetUser = AspNetUser.GetByUserName(db, UserName);
+            if (null == aspNetUser)
+                return null;
             aspNetUser.Connect(db);
             return new DCUser()
                 {
@@ -43,7 +45,6 @@ namespace PLMPack
             AspNetUser aspNetUser = AspNetUser.GetByUserName(db, UserName);
             aspNetUser.Disconnect(db);
         }
-
         
         public string UserName
         {
@@ -342,7 +343,7 @@ namespace PLMPack
         public DCFile CreateNewFile(Guid g, string ext)
         {
             PLMPackEntities db = new PLMPackEntities();
-            File f = File.CreateNew(db, g, ext);
+            File f = File.CreateNew(db, g, ext.Trim('.'));
             return new DCFile()
             {
                 Guid = new Guid(f.Guid),
@@ -353,6 +354,20 @@ namespace PLMPack
         #endregion
 
         #region Thumbnail
+        [PrincipalPermission(SecurityAction.Demand)]
+        public DCThumbnail CreateNewThumbnailFromFile(DCFile file)
+        {
+            PLMPackEntities db = new PLMPackEntities();
+            Thumbnail tb = Thumbnail.CreateNew(db, file.Guid);
+            return new DCThumbnail()
+            {
+                ID = tb.Id,
+                MimeType = tb.MimeType,
+                Width = tb.Width,
+                Height = tb.Height,
+                File = new DCFile() { Guid = new Guid(tb.File.Guid), Extension = tb.File.Extension, DateCreated = tb.File.DateCreated }
+            };
+        }
         [PrincipalPermission(SecurityAction.Demand)]
         public DCThumbnail CreateNewThumbnail(Guid g, string ext)
         {
@@ -436,7 +451,6 @@ namespace PLMPack
                     HasChildrens = tnRoot.HasChildrens
                 };
         }
-
         [PrincipalPermission(SecurityAction.Demand)]
         public DCTreeNode[] GetTreeNodeChildrens(Guid nodeId)
         {
@@ -449,49 +463,88 @@ namespace PLMPack
             return listTreeNode.ToArray();
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public DCTreeNode CreateNewNodeBranch(Guid parentNodeId, string name, string description, int thumbnailId)
+        public DCTreeNode CreateNewNodeBranch(DCTreeNode parentNode, string name, string description, DCThumbnail thumb)
         {
-            PLMPackEntities db = new PLMPackEntities();
-            AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            TreeNode tnParent = TreeNode.GetById(db, parentNodeId);
-            TreeNode tnBranch = tnParent.InsertBranch(db, user.GroupId, name, description, Thumbnail.GetByID(db, thumbnailId));
-            return Db_2_DCTreeNode(db, user, tnBranch);
+            try
+            {
+                PLMPackEntities db = new PLMPackEntities();
+                AspNetUser user = AspNetUser.GetByUserName(db, UserName);
+                TreeNode tnParent = TreeNode.GetById(db, parentNode.ID);
+                TreeNode tnBranch = tnParent.InsertBranch(db, user.GroupId, name, description, Thumbnail.GetByID(db, thumb.ID));
+                return Db_2_DCTreeNode(db, user, tnBranch);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.ToString();
+                throw ex;
+            }
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public DCTreeNode CreateNewNodeDocument(Guid parentNodeId, string name, string description, int thumbnailId, string docType, DCFile dFile)
+        public DCTreeNode CreateNewNodeDocument(DCTreeNode parentNode, string name, string description, DCThumbnail thumb
+            , DCFile dFile)
         {
-            PLMPackEntities db = new PLMPackEntities();
-            AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            TreeNode tnParent = TreeNode.GetById(db, parentNodeId);
-            Thumbnail thumb = Thumbnail.GetByID(db, thumbnailId);
-            TreeNode tnDocument = tnParent.InsertDocument(db, user.GroupId, name, description, docType, dFile.Guid, dFile.Extension, thumb);
-            return Db_2_DCTreeNode(db, user, tnDocument);
+            try
+            {
+                PLMPackEntities db = new PLMPackEntities();
+                AspNetUser user = AspNetUser.GetByUserName(db, UserName);
+                TreeNode tnParent = TreeNode.GetById(db, parentNode.ID);
+                TreeNode tnDocument = tnParent.InsertDocument(db, user.GroupId, name, description, FileToDocType(dFile), dFile.Guid, dFile.Extension, Thumbnail.GetByID(db, thumb.ID));
+                return Db_2_DCTreeNode(db, user, tnDocument);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.ToString();
+                throw ex;
+            }
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public DCTreeNode CreateNewNodeComponent(Guid parentNodeId, string name, string description, int thumbnailId, DCFile compFile, Guid compGuid,
-            DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues)
+        public DCTreeNode CreateNewNodeComponent(DCTreeNode parentNode, string name, string description, DCThumbnail thumb
+            , DCFile compFile, Guid compGuid, DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues)
         {
-            PLMPackEntities db = new PLMPackEntities();
-            AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            TreeNode tnParent = TreeNode.GetById(db, parentNodeId);
-            Thumbnail thumb = Thumbnail.GetByID(db, thumbnailId);
+            try
+            {
+                PLMPackEntities db0 = new PLMPackEntities();
+                AspNetUser user = AspNetUser.GetByUserName(db0, UserName);
+                TreeNode tnParent = TreeNode.GetById(db0, parentNode.ID);
+                TreeNode tnComponent = tnParent.InsertComponent(
+                    db0, user.GroupId,
+                    name, description,
+                    compFile.Guid, compGuid,
+                    Thumbnail.GetByID(db0, thumb.ID));
 
-            TreeNode tnComponent = tnParent.InsertComponent(
-                db, user.GroupId,
-                name, description,
-                compFile.Guid, compGuid,
-                thumb);
-            File f = thumb.File;
-            return Db_2_DCTreeNode(db, user, tnComponent);
+                // retrieve component
+                PLMPackEntities db1 = new PLMPackEntities();
+                Component comp = Component.GetByGuid(db1, compGuid);
+
+                // insert default parameter values
+                foreach (DCParamDefaultValue pdv in defaultValues)
+                    comp.InsertParamDefaultValue(db1, user.GroupId, pdv.Name, pdv.Value);
+
+                // set majoration set
+                foreach (DCMajorationSet mjset in majorationSets)
+                {
+                    CardboardProfile cp = CardboardProfile.GetByID(db0, mjset.Profile.ID);
+                    Dictionary<string, double> dictMajorations = new Dictionary<string,double>();
+                    foreach (DCMajoration maj in mjset.Majorations)
+                        dictMajorations[maj.Name] = maj.Value;
+                    comp.UpdateMajorationSet(db1, cp, dictMajorations);
+                }
+                return Db_2_DCTreeNode(db1, user, tnComponent);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.ToString();
+                throw ex;
+            }
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public void ShareTreeNode(string treeNodeId, string grpId)
+        public void ShareTreeNode(DCTreeNode dcNode, string grpId)
         {
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser user = AspNetUser.GetByUserName(db, UserName);
             Group grp = Group.GetById(db, grpId);
 
-            TreeNode node = TreeNode.GetById(db, new Guid(treeNodeId));
+            TreeNode node = TreeNode.GetById(db, dcNode.ID);
             node.Share(db, user, grp);
         }
         #endregion
@@ -615,7 +668,7 @@ namespace PLMPack
             foreach (MajorationSet mjs in c.MajorationSet)
             {
                 List<DCMajoration> listMajo = new List<DCMajoration>();
-                CardboardProfile cp = mjs.CardboardProfile;
+                CardboardProfile cp = CardboardProfile.GetByID(db, mjs.CardboardProfileId);
                 majoSets.Add(new DCMajorationSet()
                    {
                        Profile = new DCCardboardProfile()
@@ -640,25 +693,64 @@ namespace PLMPack
         }
         private DCTreeNode Db_2_DCTreeNode(PLMPackEntities db, AspNetUser user, TreeNode tn)
         {
-            DCNodeTypeEnum nodeType = DCNodeTypeEnum.NTBranch;
-            if (tn.IsDocument) nodeType = DCNodeTypeEnum.NTDocument;
-            if (tn.IsComponent) nodeType = DCNodeTypeEnum.NTComponent;
-
-            Document d = tn.IsDocument ? tn.FirstDocument : null;
-            Component c = tn.FirstComponent;
-
-            return new DCTreeNode()
+            try
             {
-                ID = Guid.Parse(tn.Id),
-                ParentNodeID = Guid.Parse(tn.ParentNodeId),
-                Name = tn.Name,
-                Description = tn.Description,
-                NodeType = nodeType,
-                HasChildrens = tn.HasChildrens,
-                Thumbnail = Db_2_DCThumbnail(tn.Thumbnail),
-                Document = Db_2_DCFile(d != null ? d.File : null),
-                Component = Db_2_Component(db, user, c)
-            };
+                DCNodeTypeEnum nodeType = DCNodeTypeEnum.NTBranch;
+                if (tn.IsDocument) nodeType = DCNodeTypeEnum.NTDocument;
+                if (tn.IsComponent) nodeType = DCNodeTypeEnum.NTComponent;
+
+                Document d = tn.IsDocument ? tn.FirstDocument(db) : null;
+                Component c = tn.IsComponent ? tn.FirstComponent(db) : null;
+                File f = null;
+                if (null != d)  {   f = File.GetById(db, Guid.Parse(d.FileGuid)); }
+
+                return new DCTreeNode()
+                {
+                    ID = Guid.Parse(tn.Id),
+                    ParentNodeID = Guid.Parse(tn.ParentNodeId),
+                    Name = tn.Name,
+                    Description = tn.Description,
+                    NodeType = nodeType,
+                    HasChildrens = tn.HasChildrens,
+                    Thumbnail = Db_2_DCThumbnail(tn.Thumbnail),
+                    Document = Db_2_DCFile(f),
+                    Component = Db_2_Component(db, user, c)
+                };
+            }
+            catch (Exception ex)
+            {
+                string message = ex.ToString();
+                return null;
+            }
+        }
+        #endregion
+
+        #region Helpers
+        public string FileToDocType(DCFile f)
+        {
+            switch (f.Extension.Trim('.').ToLower())
+            {
+                case "doc": return "DT_WORD";
+                case "xls": return "DT_EXCEL";
+                case "dll": return "COMPONENT";
+                case "des": return "DT_PICGEOM";
+                case "des3": return "DT_PICADOR3D";
+                case "pdf": return "DT_ACROBAT";
+                case "ai": return "DT_ILLUSTRATOR";
+                case "dxf": return "DT_ACAD";
+                case "dwg": return "DT_ACAD";
+                case "sxw": return "DT_WRITER";
+                case "stw": return "DT_WRITER";
+                case "sxc": return "DT_CALC";
+                case "stc": return "DT_CALC";
+                case "ard": return "DT_ARTIOS";
+                case "cf2": return "DT_CCF2";
+                case "png": return "DT_IMAGE";
+                case "bmp": return "DT_IMAGE";
+                case "jpg": return "DT_IMAGE";
+                case "jpeg": return "DT_IMAGE";
+                default: return "DT_UNKNOWN";
+            }
         }
         #endregion
     }

@@ -9,5 +9,5 @@
 
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [UserGroupMemberships]
-    ON [dbo].[UserGroupMemberships]([UserId] ASC);
+    ON [dbo].[UserGroupMemberships]([UserId] ASC, [GroupId] ASC);
 

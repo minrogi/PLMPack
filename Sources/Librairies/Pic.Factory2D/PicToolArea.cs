@@ -69,7 +69,7 @@ namespace Pic.Factory2D
                             // cas intersections confondues
                             if ((Math.Abs(xh - seg.P0.X) < 0.001) || (Math.Abs(seg.P1.X - xh) < 0.001))
                             {
-                                // restart loop from the begining
+                                // restart loop from the beginning
                                 nby = 1;
                                 tabyh[0] = double.MaxValue;
                                 stepCurrent = 0.9 * stepDefault;
