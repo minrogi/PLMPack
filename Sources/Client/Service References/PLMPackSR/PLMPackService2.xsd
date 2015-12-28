@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/PLMPack" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PLMPack" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="DCUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCUser" nillable="true" type="tns:DCUser" />
+  <xs:complexType name="DCGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Members" nillable="true" type="tns:ArrayOfDCUser" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCGroup" nillable="true" type="tns:DCGroup" />
+  <xs:complexType name="ArrayOfDCUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCUser" nillable="true" type="tns:DCUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCUser" nillable="true" type="tns:ArrayOfDCUser" />
+  <xs:complexType name="ArrayOfDCCardboadFormat">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCCardboadFormat" nillable="true" type="tns:DCCardboadFormat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCCardboadFormat" nillable="true" type="tns:ArrayOfDCCardboadFormat" />
+  <xs:complexType name="DCCardboadFormat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Length" type="xs:double" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Width" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCCardboadFormat" nillable="true" type="tns:DCCardboadFormat" />
+  <xs:complexType name="ArrayOfDCCardboardProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCCardboardProfile" nillable="true" type="tns:DCCardboardProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCCardboardProfile" nillable="true" type="tns:ArrayOfDCCardboardProfile" />
+  <xs:complexType name="DCCardboardProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Thickness" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCCardboardProfile" nillable="true" type="tns:DCCardboardProfile" />
+  <xs:complexType name="DCFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCFile" nillable="true" type="tns:DCFile" />
+  <xs:complexType name="DCThumbnail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="File" nillable="true" type="tns:DCFile" />
+      <xs:element minOccurs="0" name="Height" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="MimeType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Width" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCThumbnail" nillable="true" type="tns:DCThumbnail" />
+  <xs:complexType name="ArrayOfDCTreeNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCTreeNode" nillable="true" type="tns:DCTreeNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCTreeNode" nillable="true" type="tns:ArrayOfDCTreeNode" />
+  <xs:complexType name="DCTreeNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Component" nillable="true" type="tns:DCComponent" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Document" nillable="true" type="tns:DCFile" />
+      <xs:element minOccurs="0" name="HasChildrens" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NodeType" type="tns:NodeType" />
+      <xs:element minOccurs="0" name="ParentNodeID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Thumbnail" nillable="true" type="tns:DCThumbnail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCTreeNode" nillable="true" type="tns:DCTreeNode" />
+  <xs:complexType name="DCComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="File" nillable="true" type="tns:DCFile" />
+      <xs:element minOccurs="0" name="MajoSets" nillable="true" type="tns:ArrayOfDCMajorationSet" />
+      <xs:element minOccurs="0" name="ParamDefaults" nillable="true" type="tns:ArrayOfDCParamDefaultValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCComponent" nillable="true" type="tns:DCComponent" />
+  <xs:complexType name="ArrayOfDCMajorationSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCMajorationSet" nillable="true" type="tns:DCMajorationSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCMajorationSet" nillable="true" type="tns:ArrayOfDCMajorationSet" />
+  <xs:complexType name="DCMajorationSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Majorations" nillable="true" type="tns:ArrayOfDCMajoration" />
+      <xs:element minOccurs="0" name="Profile" nillable="true" type="tns:DCCardboardProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCMajorationSet" nillable="true" type="tns:DCMajorationSet" />
+  <xs:complexType name="ArrayOfDCMajoration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCMajoration" nillable="true" type="tns:DCMajoration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCMajoration" nillable="true" type="tns:ArrayOfDCMajoration" />
+  <xs:complexType name="DCMajoration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCMajoration" nillable="true" type="tns:DCMajoration" />
+  <xs:complexType name="ArrayOfDCParamDefaultValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DCParamDefaultValue" nillable="true" type="tns:DCParamDefaultValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDCParamDefaultValue" nillable="true" type="tns:ArrayOfDCParamDefaultValue" />
+  <xs:complexType name="DCParamDefaultValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DCParamDefaultValue" nillable="true" type="tns:DCParamDefaultValue" />
+  <xs:simpleType name="NodeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NTBranch" />
+      <xs:enumeration value="NTDocument" />
+      <xs:enumeration value="NTComponent" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NodeType" nillable="true" type="tns:NodeType" />
+</xs:schema>

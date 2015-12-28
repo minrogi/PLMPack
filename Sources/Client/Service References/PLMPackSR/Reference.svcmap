@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="19c1ce65-0308-4e6f-bba2-374ac843ec8b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://localhost:44302/PLMPackService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PLMPackService.wsdl" MetadataType="Wsdl" ID="2a55690c-4498-4322-80a1-89eb1346ebed" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?wsdl" />
+    <MetadataFile FileName="PLMPackService.xsd" MetadataType="Schema" ID="08306445-8ec6-47f4-abe7-f5721324cce7" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PLMPackService1.xsd" MetadataType="Schema" ID="8d80d02a-ec79-433f-94a3-b88b0830970b" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PLMPackService.disco" MetadataType="Disco" ID="4dc915de-9ba9-4fdf-8625-82e4ce2f4120" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?disco" />
+    <MetadataFile FileName="PLMPackService2.xsd" MetadataType="Schema" ID="d81cf2b0-24f8-49c1-a370-24c9f601a5e6" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

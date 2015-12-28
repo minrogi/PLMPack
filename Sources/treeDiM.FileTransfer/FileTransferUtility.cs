@@ -15,6 +15,14 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace treeDiM.FileTransfer
 {
+    public class FileTransferException : Exception
+    { 
+        public FileTransferException(Guid guid, string fileExt)
+            : base(string.Format("Failed to retrieve {0}", FileTransferUtility.FileNameFromGuid(guid, fileExt)))
+        {
+        }
+    }
+
     public class FileTransferUtility
     {
         #region Upload / Download methods
@@ -39,6 +47,8 @@ namespace treeDiM.FileTransfer
             {
                 CloudBlobContainer container = Container;
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(FileNameFromGuid(guid, fileExt));
+                if (!blockBlob.Exists())
+                    throw new FileTransferException(guid, fileExt);
 
                 using (var fileStream = System.IO.File.OpenWrite(filePath))
                 {
@@ -67,7 +77,7 @@ namespace treeDiM.FileTransfer
         #region Public helpers
         public static string FileNameFromGuid(Guid g, string fileExt)
         {
-            return g.ToString().Replace("-", "_") + fileExt;
+            return g.ToString().Replace("-", "_") + "."  + fileExt.Trim('.');
         }
         public static void ClearFileCache()
         {
@@ -103,6 +113,22 @@ namespace treeDiM.FileTransfer
                 return container;
             }
         }
+
+        public static string StorageConnectionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_storageConnectionString))
+                    _storageConnectionString = Settings.Default.StorageConnectionString;
+                return _storageConnectionString; 
+            }
+            set { _storageConnectionString = value; }
+
+        }
+        #endregion
+
+        #region Data members
+        private static string _storageConnectionString;
         #endregion
     }
 }

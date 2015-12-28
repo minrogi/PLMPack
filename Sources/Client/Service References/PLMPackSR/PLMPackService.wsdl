@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PLMPackService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IPLMPackService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PLMPack" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPLMPackService_get_UserName_InputMessage">
+    <wsdl:part name="parameters" element="tns:get_UserName" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_get_UserName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:get_UserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_DisConnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisConnect" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_DisConnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCurrentGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentGroup" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCurrentGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_SetCurrentGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCurrentGroup" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_SetCurrentGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCurrentGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_AddInterest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddInterest" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_AddInterest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddInterestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveInterest_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInterest" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveInterest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInterestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetAllCardboardFormats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCardboardFormats" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetAllCardboardFormats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCardboardFormatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardFormatByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardFormatByID" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardFormatByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardFormatByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CardboardFormatExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:CardboardFormatExists" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CardboardFormatExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CardboardFormatExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardFormatByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardFormatByName" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardFormatByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardFormatByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewCardboardFormat_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewCardboardFormat" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewCardboardFormat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewCardboardFormatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveCardboardFormat_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCardboardFormat" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveCardboardFormat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCardboardFormatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateCardboardFormat_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCardboardFormat" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateCardboardFormat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCardboardFormatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetAllCardboardProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCardboardProfile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetAllCardboardProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCardboardProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardProfileByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardProfileByID" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardProfileByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardProfileByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CardboardProfileExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:CardboardProfileExists" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CardboardProfileExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CardboardProfileExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardProfileByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardProfileByName" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetCardboardProfileByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardboardProfileByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewCardboardProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewCardboardProfile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewCardboardProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewCardboardProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveCardboardProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCardboardProfile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_RemoveCardboardProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCardboardProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateCardboardProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCardboardProfile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateCardboardProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCardboardProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewFile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnailFromFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailFromFile" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnailFromFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailFromFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnail" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewThumbnail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewThumbnailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetDefaultThumbnail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultThumbnail" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetDefaultThumbnail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultThumbnailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetThumbnailById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetThumbnailById" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetThumbnailById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetThumbnailByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetRootNodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRootNodes" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetRootNodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRootNodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUserRootNode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRootNode" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetUserRootNode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRootNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetTreeNodeChildrens_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeNodeChildrens" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetTreeNodeChildrens_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeNodeChildrensResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeBranch_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeBranch" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeBranch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeBranchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeDocument" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeComponent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeComponent" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_CreateNewNodeComponent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewNodeComponentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_ShareTreeNode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShareTreeNode" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_ShareTreeNode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShareTreeNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetComponentByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetComponentByGuid" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetComponentByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetComponentByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateParamDefaultComponent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateParamDefaultComponent" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateParamDefaultComponent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateParamDefaultComponentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetParamDefaultValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetParamDefaultValue" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetParamDefaultValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetParamDefaultValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateMajorationSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMajorationSet" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_UpdateMajorationSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMajorationSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetMajorationSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMajorationSet" />
+  </wsdl:message>
+  <wsdl:message name="IPLMPackService_GetMajorationSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMajorationSetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPLMPackService">
+    <wsdl:operation name="get_UserName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/get_UserName" message="tns:IPLMPackService_get_UserName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/get_UserNameResponse" message="tns:IPLMPackService_get_UserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetUser" message="tns:IPLMPackService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetUserResponse" message="tns:IPLMPackService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/Connect" message="tns:IPLMPackService_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/ConnectResponse" message="tns:IPLMPackService_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisConnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/DisConnect" message="tns:IPLMPackService_DisConnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/DisConnectResponse" message="tns:IPLMPackService_DisConnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetCurrentGroup" message="tns:IPLMPackService_GetCurrentGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetCurrentGroupResponse" message="tns:IPLMPackService_GetCurrentGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCurrentGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/SetCurrentGroup" message="tns:IPLMPackService_SetCurrentGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/SetCurrentGroupResponse" message="tns:IPLMPackService_SetCurrentGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddInterest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/AddInterest" message="tns:IPLMPackService_AddInterest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/AddInterestResponse" message="tns:IPLMPackService_AddInterest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInterest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/RemoveInterest" message="tns:IPLMPackService_RemoveInterest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/RemoveInterestResponse" message="tns:IPLMPackService_RemoveInterest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCardboardFormats">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormats" message="tns:IPLMPackService_GetAllCardboardFormats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormatsResponse" message="tns:IPLMPackService_GetAllCardboardFormats_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardFormatByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByID" message="tns:IPLMPackService_GetCardboardFormatByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByIDResponse" message="tns:IPLMPackService_GetCardboardFormatByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CardboardFormatExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CardboardFormatExists" message="tns:IPLMPackService_CardboardFormatExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CardboardFormatExistsResponse" message="tns:IPLMPackService_CardboardFormatExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardFormatByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByName" message="tns:IPLMPackService_GetCardboardFormatByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardFormatByNameResponse" message="tns:IPLMPackService_GetCardboardFormatByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCardboardFormat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewCardboardFormat" message="tns:IPLMPackService_CreateNewCardboardFormat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewCardboardFormatResponse" message="tns:IPLMPackService_CreateNewCardboardFormat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCardboardFormat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormat" message="tns:IPLMPackService_RemoveCardboardFormat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormatResponse" message="tns:IPLMPackService_RemoveCardboardFormat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCardboardFormat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardFormat" message="tns:IPLMPackService_UpdateCardboardFormat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardFormatResponse" message="tns:IPLMPackService_UpdateCardboardFormat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCardboardProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetAllCardboardProfile" message="tns:IPLMPackService_GetAllCardboardProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetAllCardboardProfileResponse" message="tns:IPLMPackService_GetAllCardboardProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardProfileByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByID" message="tns:IPLMPackService_GetCardboardProfileByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByIDResponse" message="tns:IPLMPackService_GetCardboardProfileByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CardboardProfileExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CardboardProfileExists" message="tns:IPLMPackService_CardboardProfileExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CardboardProfileExistsResponse" message="tns:IPLMPackService_CardboardProfileExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardProfileByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByName" message="tns:IPLMPackService_GetCardboardProfileByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetCardboardProfileByNameResponse" message="tns:IPLMPackService_GetCardboardProfileByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCardboardProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewCardboardProfile" message="tns:IPLMPackService_CreateNewCardboardProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewCardboardProfileResponse" message="tns:IPLMPackService_CreateNewCardboardProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCardboardProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfile" message="tns:IPLMPackService_RemoveCardboardProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfileResponse" message="tns:IPLMPackService_RemoveCardboardProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCardboardProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile" message="tns:IPLMPackService_UpdateCardboardProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse" message="tns:IPLMPackService_UpdateCardboardProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFile" message="tns:IPLMPackService_CreateNewFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewFileResponse" message="tns:IPLMPackService_CreateNewFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnailFromFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile" message="tns:IPLMPackService_CreateNewThumbnailFromFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse" message="tns:IPLMPackService_CreateNewThumbnailFromFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnail" message="tns:IPLMPackService_CreateNewThumbnail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailResponse" message="tns:IPLMPackService_CreateNewThumbnail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultThumbnail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnail" message="tns:IPLMPackService_GetDefaultThumbnail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetDefaultThumbnailResponse" message="tns:IPLMPackService_GetDefaultThumbnail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThumbnailById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetThumbnailById" message="tns:IPLMPackService_GetThumbnailById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetThumbnailByIdResponse" message="tns:IPLMPackService_GetThumbnailById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRootNodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetRootNodes" message="tns:IPLMPackService_GetRootNodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetRootNodesResponse" message="tns:IPLMPackService_GetRootNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRootNode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetUserRootNode" message="tns:IPLMPackService_GetUserRootNode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetUserRootNodeResponse" message="tns:IPLMPackService_GetUserRootNode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeNodeChildrens">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens" message="tns:IPLMPackService_GetTreeNodeChildrens_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetTreeNodeChildrensResponse" message="tns:IPLMPackService_GetTreeNodeChildrens_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeBranch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranch" message="tns:IPLMPackService_CreateNewNodeBranch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeBranchResponse" message="tns:IPLMPackService_CreateNewNodeBranch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument" message="tns:IPLMPackService_CreateNewNodeDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse" message="tns:IPLMPackService_CreateNewNodeDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeComponent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent" message="tns:IPLMPackService_CreateNewNodeComponent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse" message="tns:IPLMPackService_CreateNewNodeComponent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShareTreeNode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/ShareTreeNode" message="tns:IPLMPackService_ShareTreeNode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse" message="tns:IPLMPackService_ShareTreeNode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetComponentByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetComponentByGuid" message="tns:IPLMPackService_GetComponentByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse" message="tns:IPLMPackService_GetComponentByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateParamDefaultComponent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent" message="tns:IPLMPackService_UpdateParamDefaultComponent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse" message="tns:IPLMPackService_UpdateParamDefaultComponent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParamDefaultValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue" message="tns:IPLMPackService_GetParamDefaultValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse" message="tns:IPLMPackService_GetParamDefaultValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMajorationSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet" message="tns:IPLMPackService_UpdateMajorationSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse" message="tns:IPLMPackService_UpdateMajorationSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMajorationSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetMajorationSet" message="tns:IPLMPackService_GetMajorationSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetMajorationSetResponse" message="tns:IPLMPackService_GetMajorationSet_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IPLMPackService" type="tns:IPLMPackService">
+    <wsp:PolicyReference URI="#WSHttpBinding_IPLMPackService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="get_UserName">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/get_UserName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/Connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisConnect">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/DisConnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentGroup">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetCurrentGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCurrentGroup">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/SetCurrentGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddInterest">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/AddInterest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInterest">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/RemoveInterest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCardboardFormats">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetAllCardboardFormats" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardFormatByID">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CardboardFormatExists">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CardboardFormatExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardFormatByName">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetCardboardFormatByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCardboardFormat">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewCardboardFormat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCardboardFormat">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/RemoveCardboardFormat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCardboardFormat">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateCardboardFormat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCardboardProfile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetAllCardboardProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardProfileByID">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CardboardProfileExists">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CardboardProfileExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardboardProfileByName">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetCardboardProfileByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewCardboardProfile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewCardboardProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCardboardProfile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/RemoveCardboardProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCardboardProfile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateCardboardProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewFile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnailFromFile">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewThumbnail">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewThumbnail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultThumbnail">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetDefaultThumbnail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThumbnailById">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetThumbnailById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRootNodes">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetRootNodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRootNode">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetUserRootNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeNodeChildrens">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetTreeNodeChildrens" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeBranch">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewNodeBranch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeDocument">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewNodeComponent">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShareTreeNode">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/ShareTreeNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetComponentByGuid">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetComponentByGuid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateParamDefaultComponent">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParamDefaultValue">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetParamDefaultValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMajorationSet">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateMajorationSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMajorationSet">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetMajorationSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PLMPackService">
+    <wsdl:port name="WSHttpBinding_IPLMPackService" binding="tns:WSHttpBinding_IPLMPackService">
+      <soap12:address location="https://localhost:44302/PLMPackService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://localhost:44302/PLMPackService.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
