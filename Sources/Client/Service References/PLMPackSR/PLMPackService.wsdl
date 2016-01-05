@@ -318,17 +318,17 @@
   <wsdl:message name="IPLMPackService_GetComponentByGuid_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetComponentByGuidResponse" />
   </wsdl:message>
-  <wsdl:message name="IPLMPackService_UpdateParamDefaultComponent_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateParamDefaultComponent" />
+  <wsdl:message name="IPLMPackService_UpdateParamDefaultValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateParamDefaultValues" />
   </wsdl:message>
-  <wsdl:message name="IPLMPackService_UpdateParamDefaultComponent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateParamDefaultComponentResponse" />
+  <wsdl:message name="IPLMPackService_UpdateParamDefaultValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateParamDefaultValuesResponse" />
   </wsdl:message>
-  <wsdl:message name="IPLMPackService_GetParamDefaultValue_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetParamDefaultValue" />
+  <wsdl:message name="IPLMPackService_GetParamDefaultValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetParamDefaultValues" />
   </wsdl:message>
-  <wsdl:message name="IPLMPackService_GetParamDefaultValue_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetParamDefaultValueResponse" />
+  <wsdl:message name="IPLMPackService_GetParamDefaultValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetParamDefaultValuesResponse" />
   </wsdl:message>
   <wsdl:message name="IPLMPackService_UpdateMajorationSet_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateMajorationSet" />
@@ -483,13 +483,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetComponentByGuid" message="tns:IPLMPackService_GetComponentByGuid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse" message="tns:IPLMPackService_GetComponentByGuid_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdateParamDefaultComponent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent" message="tns:IPLMPackService_UpdateParamDefaultComponent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse" message="tns:IPLMPackService_UpdateParamDefaultComponent_OutputMessage" />
+    <wsdl:operation name="UpdateParamDefaultValues">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultValues" message="tns:IPLMPackService_UpdateParamDefaultValues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultValuesResponse" message="tns:IPLMPackService_UpdateParamDefaultValues_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetParamDefaultValue">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue" message="tns:IPLMPackService_GetParamDefaultValue_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse" message="tns:IPLMPackService_GetParamDefaultValue_OutputMessage" />
+    <wsdl:operation name="GetParamDefaultValues">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValues" message="tns:IPLMPackService_GetParamDefaultValues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPLMPackService/GetParamDefaultValuesResponse" message="tns:IPLMPackService_GetParamDefaultValues_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateMajorationSet">
       <wsdl:input wsaw:Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet" message="tns:IPLMPackService_UpdateMajorationSet_InputMessage" />
@@ -818,8 +818,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdateParamDefaultComponent">
-      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent" style="document" />
+    <wsdl:operation name="UpdateParamDefaultValues">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultValues" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -827,8 +827,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetParamDefaultValue">
-      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetParamDefaultValue" style="document" />
+    <wsdl:operation name="GetParamDefaultValues">
+      <soap12:operation soapAction="http://tempuri.org/IPLMPackService/GetParamDefaultValues" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

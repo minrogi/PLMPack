@@ -45,7 +45,7 @@ namespace PLMPack
         [OperationContract]
         DCCardboadFormat CreateNewCardboardFormat(string name, string description, double length, double width);
         [OperationContract]
-        void RemoveCardboardFormat(int id);
+        void RemoveCardboardFormat(DCCardboadFormat cbFormat);
         [OperationContract]
         DCCardboadFormat UpdateCardboardFormat(DCCardboadFormat cbFormat);
         #endregion
@@ -62,7 +62,7 @@ namespace PLMPack
         [OperationContract]
         DCCardboardProfile CreateNewCardboardProfile(string name, string description, string code, double thickness);
         [OperationContract]
-        void RemoveCardboardProfile(int id);
+        void RemoveCardboardProfile(DCCardboardProfile cbProfile);
         [OperationContract]
         DCCardboardProfile UpdateCardboardProfile(DCCardboardProfile cbProfile);
         #endregion
@@ -106,13 +106,13 @@ namespace PLMPack
         [OperationContract]
         DCComponent GetComponentByGuid(Guid g);
         [OperationContract]
-        void UpdateParamDefaultComponent(Guid g, DCParamDefaultValue[] paramDefaultValue);
+        void UpdateParamDefaultValues(Guid g, DCParamDefaultValue[] paramDefaultValue);
         [OperationContract]
-        DCParamDefaultValue[] GetParamDefaultValue(Guid g);
+        DCParamDefaultValue[] GetParamDefaultValues(Guid g);
         [OperationContract]
-        DCMajorationSet UpdateMajorationSet(Guid g, int profileId, DCMajoration[] majorations);
+        DCMajorationSet UpdateMajorationSet(Guid g, DCMajorationSet majorationSet);
         [OperationContract]
-        DCMajorationSet GetMajorationSet(Guid g, int profileId);
+        DCMajorationSet GetMajorationSet(Guid g, DCCardboardProfile profile);
         #endregion
     }
 }

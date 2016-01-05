@@ -213,6 +213,10 @@ namespace PLMPackLibClient
         {
             return _dbNodeId.GetHashCode();
         }
+        public override string ToString()
+        {
+            return string.Format("{0} ({1})", ID, Name);
+        }
         #endregion
     }
     #endregion

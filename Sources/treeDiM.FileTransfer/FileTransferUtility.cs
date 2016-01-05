@@ -57,6 +57,11 @@ namespace treeDiM.FileTransfer
             }
             return filePath;
         }
+
+        public static string BuildPath(Guid g, string fileExt)
+        {
+            return Path.Combine(TempCacheDirectory, FileNameFromGuid(g, fileExt));
+        }
         #endregion
 
         #region Checking blob existence
@@ -86,7 +91,7 @@ namespace treeDiM.FileTransfer
         #endregion
 
         #region Private helpers
-        private static string TempCacheDirectory
+        public static string TempCacheDirectory
         {
             get
             {

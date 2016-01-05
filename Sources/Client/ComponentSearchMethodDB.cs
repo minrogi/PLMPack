@@ -33,7 +33,10 @@ namespace PLMPackLibClient
         public double GetDoubleParameterDefaultValue(Guid guid, string name)
         {
             DCComponent comp = GetComponent(guid);
-            return 0.0;
+            DCParamDefaultValue paramDefValue = Array.Find(
+                comp.ParamDefaults,
+                v => string.Equals(v.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            return paramDefValue.Value;
         }
         public int GetIntParameterDefaultValue(Guid guid, string name)
         {

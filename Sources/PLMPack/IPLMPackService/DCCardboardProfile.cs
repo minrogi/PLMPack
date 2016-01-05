@@ -21,5 +21,7 @@ namespace PLMPack
         public string Code { get; set; }
         [DataMember]
         public double Thickness { get; set; }
+        [DataMember]
+        public bool HasMajorationSets { get; set; }
     }
 }

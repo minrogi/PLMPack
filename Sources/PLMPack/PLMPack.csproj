@@ -277,6 +277,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Librairies\Pic.Plugin.GeneratorCtrl\Pic.Plugin.GeneratorCtrl.csproj">
+      <Project>{48f945eb-35d7-4052-8da1-16a62a725fbc}</Project>
+      <Name>Pic.Plugin.GeneratorCtrl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PLMPackModel\PLMPackModel.csproj">
       <Project>{a9572760-6675-4786-8c96-fd98a29c7228}</Project>
       <Name>PLMPackModel</Name>

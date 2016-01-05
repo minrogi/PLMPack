@@ -151,7 +151,7 @@ namespace Pic.Factory2D.Control
         public override void Refresh()
         {
 			// sanity check
-			if (null == this.Parent)
+			if (null == this.Parent || null == _picGraphics)
 				return;
             try
             {

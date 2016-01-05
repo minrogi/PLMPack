@@ -89,7 +89,7 @@ namespace PLMPackLibClient
 
         #region Data members
         // non static data members
-        private PLMPackSR.PLMPackServiceClient _client;
+        private PLMPackServiceClient _client;
         private DCUser _user;
         // static data members
         protected static WCFClientSingleton _instance;

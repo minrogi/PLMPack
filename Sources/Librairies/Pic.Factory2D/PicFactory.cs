@@ -267,6 +267,10 @@ namespace Pic
                 AddEntity(cotation);
                 return cotation;
             }
+            public PicCotation AddCotation(PicCotation.CotType cotationType, short grp, short layer, double x0, double y0, double x1, double y1, double offset, string text)
+            {
+                return AddCotation(cotationType, grp, layer, new Vector2D(x0, y0), new Vector2D(x1, y1), offset, text, 1);
+            }
             public PicCotation AddCotation(PicCotation.CotType cotationType, short grp, short layer, double x0, double y0, double x1, double y1, double offset, string text, short noDecimals)
             {
                 return AddCotation(cotationType, grp, layer, new Vector2D(x0, y0), new Vector2D(x1, y1), offset, text, noDecimals);

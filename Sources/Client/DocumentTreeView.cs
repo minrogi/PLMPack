@@ -132,22 +132,22 @@ namespace PLMPackLibClient
                 case NodeTag.NType.NTDocument:
                     {
                         string ext = nt.Document.File.Extension.ToLower();
-                        if (string.Equals(ext, ".doc")) return 3;
-                        else if (string.Equals(ext, ".dxf")) return 4;
-                        else if (string.Equals(ext, ".pdf")) return 5;
-                        else if (string.Equals(ext, ".ai")) return 6;
-                        else if (string.Equals(ext, ".jpg")
-                            || string.Equals(ext, ".bmp")
-                            || string.Equals(ext, ".jpg")
-                            || string.Equals(ext, ".jpeg")
-                            || string.Equals(ext, ".png")) return 7;
-                        else if (string.Equals(ext, ".doc")) return 8;
-                        else if (string.Equals(ext, ".xls")) return 9;
-                        else if (string.Equals(ext, ".ppt")) return 10;
-                        else if (string.Equals(ext, ".odt")) return 11;
-                        else if (string.Equals(ext, ".ods")) return 12;
-                        else if (string.Equals(ext, ".ard")) return 13;
-                        else if (string.Equals(ext, ".des3")) return 14;
+                        if (string.Equals(ext, "des")) return 3;
+                        else if (string.Equals(ext, "dxf")) return 4;
+                        else if (string.Equals(ext, "pdf")) return 5;
+                        else if (string.Equals(ext, "ai")) return 6;
+                        else if (string.Equals(ext, "jpg")
+                            || string.Equals(ext, "bmp")
+                            || string.Equals(ext, "jpg")
+                            || string.Equals(ext, "jpeg")
+                            || string.Equals(ext, "png")) return 7;
+                        else if (string.Equals(ext, "doc")) return 8;
+                        else if (string.Equals(ext, "xls")) return 9;
+                        else if (string.Equals(ext, "ppt")) return 10;
+                        else if (string.Equals(ext, "odt")) return 11;
+                        else if (string.Equals(ext, "ods")) return 12;
+                        else if (string.Equals(ext, "ard")) return 13;
+                        else if (string.Equals(ext, "des3")) return 14;
                         else
                             return 0;
                     }
@@ -176,7 +176,6 @@ namespace PLMPackLibClient
             }
             return null;
         }
-
         #endregion
 
         #region Selection
@@ -184,9 +183,14 @@ namespace PLMPackLibClient
         { 
             // find node
             TreeNode tn = FindNode(null, tag);
-            tn.Expand();
-            // select node
-            SelectedNode = tn;
+            if (null != tn)
+            {
+                tn.Expand();
+                // select node
+                SelectedNode = tn;
+            }
+            else
+                _log.Error(string.Format("Tag {0} has no treenode", tag.ToString()));
         }
         #endregion
 

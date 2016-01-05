@@ -402,6 +402,10 @@ namespace Pic.Plugin.ViewCtrl
                         loader.SearchMethod = _searchMethod;
                     _component = loader.LoadComponent(value);
                 }
+                // set component in profile loader
+                if (null != _profileLoader)
+                    _profileLoader.SetComponent(_component);
+
                 // update panel2 controls
                 this.Panel2.AutoScroll = true;
                 CreatePluginControls();
@@ -579,9 +583,16 @@ namespace Pic.Plugin.ViewCtrl
         /// <param name="e">Argument</param>
         protected void Panel1_Paint(object obj, PaintEventArgs e)
         {
-            if (null == Component || DesignMode)
-                return;
-            RePaint(e, null != tempParameterStack ? tempParameterStack : CurrentParameterStack);
+            try
+            {
+                if (null == Component || DesignMode)
+                    return;
+                RePaint(e, null != tempParameterStack ? tempParameterStack : CurrentParameterStack);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.ToString());
+            }
         }
 
         private void RePaint(PaintEventArgs e, ParameterStack stack)
@@ -1427,6 +1438,8 @@ namespace Pic.Plugin.ViewCtrl
             else
                 throw new Exception(string.Format("ProfileLoader : No majoration with name = {0}!", name));
         }
+
+        abstract public void SetComponent(Component comp);
         #endregion
 
         #region Abstract method

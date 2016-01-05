@@ -74,7 +74,13 @@ VALUES (UserId, GroupId)
 
 MERGE INTO Files As Target
 USING (VALUES
-	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2))
+	-- TREEDIM
+	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2)),
+	-- FOLDER
+	(N'affbf3ec-cca4-4ebe-87c7-03960a7134d6', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2))
+
+
+	-- 
 )
 AS Source(Guid, Extension, DateCreated)
 ON Target.Guid=Source.Guid
@@ -89,7 +95,10 @@ VALUES (Guid, Extension, DateCreated)
 
 MERGE INTO Thumbnails As Target
 USING (VALUES
-	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', 150, 150, N'image/png')
+	--TREEDIM
+	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', 150, 150, N'image/png'),
+	--FOLDER
+	(N'affbf3ec-cca4-4ebe-87c7-03960a7134d6', 150, 150, N'image/png')
 )
 AS Source(FileGuid, Width, Height, MimeType)
 ON Target.FileGuid=Source.FileGuid

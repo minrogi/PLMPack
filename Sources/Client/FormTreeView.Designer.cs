@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.treeView = new PLMPackLibClient.DocumentTreeView();
-            this.webBrowser4PDF = new System.Windows.Forms.WebBrowser();
             this.branchView = new PLMPackLibClient.BranchViewControl();
             this.factoryViewCtrl = new Pic.Factory2D.Control.FactoryViewerBase();
             this.pluginViewCtrl = new Pic.Plugin.ViewCtrl.PluginViewCtrl();
+            this.webBrowser4PDF = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -55,10 +55,10 @@
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.webBrowser4PDF);
             this.splitContainer.Panel2.Controls.Add(this.branchView);
             this.splitContainer.Panel2.Controls.Add(this.factoryViewCtrl);
             this.splitContainer.Panel2.Controls.Add(this.pluginViewCtrl);
+            this.splitContainer.Panel2.Controls.Add(this.webBrowser4PDF);
             this.splitContainer.Size = new System.Drawing.Size(784, 562);
             this.splitContainer.SplitterDistance = 172;
             this.splitContainer.TabIndex = 0;
@@ -75,15 +75,6 @@
             this.treeView.Size = new System.Drawing.Size(172, 562);
             this.treeView.TabIndex = 0;
             // 
-            // webBrowser4PDF
-            // 
-            this.webBrowser4PDF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser4PDF.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser4PDF.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser4PDF.Name = "webBrowser4PDF";
-            this.webBrowser4PDF.Size = new System.Drawing.Size(608, 562);
-            this.webBrowser4PDF.TabIndex = 1;
-            // 
             // branchView
             // 
             this.branchView.AutoScroll = true;
@@ -91,7 +82,7 @@
             this.branchView.Location = new System.Drawing.Point(0, 0);
             this.branchView.Name = "branchView";
             this.branchView.Size = new System.Drawing.Size(608, 562);
-            this.branchView.TabIndex = 0;
+            this.branchView.TabIndex = 2;
             // 
             // factoryViewCtrl
             // 
@@ -104,15 +95,15 @@
             this.factoryViewCtrl.ShowCotations = false;
             this.factoryViewCtrl.ShowNestingMenu = false;
             this.factoryViewCtrl.Size = new System.Drawing.Size(608, 562);
-            this.factoryViewCtrl.TabIndex = 2;
+            this.factoryViewCtrl.TabIndex = 3;
             // 
             // pluginViewCtrl
             // 
             this.pluginViewCtrl.CloseButtonVisible = false;
             this.pluginViewCtrl.Component = null;
-            this.pluginViewCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pluginViewCtrl.HasDependancies = false;
             this.pluginViewCtrl.Localizer = null;
+            this.pluginViewCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pluginViewCtrl.Location = new System.Drawing.Point(0, 0);
             this.pluginViewCtrl.Name = "pluginViewCtrl";
             // 
@@ -124,11 +115,20 @@
             this.pluginViewCtrl.ReflectionY = false;
             this.pluginViewCtrl.ShowCotations = true;
             this.pluginViewCtrl.ShowSummary = false;
-            this.pluginViewCtrl.Size = new System.Drawing.Size(608, 562);
-            this.pluginViewCtrl.SplitterDistance = 358;
+            this.pluginViewCtrl.Size = new System.Drawing.Size(428, 476);
+            this.pluginViewCtrl.SplitterDistance = 178;
             this.pluginViewCtrl.SplitterWidth = 1;
-            this.pluginViewCtrl.TabIndex = 0;
+            this.pluginViewCtrl.TabIndex = 4;
             this.pluginViewCtrl.ValidateButtonVisible = false;
+            // 
+            // webBrowser4PDF
+            // 
+            this.webBrowser4PDF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser4PDF.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser4PDF.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser4PDF.Name = "webBrowser4PDF";
+            this.webBrowser4PDF.Size = new System.Drawing.Size(608, 562);
+            this.webBrowser4PDF.TabIndex = 0;
             // 
             // FormTreeView
             // 
@@ -138,7 +138,7 @@
             this.Controls.Add(this.splitContainer);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FormTreeView";
-            this.Text = "Main";
+            this.Text = "FormTreeView";
             this.Load += new System.EventHandler(this.FormTreeView_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);

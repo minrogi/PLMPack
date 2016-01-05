@@ -66,6 +66,13 @@ namespace PLMPackLibClient
             formTV.CloseButtonVisible = false;
             formTV.Show(dockPanel, DockState.Document);
             dockPanel.ResumeLayout(true, true);
+
+            this.toolStripButtonCotations.Click += new System.EventHandler(formTV.onToolStripCotations);
+            this.toolStripButtonReflectionX.Click += new System.EventHandler(formTV.onToolStripReflectionX);
+            this.toolStripButtonReflectionY.Click += new System.EventHandler(formTV.onToolStripReflectionY);
+            this.toolStripButtonLayout.Click += new System.EventHandler(formTV.onToolStripLayout);
+            this.toolStripButtonEditComponentCode.Click += new System.EventHandler(formTV.onToolStripEditComponentCode);
+            this.toolStripButtonEditParameters.Click += new System.EventHandler(formTV.onToolStripEditParameters);
         }
 
         public void ShowLogConsole()
@@ -110,7 +117,7 @@ namespace PLMPackLibClient
             try {   FileTransferUtility.ClearFileCache();  }
             catch (Exception ex)  { _log.Error(ex.Message); }
         }
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void onToolStripHelp(object sender, EventArgs e)
         {
             FormAboutBox form = new FormAboutBox();
             form.ShowDialog();
@@ -161,6 +168,9 @@ namespace PLMPackLibClient
                 return "release";
             }
         }
+        #endregion
+
+        #region ToolStrip handlers
         #endregion
     }
 }

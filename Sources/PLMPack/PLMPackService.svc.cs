@@ -220,10 +220,10 @@ namespace PLMPack
             return new DCCardboadFormat() { ID = cf.Id, Name = cf.Name, Description = cf.Description, Length = cf.Length, Width = cf.Width };
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public void RemoveCardboardFormat(int id)
+        public void RemoveCardboardFormat(DCCardboadFormat cbFormat)
         { 
             PLMPackEntities db = new PLMPackEntities();
-            CardboardFormat cf = CardboardFormat.GetById(db, id);
+            CardboardFormat cf = CardboardFormat.GetById(db, cbFormat.ID);
             cf.Delete(db);            
         }
         [PrincipalPermission(SecurityAction.Demand)]
@@ -268,6 +268,8 @@ namespace PLMPack
                         }
                     );
             }
+            // sort by name
+
             return listCardboardProfiles.ToArray();
         }
         [PrincipalPermission(SecurityAction.Demand)]
@@ -275,13 +277,15 @@ namespace PLMPack
         {
             PLMPackEntities db = new PLMPackEntities();
             CardboardProfile cp = CardboardProfile.GetByID(db, id);
+            bool hasMajorationSets = db.MajorationSets.Count(mjs => mjs.CardboardProfileId == cp.Id) > 0;
             return new DCCardboardProfile()
                 {
                     ID = cp.Id,
                     Name = cp.Name,
                     Description = cp.Description,
                     Code = cp.Code,
-                    Thickness = cp.Thickness
+                    Thickness = cp.Thickness,
+                    HasMajorationSets = hasMajorationSets
                 };
         }
         [PrincipalPermission(SecurityAction.Demand)]
@@ -315,10 +319,10 @@ namespace PLMPack
                 };
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public void RemoveCardboardProfile(int id)
+        public void RemoveCardboardProfile(DCCardboardProfile cbProfile)
         {
             PLMPackEntities db = new PLMPackEntities();
-            CardboardProfile cp = CardboardProfile.GetByID(db, id);
+            CardboardProfile cp = CardboardProfile.GetByID(db, cbProfile.ID);
             cp.Delete(db);
         }
         [PrincipalPermission(SecurityAction.Demand)]
@@ -560,59 +564,65 @@ namespace PLMPack
             
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public DCMajorationSet UpdateMajorationSet(Guid g, int profileId, DCMajoration[] majorations)
+        public DCMajorationSet UpdateMajorationSet(Guid g, DCMajorationSet majorationSet)
         {
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            CardboardProfile cp = CardboardProfile.GetByID(db, profileId);
+            CardboardProfile cp = CardboardProfile.GetByID(db, majorationSet.Profile.ID);
             Component comp = Component.GetByGuid(db, g);
 
             Dictionary<string, double> dict = new Dictionary<string, double>();
-            foreach (DCMajoration maj in majorations)
+            foreach (DCMajoration maj in majorationSet.Majorations)
                 dict.Add(maj.Name, maj.Value);
             comp.UpdateMajorationSet(db, cp, dict);
+            // retrieve majoration set
+            Dictionary<string, double> dictOut = comp.GetMajorationSet(db, cp);
 
-            dict = comp.GetMajorationSet(db, cp);
-            DCMajorationSet majoSet = new DCMajorationSet();
-            majoSet.Profile = new DCCardboardProfile()
+            DCMajorationSet majoSetOut = new DCMajorationSet()
             {
-                ID = cp.Id,
-                Name = cp.Name,
-                Description = cp.Description,
-                Code = cp.Code,
-                Thickness = cp.Thickness
-            };
-            majoSet.Majorations = new DCMajoration[dict.Count];
-            int iCount = 0;
-            foreach (KeyValuePair<string, double> v in dict)
-            { majoSet.Majorations[iCount] = new DCMajoration() { Name = v.Key, Value = v.Value }; ++iCount; }
-            return majoSet;
-        }
-        [PrincipalPermission(SecurityAction.Demand)]
-        public DCMajorationSet GetMajorationSet(Guid g, int profileId)
-        {
-            PLMPackEntities db = new PLMPackEntities();
-            AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            Component comp = Component.GetByGuid(db, g);
-            CardboardProfile cp = CardboardProfile.GetByID(db, profileId);
-            Dictionary<string, double> dict = comp.GetMajorationSet(db, cp);
-            DCMajorationSet majoSet = new DCMajorationSet();
-            majoSet.Profile = new DCCardboardProfile()
+                Profile = new DCCardboardProfile()
                 {
                     ID = cp.Id,
                     Name = cp.Name,
                     Description = cp.Description,
                     Code = cp.Code,
                     Thickness = cp.Thickness
-                };
-            majoSet.Majorations = new DCMajoration[dict.Count];
+                },
+                Majorations = new DCMajoration[dictOut.Count]
+            };
+            int iCount = 0;
+            foreach (KeyValuePair<string, double> v in dictOut)
+            { majoSetOut.Majorations[iCount] = new DCMajoration() { Name = v.Key, Value = v.Value }; ++iCount; }
+            return majoSetOut;
+        }
+        [PrincipalPermission(SecurityAction.Demand)]
+        public DCMajorationSet GetMajorationSet(Guid g, DCCardboardProfile profile)
+        {
+            PLMPackEntities db = new PLMPackEntities();
+            AspNetUser user = AspNetUser.GetByUserName(db, UserName);
+            Component comp = Component.GetByGuid(db, g);
+            CardboardProfile cp = CardboardProfile.GetByID(db, profile.ID);
+            Dictionary<string, double> dict = comp.GetMajorationSet(db, cp);
+            // instantiate majoration set
+            DCMajorationSet majoSet = new DCMajorationSet()
+            {
+                Profile = new DCCardboardProfile()
+                {
+                    ID = cp.Id,
+                    Name = cp.Name,
+                    Description = cp.Description,
+                    Code = cp.Code,
+                    Thickness = cp.Thickness
+                },
+                Majorations = new DCMajoration[dict.Count]
+            };
             int iCount = 0;
             foreach (KeyValuePair<string, double> v in dict)
             { majoSet.Majorations[iCount] = new DCMajoration() { Name = v.Key, Value = v.Value }; ++iCount; }
             return majoSet;
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public DCParamDefaultValue[] GetParamDefaultValue(Guid g)
+        public DCParamDefaultValue[] GetParamDefaultValues(Guid g)
         {
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser user = AspNetUser.GetByUserName(db, UserName);
@@ -627,7 +637,7 @@ namespace PLMPack
 
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public void UpdateParamDefaultComponent(Guid g, DCParamDefaultValue[] paramDefaultValue)
+        public void UpdateParamDefaultValues(Guid g, DCParamDefaultValue[] paramDefaultValue)
         {
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser user = AspNetUser.GetByUserName(db, UserName);
@@ -723,9 +733,6 @@ namespace PLMPack
                 return null;
             }
         }
-        #endregion
-
-        #region Helpers
         public string FileToDocType(DCFile f)
         {
             switch (f.Extension.Trim('.').ToLower())

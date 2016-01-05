@@ -33,7 +33,7 @@ namespace TestLegacyDBUploader
             public string Password { get; set; }
 
             [Option('t', "test", Required = false,
-                DefaultValue = true, HelpText = "Test : if true, files will not be actually uploaded.")]
+                DefaultValue = false, HelpText = "Test : if true, files will not be actually uploaded.")]
             public bool Test { get; set; }
 
             [ParserState]

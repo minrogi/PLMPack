@@ -38,23 +38,36 @@ namespace PLMPackModel
         #region Current group
         public Group CurrentGroup(PLMPackEntities db)
         {
-            if (string.IsNullOrEmpty(GroupId))
-            {
-                string grpName = UserName;
-
-                Group grp = Group.CreateNew(db
-                    , string.Format("{0}_grp", grpName), string.Format("Default group of user {0}", grpName)
-                    , this);
-                grp.AspNetUsers.Add(this);
-                GroupId = grp.Id;
-                db.SaveChanges();
-            }
             return db.Groups.Single(grp => grp.Id == GroupId);
         }
         public void SetCurrentGroup(PLMPackEntities db, Group gp)
         {
             GroupId = gp.Id;
             db.SaveChanges();
+        }
+
+        private void InitializeUser(PLMPackEntities db)
+        {
+            if (string.IsNullOrEmpty(GroupId))
+            {
+                string grpName = UserName;
+                // create group using user name
+                Group grp = Group.CreateNew(db
+                    , string.Format("{0}_grp", grpName), string.Format("Default group of user {0}", grpName)
+                    , this);
+                grp.AspNetUsers.Add(this);
+                GroupId = grp.Id;
+                db.SaveChanges();
+                // create interest
+                Group grp_treeDiM = Group.GetByName(db, "treeDiM");
+                if (null != grp_treeDiM)
+                    AddGroupOfInterest(db, grp_treeDiM);
+                db.SaveChanges();
+                // create group root node
+                Thumbnail thumb = Thumbnail.GetDefaultThumbnail(db, "FOLDER");
+                TreeNode tn = TreeNode.CreateNew(db, grp.Id, null, grp.GroupName, grp.GroupDesc, thumb.Id);
+                tn.Share(db, this, Group.Everyone(db));
+            }
         }
         #endregion
 
@@ -84,6 +97,9 @@ namespace PLMPackModel
         #region Connect / Disconnect
         public void Connect(PLMPackEntities db)
         {
+            // initialize user
+            InitializeUser(db);
+            // create user connection
             UserConnection uConnect = new UserConnection();
             uConnect.UserId = Id;
             uConnect.DateConnectIN = DateTime.Now;
@@ -105,7 +121,7 @@ namespace PLMPackModel
     #endregion
 
     #region TreeNode
-    public partial class TreeNode
+    public partial class TreeNode : IEquatable<TreeNode>, IComparable<TreeNode>
     {
         #region Static methods
         public static TreeNode CreateNew(PLMPackEntities db, string grpId
@@ -164,6 +180,20 @@ namespace PLMPackModel
         #endregion
 
         #region Non static methods
+        #region Implement IEquatable
+        public bool Equals(TreeNode other)
+        {
+            if (null == other) return false;
+            else return Id == other.Id;
+        }
+        #endregion
+        #region Implement IComparable
+        public int CompareTo(TreeNode other)
+        {
+            if (null == other) return 1;
+            else return this.Name.CompareTo(other.Name);
+        }
+        #endregion
         #region Childrens
         public bool HasChildrens
         {
@@ -215,6 +245,7 @@ namespace PLMPackModel
                 if (tn.IsShared(db, user) && user.HasGroupOfInterest(tn.Group))
                     nodes.Add(tn);
             }
+            nodes.Sort();
             return nodes.ToArray();
         }
         public void Print(PLMPackEntities db, AspNetUser user, string offset)
@@ -656,6 +687,16 @@ namespace PLMPackModel
     #region Component
     public partial class Component
     {
+        #region Enums
+        public enum MajoRounding
+        {
+            ROUDING_FIRSTDECIMALNEAREST
+            , ROUNDING_HALFNEAREST
+            , ROUNDING_HALFTOP
+            , ROUDING_INT
+        }
+        #endregion
+
         #region Static methods
         public static Component CreateNew(PLMPackEntities db, string grpId
             , string name, string description
@@ -676,16 +717,16 @@ namespace PLMPackModel
 
         #region Non static methods
         #region Majoration sets
-        public Dictionary<string, double> GetMajorationSet(PLMPackEntities db, CardboardProfile cf)
+        public Dictionary<string, double> GetMajorationSet(PLMPackEntities db, CardboardProfile cp)
         {
             if (db.MajorationSets.Count(
-                mjs => (mjs.ComponentGuid == Guid) && (mjs.CardboardProfile.GroupId == cf.GroupId) ) == 0)
+                mjs => (mjs.ComponentGuid == Guid) && (mjs.CardboardProfile.GroupId == cp.GroupId) ) == 0)
             {
                 // dict majo
                 db.MajorationSets.Add( new MajorationSet()
                     {
                         ComponentGuid = Guid,
-                        CardboardProfileId = cf.Id
+                        CardboardProfileId = cp.Id
                     }
                     );
                 db.SaveChanges();
@@ -695,14 +736,14 @@ namespace PLMPackModel
                 foreach (MajorationSet mjset in majoSets)
                 {
                     double thickness = mjset.CardboardProfile.Thickness;
-                    if (Math.Abs(thickness - cf.Thickness) < diffMax)
+                    if (Math.Abs(thickness - cp.Thickness) < diffMax)
                     {
                         mjsNearest = mjset;
-                        diffMax = Math.Abs(thickness - cf.Thickness);
+                        diffMax = Math.Abs(thickness - cp.Thickness);
                     }
                     
                 }
-                MajorationSet mjsCurrent = MajorationSet.Single(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cf.Id));
+                MajorationSet mjsCurrent = MajorationSet.Single(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cp.Id));
                 double thicknessNearest = mjsNearest.CardboardProfile.Thickness;
                 foreach (Majoration mj in mjsNearest.Majorations)
                 {
@@ -711,14 +752,59 @@ namespace PLMPackModel
                         {
                             MajorationSetId = mjsCurrent.Id,
                             Name = mj.Name,
-                            Value = mj.Value * cf.Thickness / thicknessNearest
+                            Value = mj.Value * cp.Thickness / thicknessNearest
                         }
                         );
                 }
                 db.SaveChanges();
             }
-            Dictionary<string, double> dictMajo = new Dictionary<string,double>();
-            MajorationSet majoSet = MajorationSet.Single();
+
+            var majorationSets = db.MajorationSets.Where(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfile.GroupId == this.Document.GroupId));
+
+            // find nearest set
+            MajorationSet nearestSet = null;
+            foreach (MajorationSet majoSet in majorationSets)
+            {
+                if (null == nearestSet
+                    || (Math.Abs(majoSet.CardboardProfile.Thickness - cp.Thickness) < Math.Abs(nearestSet.CardboardProfile.Thickness - cp.Thickness))
+                    )
+                    nearestSet = majoSet;
+            }
+
+            // build dictionnary
+            Dictionary<string, double> dictMajo = new Dictionary<string, double>();
+            if (null != nearestSet)
+            {
+                double coef = (double)(cp.Thickness / nearestSet.CardboardProfile.Thickness);
+                dictMajo.Add("th1", cp.Thickness);
+                dictMajo.Add("ep1", cp.Thickness);
+                foreach (Majoration maj in nearestSet.Majorations)
+                {
+                    double valueMaj = maj.Value * coef;
+                    if (Math.Abs(coef - 1.0) > 1.0e-3)
+                    {
+                        MajoRounding rounding = MajoRounding.ROUDING_FIRSTDECIMALNEAREST;
+                        switch (rounding)
+                        {
+                            case MajoRounding.ROUDING_FIRSTDECIMALNEAREST:
+                                valueMaj = Math.Round(valueMaj * 10) / 10.0;
+                                break;
+                            case MajoRounding.ROUNDING_HALFNEAREST:
+                                valueMaj = Math.Round(valueMaj * 2) / 2.0;
+                                break;
+                            case MajoRounding.ROUNDING_HALFTOP:
+                                valueMaj = Math.Ceiling(valueMaj * 2) / 2;
+                                break;
+                            case MajoRounding.ROUDING_INT:
+                                valueMaj = Math.Round(valueMaj);
+                                break;
+                            default:
+                                break; // no rounding
+                        }
+                    }
+                    dictMajo.Add(maj.Name, valueMaj);
+                }
+            }
             return dictMajo;            
         }
         public void UpdateMajorationSet(PLMPackEntities db, CardboardProfile cp, Dictionary<string, double> majorations)
@@ -895,7 +981,7 @@ namespace PLMPackModel
         }
         public static CardboardFormat[] GetAll(PLMPackEntities db, Group gp)
         {
-            return db.CardboardFormats.Where(dbf => dbf.Group == gp).ToArray();
+            return db.CardboardFormats.Where(cbf => cbf.GroupId == gp.Id).ToArray();
         }
         public static void PrintAll(PLMPackEntities db, Group gp)
         {
@@ -949,7 +1035,7 @@ namespace PLMPackModel
         }
         public static CardboardProfile[] GetAll(PLMPackEntities db, Group gp)
         {
-            return db.CardboardProfiles.Where(dbp => dbp.Group == gp).ToArray();
+            return db.CardboardProfiles.Where(cbp => cbp.GroupId == gp.Id).OrderBy(cbp => cbp.Name).ToArray();
         }
         public static CardboardProfile GetByID(PLMPackEntities db, int id)
         {
