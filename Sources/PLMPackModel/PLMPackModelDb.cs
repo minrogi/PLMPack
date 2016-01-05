@@ -722,41 +722,48 @@ namespace PLMPackModel
             if (db.MajorationSets.Count(
                 mjs => (mjs.ComponentGuid == Guid) && (mjs.CardboardProfile.GroupId == cp.GroupId) ) == 0)
             {
-                // dict majo
-                db.MajorationSets.Add( new MajorationSet()
-                    {
-                        ComponentGuid = Guid,
-                        CardboardProfileId = cp.Id
-                    }
-                    );
-                db.SaveChanges();
-                // build list of majo
-                var majoSets = db.MajorationSets.Where(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfile.GroupId == this.Document.GroupId));
-                MajorationSet mjsNearest = null; double diffMax = double.MaxValue;
-                foreach (MajorationSet mjset in majoSets)
+                try
                 {
-                    double thickness = mjset.CardboardProfile.Thickness;
-                    if (Math.Abs(thickness - cp.Thickness) < diffMax)
-                    {
-                        mjsNearest = mjset;
-                        diffMax = Math.Abs(thickness - cp.Thickness);
-                    }
-                    
-                }
-                MajorationSet mjsCurrent = MajorationSet.Single(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cp.Id));
-                double thicknessNearest = mjsNearest.CardboardProfile.Thickness;
-                foreach (Majoration mj in mjsNearest.Majorations)
-                {
-                    db.Majorations.Add(
-                        new Majoration()
+                    // dict majo
+                    db.MajorationSets.Add(new MajorationSet()
                         {
-                            MajorationSetId = mjsCurrent.Id,
-                            Name = mj.Name,
-                            Value = mj.Value * cp.Thickness / thicknessNearest
+                            ComponentGuid = Guid,
+                            CardboardProfileId = cp.Id
                         }
                         );
+                    db.SaveChanges();
+                    // build list of majo
+                    var majoSets = db.MajorationSets.Where(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfile.GroupId == this.Document.GroupId));
+                    MajorationSet mjsNearest = null; double diffMax = double.MaxValue;
+                    foreach (MajorationSet mjset in majoSets)
+                    {
+                        double thickness = mjset.CardboardProfile.Thickness;
+                        if (Math.Abs(thickness - cp.Thickness) < diffMax)
+                        {
+                            mjsNearest = mjset;
+                            diffMax = Math.Abs(thickness - cp.Thickness);
+                        }
+
+                    }
+                    MajorationSet mjsCurrent = MajorationSet.Single(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfileId == cp.Id));
+                    double thicknessNearest = mjsNearest.CardboardProfile.Thickness;
+                    foreach (Majoration mj in mjsNearest.Majorations)
+                    {
+                        db.Majorations.Add(
+                            new Majoration()
+                            {
+                                MajorationSetId = mjsCurrent.Id,
+                                Name = mj.Name,
+                                Value = mj.Value * cp.Thickness / thicknessNearest
+                            }
+                            );
+                    }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             var majorationSets = db.MajorationSets.Where(mjs => (mjs.ComponentGuid == this.Guid) && (mjs.CardboardProfile.GroupId == this.Document.GroupId));
