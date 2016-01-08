@@ -1,0 +1,33 @@
+f4003 branch
+
+2016-01-06 05:52:36 ERROR - System.TimeoutException: Le canal de demande a dépassé le délai imparti en attendant une réponse après 00:01:00. Augmentez la valeur du délai d'attente transmise à l'appel à Request ou augmentez la valeur SendTimeout sur Binding. Le temps alloué à cette opération fait peut-être partie d'un délai d'attente plus long. ---> System.TimeoutException: La requête HTTP à 'https://plmpack.azurewebsites.net/PLMPackService.svc' a dépassé le délai d'attente alloué de 00:01:00. Le temps alloué à cette opération fait peut-être partie d'un délai d'attente plus long. ---> System.Net.WebException: Le délai d'attente de l'opération a expiré.
+   à System.Net.HttpWebRequest.GetResponse()
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   --- Fin de la trace de la pile d'exception interne ---
+   à System.ServiceModel.Channels.HttpChannelUtilities.ProcessGetResponseWebException(WebException webException, HttpWebRequest request, HttpAbortReason abortReason)
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace:
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ClientReliableChannelBinder`1.RequestClientReliableChannelBinder`1.OnRequest(TRequestChannel channel, Message message, TimeSpan timeout, MaskingMode maskingMode)
+   à System.ServiceModel.Channels.ClientReliableChannelBinder`1.Request(Message message, TimeSpan timeout, MaskingMode maskingMode)
+   à System.ServiceModel.Channels.ClientReliableChannelBinder`1.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Security.SecuritySessionClientSettings`1.SecurityRequestSessionChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à treeDiM.PLMPackLib.PLMPackSR.IPLMPackService.CreateNewNodeBranch(DCTreeNode parentNode, String name, String description, DCThumbnail thumb)
+   à treeDiM.PLMPackLib.PLMPackSR.PLMPackServiceClient.CreateNewNodeBranch(DCTreeNode parentNode, String name, String description, DCThumbnail thumb) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\Service References\PLMPackSR\Reference.cs:ligne 1656
+   à treeDiM.PLMPackLib.LegacyDBUploder.RecursiveInsert(PPDataContext db, TreeNode tn, DCTreeNode wsNode, String offset, IProcessingCallback callback) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\LegacyDBUploder.cs:ligne 184
+   à treeDiM.PLMPackLib.LegacyDBUploder.RecursiveInsert(PPDataContext db, TreeNode tn, DCTreeNode wsNode, String offset, IProcessingCallback callback) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\LegacyDBUploder.cs:ligne 194
+   à treeDiM.PLMPackLib.LegacyDBUploder.RecursiveInsert(PPDataContext db, TreeNode tn, DCTreeNode wsNode, String offset, IProcessingCallback callback) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\LegacyDBUploder.cs:ligne 194
+   à treeDiM.PLMPackLib.LegacyDBUploder.CopyTreeNodeRecursively(PPDataContext db, IProcessingCallback callback) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\LegacyDBUploder.cs:ligne 114
+   à treeDiM.PLMPackLib.LegacyDBUploder.Upload(IProcessingCallback callback) dans k:\GitHub\PLMPack\Sources\treeDiM.PLMPackLib.LegacyDBUploader\LegacyDBUploder.cs:ligne 76
+   à TestLegacyDBUploader.Program.Main(String[] args) dans k:\GitHub\PLMPack\Sources\TestLegacyDBUploader\Program.cs:ligne 74

@@ -148,6 +148,24 @@ namespace PLMPack
             Group grp = Group.GetById(db, grpId);
             user.RemoveGroupOfInterest(db, grp);
         }
+        [PrincipalPermission(SecurityAction.Demand)]
+        public DCGroup GetGroupByName(string grpName)
+        {
+            PLMPackEntities db = new PLMPackEntities();
+            Group grp = Group.GetByName(db, grpName);
+            List<AspNetUser> users = grp.GetAllUsers(db);
+            List<DCUser> listDCUser = new List<DCUser>();
+            foreach (AspNetUser u in users)
+                listDCUser.Add(new DCUser() { ID = u.Id, Name = u.UserName, Email = u.Email, Phone = u.PhoneNumber, GroupID = u.GroupId });
+            return new DCGroup() { ID = grp.Id, Name = grp.GroupName, Description = grp.GroupDesc, Members = listDCUser.ToArray() };
+        }
+        [PrincipalPermission(SecurityAction.Demand)]
+        public DCGroup GetGroupEveryone()
+        {
+            PLMPackEntities db = new PLMPackEntities();
+            Group grp = Group.GetByName(db, "Everyone");
+            return new DCGroup() { ID = grp.Id, Name = grp.GroupName, Description = grp.GroupDesc }; 
+        }
         #endregion
 
         #region Cardboard format
@@ -358,6 +376,17 @@ namespace PLMPack
         #endregion
 
         #region Thumbnail
+        public Guid UploadDefault(string defName, string fileExt)
+        {
+            PLMPackEntities db = new PLMPackEntities();
+            Guid g = Thumbnail.GetDefaultGuid(defName);
+            if (null == Thumbnail.GetDefaultThumbnail(db, defName))
+            {
+                File f = File.CreateNew(db, g, fileExt);
+                Thumbnail.CreateNew(db, g);
+            }
+            return g;
+        }
         [PrincipalPermission(SecurityAction.Demand)]
         public DCThumbnail CreateNewThumbnailFromFile(DCFile file)
         {
@@ -542,14 +571,21 @@ namespace PLMPack
             }
         }
         [PrincipalPermission(SecurityAction.Demand)]
-        public void ShareTreeNode(DCTreeNode dcNode, string grpId)
+        public void ShareTreeNode(DCTreeNode dcNode, DCGroup dcGroup)
         {
             PLMPackEntities db = new PLMPackEntities();
             AspNetUser user = AspNetUser.GetByUserName(db, UserName);
-            Group grp = Group.GetById(db, grpId);
+            Group gp = Group.GetById(db, dcGroup.ID);
 
             TreeNode node = TreeNode.GetById(db, dcNode.ID);
-            node.Share(db, user, grp);
+            node.Share(db, user, gp);
+        }
+        [PrincipalPermission(SecurityAction.Demand)]
+        public void ShareEveryone(DCTreeNode dcNode)
+        { 
+            PLMPackEntities db = new PLMPackEntities();
+            TreeNode node = TreeNode.GetById(db, dcNode.ID);
+            node.Share(db, AspNetUser.GetByUserName(db, UserName));
         }
         #endregion
 

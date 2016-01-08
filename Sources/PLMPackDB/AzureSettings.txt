@@ -1,6 +1,6 @@
 Local SQL Server DB
 ===================
-Connection string 			: Data Source=(localdb)\v11.0;Initial Catalog=PLMPackDB;Integrated Security=True;Pooling=False
+Connection string 			: Data Source=(localdb)\ProjectsV12;Initial Catalog=PLMPackDB;Integrated Security=True;Pooling=False;Connect Timeout=30
 
 MICROSOFT AZURE SQL DATABASE
 ============================

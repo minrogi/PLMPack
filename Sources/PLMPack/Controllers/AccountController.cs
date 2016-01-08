@@ -168,7 +168,7 @@ namespace PLMPack.Controllers
                         "Please confirm your account by clicking <a href=\""
                         + callbackUrl + "\">here</a>");
 
-                    return View("Confirm Email");
+                    return View("ConfirmEmail");
                 }
                 AddErrors(result);
             }

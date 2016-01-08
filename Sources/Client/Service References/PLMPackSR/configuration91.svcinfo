@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="b4sDjwFZ4CtEKBxdw02QCjse/wE=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="xciGHE0KCq0D/epGiP6xpY2s0og=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="WSHttpBinding_IPLMPackService">
       <properties>
@@ -127,10 +127,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSHttpBinding_IPLMPackService" contract="PLMPackSR.IPLMPackService" bindingType="wsHttpBinding" address="https://localhost:44302/PLMPackService.svc" bindingConfiguration="WSHttpBinding_IPLMPackService">
+    <endpoint name="WSHttpBinding_IPLMPackService" contract="PLMPackSR.IPLMPackService" bindingType="wsHttpBinding" address="https://plmpack.azurewebsites.net/PLMPackService.svc" bindingConfiguration="WSHttpBinding_IPLMPackService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://localhost:44302/PLMPackService.svc</serializedValue>
+          <serializedValue>https://plmpack.azurewebsites.net/PLMPackService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -56,11 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Service References\PLMPack\PLMPackService.wsdl" />
-    <None Include="Service References\PLMPack\PLMPackService.xsd">
+    <None Include="Service References\PLMPack\PLMPackService1.wsdl" />
+    <None Include="Service References\PLMPack\PLMPackService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PLMPack\PLMPackService1.xsd">
+    <None Include="Service References\PLMPack\PLMPackService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PLMPack\PLMPackService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCCardboadFormat.datasource">
@@ -72,6 +75,9 @@
     <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCComponent.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCFile.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCGroup.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -79,6 +85,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCParamDefaultValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCThumbnail.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PLMPack\TestPLMPackService.PLMPack.DCTreeNode.datasource">
@@ -95,22 +104,19 @@
     <WCFMetadataStorage Include="Service References\PLMPack\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\PLMPack\PLMPackService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\PLMPack\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\PLMPack\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\PLMPack\PLMPackService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\PLMPack\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PLMPack\PLMPackService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

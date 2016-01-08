@@ -118,7 +118,7 @@ namespace PLMPackLibClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.google.fr/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://plmpack.azurewebsites.net/Account/Register")]
         public string RegisterURL {
             get {
                 return ((string)(this["RegisterURL"]));

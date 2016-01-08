@@ -18,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://localhost:44302/PLMPackService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://plmpack.azurewebsites.net/PLMPackService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PLMPackService.wsdl" MetadataType="Wsdl" ID="e89f4351-f521-4513-89a7-0793db42e50d" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?wsdl" />
-    <MetadataFile FileName="PLMPackService.xsd" MetadataType="Schema" ID="3a18b111-4483-471d-8286-0184594761a4" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd1" />
-    <MetadataFile FileName="PLMPackService1.xsd" MetadataType="Schema" ID="4d2bc2e6-c8b2-45b9-ba8e-589b4028925e" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd0" />
-    <MetadataFile FileName="PLMPackService.disco" MetadataType="Disco" ID="dfced92a-a707-44ff-9d73-c4648b60a2f5" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?disco" />
-    <MetadataFile FileName="PLMPackService2.xsd" MetadataType="Schema" ID="1b1707e1-5009-401f-b0b8-8114cd57c07a" SourceId="1" SourceUrl="https://localhost:44302/PLMPackService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PLMPackService1.disco" MetadataType="Disco" ID="ee13306a-8eaf-4ccd-9a47-57ee85413b3f" SourceId="1" SourceUrl="https://plmpack.azurewebsites.net/PLMPackService.svc?disco" />
+    <MetadataFile FileName="PLMPackService3.xsd" MetadataType="Schema" ID="b4a36015-2202-4dc1-bd87-8e8df4fac350" SourceId="1" SourceUrl="https://plmpack.azurewebsites.net/PLMPackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PLMPackService31.xsd" MetadataType="Schema" ID="d8abeee3-38ad-4e87-a0fa-956ff3875008" SourceId="1" SourceUrl="https://plmpack.azurewebsites.net/PLMPackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PLMPackService32.xsd" MetadataType="Schema" ID="3ea2609c-0fc3-4ebb-9e84-f4a6cb587e1e" SourceId="1" SourceUrl="https://plmpack.azurewebsites.net/PLMPackService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PLMPackService1.wsdl" MetadataType="Wsdl" ID="0e7ee253-6b58-4f63-847a-7d3bde31b162" SourceId="1" SourceUrl="https://plmpack.azurewebsites.net/PLMPackService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

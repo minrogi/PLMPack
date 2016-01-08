@@ -28,15 +28,15 @@ namespace treeDiM.FileTransfer
         #region Upload / Download methods
         public static Guid UploadFile(string filePath)
         {
-            Guid guid = Guid.NewGuid();
+            return UploadFile(filePath, Guid.NewGuid());
+        }
+        public static Guid UploadFile(string filePath, Guid g)
+        {
             CloudBlobContainer container = Container;
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(FileNameFromGuid(guid, Path.GetExtension(filePath)));
-
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(FileNameFromGuid(g, Path.GetExtension(filePath)));
             using (var fileStream = System.IO.File.OpenRead(filePath))
-            {
-                blockBlob.UploadFromStream(fileStream);
-            }
-            return guid;
+            { blockBlob.UploadFromStream(fileStream); }
+            return g;
         }
         public static string DownloadFile(Guid guid, string fileExt)
         {

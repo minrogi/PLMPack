@@ -340,6 +340,9 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasMajorationSetsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -380,6 +383,19 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasMajorationSets {
+            get {
+                return this.HasMajorationSetsField;
+            }
+            set {
+                if ((this.HasMajorationSetsField.Equals(value) != true)) {
+                    this.HasMajorationSetsField = value;
+                    this.RaisePropertyChanged("HasMajorationSets");
                 }
             }
         }
@@ -1134,6 +1150,18 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveInterest", ReplyAction="http://tempuri.org/IPLMPackService/RemoveInterestResponse")]
         System.Threading.Tasks.Task RemoveInterestAsync(string grpId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupByName", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupByNameResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCGroup GetGroupByName(string grpName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupByName", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupByNameResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCGroup> GetGroupByNameAsync(string grpName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupEveryone", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupEveryoneResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCGroup GetGroupEveryone();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupEveryone", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupEveryoneResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCGroup> GetGroupEveryoneAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormats", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardFormatsResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat[] GetAllCardboardFormats();
         
@@ -1165,10 +1193,10 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat> CreateNewCardboardFormatAsync(string name, string description, double length, double width);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardFormatResponse")]
-        void RemoveCardboardFormat(int id);
+        void RemoveCardboardFormat(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardFormatResponse")]
-        System.Threading.Tasks.Task RemoveCardboardFormatAsync(int id);
+        System.Threading.Tasks.Task RemoveCardboardFormatAsync(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardFormat", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardFormatResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat UpdateCardboardFormat(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat);
@@ -1207,10 +1235,10 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile> CreateNewCardboardProfileAsync(string name, string description, string code, double thickness);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardProfileResponse")]
-        void RemoveCardboardProfile(int id);
+        void RemoveCardboardProfile(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/RemoveCardboardProfileResponse")]
-        System.Threading.Tasks.Task RemoveCardboardProfileAsync(int id);
+        System.Threading.Tasks.Task RemoveCardboardProfileAsync(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateCardboardProfile", ReplyAction="http://tempuri.org/IPLMPackService/UpdateCardboardProfileResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile UpdateCardboardProfile(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile);
@@ -1223,6 +1251,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewFileResponse")]
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCFile> CreateNewFileAsync(System.Guid g, string ext);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UploadDefault", ReplyAction="http://tempuri.org/IPLMPackService/UploadDefaultResponse")]
+        System.Guid UploadDefault(string defName, string fileExt);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UploadDefault", ReplyAction="http://tempuri.org/IPLMPackService/UploadDefaultResponse")]
+        System.Threading.Tasks.Task<System.Guid> UploadDefaultAsync(string defName, string fileExt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(treeDiM.PLMPackLib.PLMPackSR.DCFile file);
@@ -1273,10 +1307,10 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeBranchAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType);
+        treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeDocument", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeDocumentResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewNodeComponent", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewNodeComponentResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
@@ -1285,10 +1319,16 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeComponentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
-        void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId);
+        void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, treeDiM.PLMPackLib.PLMPackSR.DCGroup dcGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
-        System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId);
+        System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, treeDiM.PLMPackLib.PLMPackSR.DCGroup dcGroup);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareEveryone", ReplyAction="http://tempuri.org/IPLMPackService/ShareEveryoneResponse")]
+        void ShareEveryone(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareEveryone", ReplyAction="http://tempuri.org/IPLMPackService/ShareEveryoneResponse")]
+        System.Threading.Tasks.Task ShareEveryoneAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
         treeDiM.PLMPackLib.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g);
@@ -1296,29 +1336,29 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
         System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCComponent> GetComponentByGuidAsync(System.Guid g);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse")]
-        void UpdateParamDefaultComponent(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultValues", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultValuesResponse")]
+        void UpdateParamDefaultValues(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponent", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultComponentResponse")]
-        System.Threading.Tasks.Task UpdateParamDefaultComponentAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateParamDefaultValues", ReplyAction="http://tempuri.org/IPLMPackService/UpdateParamDefaultValuesResponse")]
+        System.Threading.Tasks.Task UpdateParamDefaultValuesAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] GetParamDefaultValue(System.Guid g);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValues", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValuesResponse")]
+        treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] GetParamDefaultValues(System.Guid g);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValue", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValueResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[]> GetParamDefaultValueAsync(System.Guid g);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet UpdateMajorationSet(System.Guid g, int profileId, treeDiM.PLMPackLib.PLMPackSR.DCMajoration[] majorations);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetParamDefaultValues", ReplyAction="http://tempuri.org/IPLMPackService/GetParamDefaultValuesResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[]> GetParamDefaultValuesAsync(System.Guid g);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, int profileId, treeDiM.PLMPackLib.PLMPackSR.DCMajoration[] majorations);
+        treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet UpdateMajorationSet(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet majorationSet);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UpdateMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/UpdateMajorationSetResponse")]
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet majorationSet);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/GetMajorationSetResponse")]
-        treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet GetMajorationSet(System.Guid g, int profileId);
+        treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet GetMajorationSet(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile profile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetMajorationSet", ReplyAction="http://tempuri.org/IPLMPackService/GetMajorationSetResponse")]
-        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> GetMajorationSetAsync(System.Guid g, int profileId);
+        System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> GetMajorationSetAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile profile);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1412,6 +1452,22 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.RemoveInterestAsync(grpId);
         }
         
+        public treeDiM.PLMPackLib.PLMPackSR.DCGroup GetGroupByName(string grpName) {
+            return base.Channel.GetGroupByName(grpName);
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCGroup> GetGroupByNameAsync(string grpName) {
+            return base.Channel.GetGroupByNameAsync(grpName);
+        }
+        
+        public treeDiM.PLMPackLib.PLMPackSR.DCGroup GetGroupEveryone() {
+            return base.Channel.GetGroupEveryone();
+        }
+        
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCGroup> GetGroupEveryoneAsync() {
+            return base.Channel.GetGroupEveryoneAsync();
+        }
+        
         public treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat[] GetAllCardboardFormats() {
             return base.Channel.GetAllCardboardFormats();
         }
@@ -1452,12 +1508,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewCardboardFormatAsync(name, description, length, width);
         }
         
-        public void RemoveCardboardFormat(int id) {
-            base.Channel.RemoveCardboardFormat(id);
+        public void RemoveCardboardFormat(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat) {
+            base.Channel.RemoveCardboardFormat(cbFormat);
         }
         
-        public System.Threading.Tasks.Task RemoveCardboardFormatAsync(int id) {
-            return base.Channel.RemoveCardboardFormatAsync(id);
+        public System.Threading.Tasks.Task RemoveCardboardFormatAsync(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat) {
+            return base.Channel.RemoveCardboardFormatAsync(cbFormat);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat UpdateCardboardFormat(treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat cbFormat) {
@@ -1508,12 +1564,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewCardboardProfileAsync(name, description, code, thickness);
         }
         
-        public void RemoveCardboardProfile(int id) {
-            base.Channel.RemoveCardboardProfile(id);
+        public void RemoveCardboardProfile(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile) {
+            base.Channel.RemoveCardboardProfile(cbProfile);
         }
         
-        public System.Threading.Tasks.Task RemoveCardboardProfileAsync(int id) {
-            return base.Channel.RemoveCardboardProfileAsync(id);
+        public System.Threading.Tasks.Task RemoveCardboardProfileAsync(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile) {
+            return base.Channel.RemoveCardboardProfileAsync(cbProfile);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile UpdateCardboardProfile(treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile cbProfile) {
@@ -1530,6 +1586,14 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
         
         public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCFile> CreateNewFileAsync(System.Guid g, string ext) {
             return base.Channel.CreateNewFileAsync(g, ext);
+        }
+        
+        public System.Guid UploadDefault(string defName, string fileExt) {
+            return base.Channel.UploadDefault(defName, fileExt);
+        }
+        
+        public System.Threading.Tasks.Task<System.Guid> UploadDefaultAsync(string defName, string fileExt) {
+            return base.Channel.UploadDefaultAsync(defName, fileExt);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(treeDiM.PLMPackLib.PLMPackSR.DCFile file) {
@@ -1596,12 +1660,12 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewNodeBranchAsync(parentNode, name, description, thumb);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType) {
-            return base.Channel.CreateNewNodeDocument(parentNode, name, description, thumb, dFile, docType);
+        public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeDocument(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile) {
+            return base.Channel.CreateNewNodeDocument(parentNode, name, description, thumb, dFile);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile, string docType) {
-            return base.Channel.CreateNewNodeDocumentAsync(parentNode, name, description, thumb, dFile, docType);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCTreeNode> CreateNewNodeDocumentAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile dFile) {
+            return base.Channel.CreateNewNodeDocumentAsync(parentNode, name, description, thumb, dFile);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCTreeNode CreateNewNodeComponent(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode parentNode, string name, string description, treeDiM.PLMPackLib.PLMPackSR.DCThumbnail thumb, treeDiM.PLMPackLib.PLMPackSR.DCFile compFile, System.Guid compGuid, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet[] majorationSets, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] defaultValues) {
@@ -1612,12 +1676,20 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.CreateNewNodeComponentAsync(parentNode, name, description, thumb, compFile, compGuid, majorationSets, defaultValues);
         }
         
-        public void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId) {
-            base.Channel.ShareTreeNode(dcNode, grpId);
+        public void ShareTreeNode(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, treeDiM.PLMPackLib.PLMPackSR.DCGroup dcGroup) {
+            base.Channel.ShareTreeNode(dcNode, dcGroup);
         }
         
-        public System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, string grpId) {
-            return base.Channel.ShareTreeNodeAsync(dcNode, grpId);
+        public System.Threading.Tasks.Task ShareTreeNodeAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode, treeDiM.PLMPackLib.PLMPackSR.DCGroup dcGroup) {
+            return base.Channel.ShareTreeNodeAsync(dcNode, dcGroup);
+        }
+        
+        public void ShareEveryone(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode) {
+            base.Channel.ShareEveryone(dcNode);
+        }
+        
+        public System.Threading.Tasks.Task ShareEveryoneAsync(treeDiM.PLMPackLib.PLMPackSR.DCTreeNode dcNode) {
+            return base.Channel.ShareEveryoneAsync(dcNode);
         }
         
         public treeDiM.PLMPackLib.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g) {
@@ -1628,36 +1700,36 @@ namespace treeDiM.PLMPackLib.PLMPackSR {
             return base.Channel.GetComponentByGuidAsync(g);
         }
         
-        public void UpdateParamDefaultComponent(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue) {
-            base.Channel.UpdateParamDefaultComponent(g, paramDefaultValue);
+        public void UpdateParamDefaultValues(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue) {
+            base.Channel.UpdateParamDefaultValues(g, paramDefaultValue);
         }
         
-        public System.Threading.Tasks.Task UpdateParamDefaultComponentAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue) {
-            return base.Channel.UpdateParamDefaultComponentAsync(g, paramDefaultValue);
+        public System.Threading.Tasks.Task UpdateParamDefaultValuesAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] paramDefaultValue) {
+            return base.Channel.UpdateParamDefaultValuesAsync(g, paramDefaultValue);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] GetParamDefaultValue(System.Guid g) {
-            return base.Channel.GetParamDefaultValue(g);
+        public treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[] GetParamDefaultValues(System.Guid g) {
+            return base.Channel.GetParamDefaultValues(g);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[]> GetParamDefaultValueAsync(System.Guid g) {
-            return base.Channel.GetParamDefaultValueAsync(g);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCParamDefaultValue[]> GetParamDefaultValuesAsync(System.Guid g) {
+            return base.Channel.GetParamDefaultValuesAsync(g);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet UpdateMajorationSet(System.Guid g, int profileId, treeDiM.PLMPackLib.PLMPackSR.DCMajoration[] majorations) {
-            return base.Channel.UpdateMajorationSet(g, profileId, majorations);
+        public treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet UpdateMajorationSet(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet majorationSet) {
+            return base.Channel.UpdateMajorationSet(g, majorationSet);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, int profileId, treeDiM.PLMPackLib.PLMPackSR.DCMajoration[] majorations) {
-            return base.Channel.UpdateMajorationSetAsync(g, profileId, majorations);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> UpdateMajorationSetAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet majorationSet) {
+            return base.Channel.UpdateMajorationSetAsync(g, majorationSet);
         }
         
-        public treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet GetMajorationSet(System.Guid g, int profileId) {
-            return base.Channel.GetMajorationSet(g, profileId);
+        public treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet GetMajorationSet(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile profile) {
+            return base.Channel.GetMajorationSet(g, profile);
         }
         
-        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> GetMajorationSetAsync(System.Guid g, int profileId) {
-            return base.Channel.GetMajorationSetAsync(g, profileId);
+        public System.Threading.Tasks.Task<treeDiM.PLMPackLib.PLMPackSR.DCMajorationSet> GetMajorationSetAsync(System.Guid g, treeDiM.PLMPackLib.PLMPackSR.DCCardboardProfile profile) {
+            return base.Channel.GetMajorationSetAsync(g, profile);
         }
     }
 }

@@ -1126,6 +1126,12 @@ namespace PLMPackLibClient.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/RemoveInterest", ReplyAction="http://tempuri.org/IPLMPackService/RemoveInterestResponse")]
         void RemoveInterest(string grpId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupByName", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupByNameResponse")]
+        PLMPackLibClient.PLMPackSR.DCGroup GetGroupByName(string grpName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetGroupEveryone", ReplyAction="http://tempuri.org/IPLMPackService/GetGroupEveryoneResponse")]
+        PLMPackLibClient.PLMPackSR.DCGroup GetGroupEveryone();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetAllCardboardFormats", ReplyAction="http://tempuri.org/IPLMPackService/GetAllCardboardFormatsResponse")]
         PLMPackLibClient.PLMPackSR.DCCardboadFormat[] GetAllCardboardFormats();
         
@@ -1171,6 +1177,9 @@ namespace PLMPackLibClient.PLMPackSR {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewFileResponse")]
         PLMPackLibClient.PLMPackSR.DCFile CreateNewFile(System.Guid g, string ext);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/UploadDefault", ReplyAction="http://tempuri.org/IPLMPackService/UploadDefaultResponse")]
+        System.Guid UploadDefault(string defName, string fileExt);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFile", ReplyAction="http://tempuri.org/IPLMPackService/CreateNewThumbnailFromFileResponse")]
         PLMPackLibClient.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(PLMPackLibClient.PLMPackSR.DCFile file);
         
@@ -1202,7 +1211,10 @@ namespace PLMPackLibClient.PLMPackSR {
         PLMPackLibClient.PLMPackSR.DCTreeNode CreateNewNodeComponent(PLMPackLibClient.PLMPackSR.DCTreeNode parentNode, string name, string description, PLMPackLibClient.PLMPackSR.DCThumbnail thumb, PLMPackLibClient.PLMPackSR.DCFile compFile, System.Guid compGuid, PLMPackLibClient.PLMPackSR.DCMajorationSet[] majorationSets, PLMPackLibClient.PLMPackSR.DCParamDefaultValue[] defaultValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareTreeNode", ReplyAction="http://tempuri.org/IPLMPackService/ShareTreeNodeResponse")]
-        void ShareTreeNode(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode, string grpId);
+        void ShareTreeNode(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode, PLMPackLibClient.PLMPackSR.DCGroup dcGroup);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/ShareEveryone", ReplyAction="http://tempuri.org/IPLMPackService/ShareEveryoneResponse")]
+        void ShareEveryone(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPLMPackService/GetComponentByGuid", ReplyAction="http://tempuri.org/IPLMPackService/GetComponentByGuidResponse")]
         PLMPackLibClient.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g);
@@ -1279,6 +1291,14 @@ namespace PLMPackLibClient.PLMPackSR {
             base.Channel.RemoveInterest(grpId);
         }
         
+        public PLMPackLibClient.PLMPackSR.DCGroup GetGroupByName(string grpName) {
+            return base.Channel.GetGroupByName(grpName);
+        }
+        
+        public PLMPackLibClient.PLMPackSR.DCGroup GetGroupEveryone() {
+            return base.Channel.GetGroupEveryone();
+        }
+        
         public PLMPackLibClient.PLMPackSR.DCCardboadFormat[] GetAllCardboardFormats() {
             return base.Channel.GetAllCardboardFormats();
         }
@@ -1339,6 +1359,10 @@ namespace PLMPackLibClient.PLMPackSR {
             return base.Channel.CreateNewFile(g, ext);
         }
         
+        public System.Guid UploadDefault(string defName, string fileExt) {
+            return base.Channel.UploadDefault(defName, fileExt);
+        }
+        
         public PLMPackLibClient.PLMPackSR.DCThumbnail CreateNewThumbnailFromFile(PLMPackLibClient.PLMPackSR.DCFile file) {
             return base.Channel.CreateNewThumbnailFromFile(file);
         }
@@ -1379,8 +1403,12 @@ namespace PLMPackLibClient.PLMPackSR {
             return base.Channel.CreateNewNodeComponent(parentNode, name, description, thumb, compFile, compGuid, majorationSets, defaultValues);
         }
         
-        public void ShareTreeNode(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode, string grpId) {
-            base.Channel.ShareTreeNode(dcNode, grpId);
+        public void ShareTreeNode(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode, PLMPackLibClient.PLMPackSR.DCGroup dcGroup) {
+            base.Channel.ShareTreeNode(dcNode, dcGroup);
+        }
+        
+        public void ShareEveryone(PLMPackLibClient.PLMPackSR.DCTreeNode dcNode) {
+            base.Channel.ShareEveryone(dcNode);
         }
         
         public PLMPackLibClient.PLMPackSR.DCComponent GetComponentByGuid(System.Guid g) {

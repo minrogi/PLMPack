@@ -75,12 +75,7 @@ VALUES (UserId, GroupId)
 MERGE INTO Files As Target
 USING (VALUES
 	-- TREEDIM
-	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2)),
-	-- FOLDER
-	(N'affbf3ec-cca4-4ebe-87c7-03960a7134d6', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2))
-
-
-	-- 
+	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', N'png', CAST('2016-01-01 12:00:00 AM' AS DATETIME2))
 )
 AS Source(Guid, Extension, DateCreated)
 ON Target.Guid=Source.Guid
@@ -96,9 +91,7 @@ VALUES (Guid, Extension, DateCreated)
 MERGE INTO Thumbnails As Target
 USING (VALUES
 	--TREEDIM
-	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', 150, 150, N'image/png'),
-	--FOLDER
-	(N'affbf3ec-cca4-4ebe-87c7-03960a7134d6', 150, 150, N'image/png')
+	(N'3BD67B77-6BB4-4A5E-AD49-46F686CA6340', 150, 150, N'image/png')
 )
 AS Source(FileGuid, Width, Height, MimeType)
 ON Target.FileGuid=Source.FileGuid
@@ -125,4 +118,16 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT (Id, Name, Description, ThumbnailId, ParentNodeId, GroupId)
 VALUES (Id, Name, Description, ThumbnailId, ParentNodeId, GroupId)
 ;
- 
+
+MERGE INTO TreeNodeGroupShares as Target
+USING (VALUES
+	(N'072D09C6-023C-45A7-8111-226BF1FD9218', N'2a1c6794-c753-4665-a002-3c2a8b99ad72')
+)
+AS Source(TreeNodeId, GroupId)
+ON Target.TreeNodeId=Source.TreeNodeId AND Target.GroupId=Source.GroupId
+-- update matched rows
+-- insert new row
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (TreeNodeId, GroupId)
+VALUES (TreeNodeId, GroupId)
+; 

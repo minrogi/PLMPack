@@ -31,11 +31,11 @@ namespace treeDiM.PLMPackLib
             // begin
             if (null != callback) callback.Begin();
             // connect
-            _client = new PLMPackSR.PLMPackServiceClient();
-            _client.ClientCredentials.UserName.UserName = UserName;
-            _client.ClientCredentials.UserName.Password = Password;
+            PLMPackSR.PLMPackServiceClient client = new PLMPackSR.PLMPackServiceClient();
+            client.ClientCredentials.UserName.UserName = UserName;
+            client.ClientCredentials.UserName.Password = Password;
 
-            PLMPackSR.DCUser user = _client.Connect();
+            PLMPackSR.DCUser user = client.Connect();
             if (user != null)
             {   if (null != callback)   callback.Info(string.Format("Connection successful: {0}", user.Email));  }
             else
@@ -44,117 +44,183 @@ namespace treeDiM.PLMPackLib
                 return;
             }
 
+            // ### upload default thumbnails
+            Dictionary<string, string> defNameDict = new Dictionary<string, string>()
+            {
+                { "AI", "Ai.png"},
+                { "ARD","ARD.png"},
+                { "CALC", "Calc.png"},
+                { "CCF2", "CFF2.png"},
+                { "DXF", "DXF.png"},
+                { "EPS", "EPS.png"},
+                { "EXCEL", "Excel.png"},
+                { "FOLDER", "Folder.png"},
+                { "IMAGE", "Image.png"},
+                { "PDF", "pdf.png"},
+                { "DES3", "Picador3D.png"},
+                { "DES", "PicGEOM.png"},
+                { "PPT", "Powerpoint.png"},
+                { "WORD", "Word.png"},
+                { "WRITER", "Writer.png"}
+            };
+            foreach (KeyValuePair<string, string> entry in defNameDict)
+            {
+                string filePath = Path.Combine(RepositoryThumbnail, entry.Value);
+                Guid fileGuid = client.UploadDefault(entry.Key, Path.GetExtension(filePath).Trim('.'));
+                Upload(filePath, fileGuid, callback);
+            }
+            client.Close();
+            // ### upload default thumbnails
             PPDataContext db = new PPDataContext(_dbPath, RepositoryPath);
             CopyCardboardFormat(db, callback);
             CopyCardboardProfiles(db, callback);
             CopyTreeNodeRecursively(db, callback);
 
-            _client.Close();
             // end
             if (null != callback) callback.End();
         }
-
         private void CopyCardboardFormat(PPDataContext db, IProcessingCallback callback)
         {
             if (null != callback) callback.Info("Cardboard formats...");
+
+            PLMPackSR.PLMPackServiceClient client = new PLMPackSR.PLMPackServiceClient();
+            client.ClientCredentials.UserName.UserName = UserName;
+            client.ClientCredentials.UserName.Password = Password;
+
             foreach (CardboardFormat cf in db.CardboardFormats)
             {
                 if (null != callback)
                     callback.Info(string.Format("Cardboard format {0} ( {1} * {2} )", cf.Name, cf.Length, cf.Width));
-                if (!_client.CardboardFormatExists(cf.Name))
-                    _client.CreateNewCardboardFormat(cf.Name, cf.Description, cf.Length, cf.Width);
+                if (!client.CardboardFormatExists(cf.Name))
+                    client.CreateNewCardboardFormat(cf.Name, cf.Description, cf.Length, cf.Width);
             }
+            client.Close();
         }
         private void CopyCardboardProfiles(PPDataContext db, IProcessingCallback callback)
         {
             if (null != callback) callback.Info("Cardboard profiles...");
+
+            PLMPackSR.PLMPackServiceClient client = new PLMPackSR.PLMPackServiceClient();
+            client.ClientCredentials.UserName.UserName = UserName;
+            client.ClientCredentials.UserName.Password = Password;
+
             foreach (CardboardProfile cp in db.CardboardProfiles)
             {
                 if (null != callback)
                     callback.Info(string.Format("Cardboard profile {0} ({1})", cp.Name, cp.Thickness));
-                if (!_client.CardboardProfileExists(cp.Name))
-                    _client.CreateNewCardboardProfile(cp.Name, "", cp.Code, cp.Thickness);
+                if (!client.CardboardProfileExists(cp.Name))
+                    client.CreateNewCardboardProfile(cp.Name, "", cp.Code, cp.Thickness);
             }
-
+            client.Close();
         }
         private void CopyTreeNodeRecursively(PPDataContext db, IProcessingCallback callback)
         {
             if (null != callback) callback.Info("Tree nodes...");
+
+            PLMPackSR.PLMPackServiceClient client = new PLMPackSR.PLMPackServiceClient();
+            client.ClientCredentials.UserName.UserName = UserName;
+            client.ClientCredentials.UserName.Password = Password;
+
             List<TreeNode> rootNodes = TreeNode.GetRootNodes(db);
             string offset = string.Empty;
-            PLMPackSR.DCTreeNode userRootNode = _client.GetUserRootNode();
-            foreach (TreeNode tn in rootNodes)
-                RecursiveInsert(db, tn, userRootNode, string.Empty, callback);
+            PLMPackSR.DCTreeNode userRootNode = client.GetUserRootNode();
 
+            client.Close();
+
+            foreach (TreeNode root in rootNodes)
+            {
+                List<TreeNode> rootChildrens = root.Childrens(db);
+                foreach (TreeNode tn in rootChildrens)
+                    RecursiveInsert(db, tn, userRootNode, string.Empty, callback);
+            }
         }
-
         private void RecursiveInsert(PPDataContext db, TreeNode tn, PLMPackSR.DCTreeNode wsNode, string offset, IProcessingCallback callback)
         {
-            // create node thumbnail
-            string thumbPath = tn.Thumbnail.File.PathWRepo( RepositoryPath );
-            DCFile thFile = Upload(thumbPath, callback);
-            PLMPackSR.DCThumbnail wsThumbnail = _client.CreateNewThumbnailFromFile(thFile);
+            PLMPackSR.PLMPackServiceClient client = new PLMPackSR.PLMPackServiceClient();
+            client.ClientCredentials.UserName.UserName = UserName;
+            client.ClientCredentials.UserName.Password = Password;
 
-            string docType = string.Empty;
             PLMPackSR.DCTreeNode wsNodeChild = null;
-            if (tn.IsDocument)
+            string docType = string.Empty;
+
+            try
             {
-                // get document
-                Document doc = tn.Documents(db)[0];
-                string docPath = doc.File.PathWRepo(RepositoryPath);
-                // upload document
-                PLMPackSR.DCFile wsDocFile = Upload(docPath, callback);
+                // create node thumbnail
+                string thumbPath = tn.Thumbnail.File.PathWRepo(RepositoryPath);
+                DCFile thFile = Upload(thumbPath, callback, client);
+                PLMPackSR.DCThumbnail wsThumbnail = client.CreateNewThumbnailFromFile(thFile);
 
-                if (tn.IsComponent)
+                if (tn.IsDocument)
                 {
-                    docType = "COMPONENT";
-                    Component comp = doc.Components[0];
+                    // get document
+                    Document doc = tn.Documents(db)[0];
+                    string docPath = doc.File.PathWRepo(RepositoryPath);
+                    // upload document
+                    PLMPackSR.DCFile wsDocFile = Upload(docPath, callback, client);
 
-                    // get majorations
-                    List<PLMPackSR.DCMajorationSet> majorationSets = new List<PLMPackSR.DCMajorationSet>();
-                    foreach (MajorationSet majoSet in comp.MajorationSets)
+                    if (tn.IsComponent)
                     {
-                        DCCardboardProfile cbProfile = _client.GetCardboardProfileByName(majoSet.CardboardProfile.Name);
-                        string sMajo = string.Empty;
-                        List<DCMajoration> dcMajorationList = new List<DCMajoration>();
-                        foreach (Majoration majo in majoSet.Majorations)
+                        docType = "COMPONENT";
+                        Component comp = doc.Components[0];
+
+                        // get majorations
+                        List<PLMPackSR.DCMajorationSet> majorationSets = new List<PLMPackSR.DCMajorationSet>();
+                        foreach (MajorationSet majoSet in comp.MajorationSets)
                         {
-                            sMajo += string.Format("({0}={1})", majo.Name, majo.Value);
-                            dcMajorationList.Add(new DCMajoration() { Name = majo.Name, Value = majo.Value });
-                        }
-                        majorationSets.Add(
-                            new DCMajorationSet()
+                            DCCardboardProfile cbProfile = client.GetCardboardProfileByName(majoSet.CardboardProfile.Name);
+                            string sMajo = string.Empty;
+                            List<DCMajoration> dcMajorationList = new List<DCMajoration>();
+                            foreach (Majoration majo in majoSet.Majorations)
                             {
-                                Profile = cbProfile,
-                                Majorations = dcMajorationList.ToArray()
+                                sMajo += string.Format("({0}={1})", majo.Name, majo.Value);
+                                dcMajorationList.Add(new DCMajoration() { Name = majo.Name, Value = majo.Value });
                             }
-                            );
+                            majorationSets.Add(
+                                new DCMajorationSet()
+                                {
+                                    Profile = cbProfile,
+                                    Majorations = dcMajorationList.ToArray()
+                                }
+                                );
 
-                        if (null != callback)
-                            callback.Info(string.Format("{0} - {1}", majoSet.CardboardProfile.Name, sMajo));
+                            if (null != callback)
+                                callback.Info(string.Format("{0} - {1}", majoSet.CardboardProfile.Name, sMajo));
+                        }
+                        // get default parameter values
+                        List<PLMPackSR.DCParamDefaultValue> paramDefaultValues = new List<PLMPackSR.DCParamDefaultValue>();
+                        foreach (ParamDefaultValue pdv in comp.ParamDefaultValues)
+                            paramDefaultValues.Add(new DCParamDefaultValue() { Name = pdv.Name, Value = pdv.Value });
+
+                        PLMPackSR.DCTreeNode wsNodeComp = client.CreateNewNodeComponent(
+                            wsNode, tn.Name, tn.Description
+                            , wsThumbnail, wsDocFile, doc.Components[0].Guid
+                            , majorationSets.ToArray(), paramDefaultValues.ToArray());
+                        client.ShareEveryone(wsNodeComp);
                     }
-                    // get default parameter values
-                    List<PLMPackSR.DCParamDefaultValue> paramDefaultValues = new List<PLMPackSR.DCParamDefaultValue>();
-                    foreach (ParamDefaultValue pdv in comp.ParamDefaultValues)
-                        paramDefaultValues.Add(new DCParamDefaultValue() { Name = pdv.Name, Value = pdv.Value });
-
-                    PLMPackSR.DCTreeNode wsNodeComp = _client.CreateNewNodeComponent(
-                        wsNode, tn.Name, tn.Description
-                        , wsThumbnail, wsDocFile, doc.Components[0].Guid
-                        , majorationSets.ToArray(), paramDefaultValues.ToArray());
+                    else
+                    {
+                        docType = "DOCUMENT";
+                        PLMPackSR.DCTreeNode wsNodeDocument = client.CreateNewNodeDocument(wsNode, tn.Name, tn.Description
+                            , wsThumbnail, wsDocFile);
+                        client.ShareEveryone(wsNodeDocument);
+                    }
                 }
                 else
                 {
-                    docType = "DOCUMENT";
-                    PLMPackSR.DCTreeNode wsNodeDocument = _client.CreateNewNodeDocument(wsNode, tn.Name, tn.Description
-                        , wsThumbnail, wsDocFile, docType);
-                }                    
+                    docType = "BRANCH";
+                    wsNodeChild = client.CreateNewNodeBranch(wsNode, tn.Name, tn.Description, wsThumbnail);
+                    client.ShareEveryone(wsNodeChild);
+                }
+
+                client.Close();
             }
-            else
+            catch (Exception ex)
             {
-                docType = "BRANCH";
-                wsNodeChild = _client.CreateNewNodeBranch(wsNode, tn.Name, tn.Description, wsThumbnail);
+                client.Abort();
+                if (null != callback)
+                    callback.Error(ex.ToString());
             }
+
             if (null == wsNodeChild)
                 return;
 
@@ -190,14 +256,20 @@ namespace treeDiM.PLMPackLib
         #endregion
 
         #region Helpers
-        private PLMPackSR.DCFile Upload(string filePath, IProcessingCallback callback)
+        private PLMPackSR.DCFile Upload(string filePath, IProcessingCallback callback, PLMPackSR.PLMPackServiceClient client)
         {
             if (null != callback)
                 callback.Info(string.Format(_actuallyUpload ? "Uploading {0}..." : "Not actually uploading {0}...", Path.GetFileName(filePath)));
-            return _client.CreateNewFile(
+            return client.CreateNewFile(
                 _actuallyUpload ? FileTransferUtility.UploadFile(filePath) : Guid.NewGuid()
                 , Path.GetExtension(filePath)
                 );
+        }
+        private void Upload(string filePath, Guid g, IProcessingCallback callback)
+        { 
+            if (null != callback)
+                callback.Info(string.Format(_actuallyUpload ? "Uploading {0}..." : "Not actually uploading {0}...", Path.GetFileName(filePath)));
+            FileTransferUtility.UploadFile(filePath, g);        
         }
         private string RepositoryPath
         {
@@ -206,13 +278,19 @@ namespace treeDiM.PLMPackLib
                 return Path.Combine(Directory.GetParent(Path.GetDirectoryName(_dbPath)).FullName, "Documents");
             }
         }
+        private string RepositoryThumbnail
+        {
+            get
+            {
+                return Path.Combine(Directory.GetParent(Path.GetDirectoryName(_dbPath)).FullName, "Thumbnails");
+            }
+        }
         #endregion
 
         #region Data members
         private string _dbPath;
         private string _userName, _password;
         private bool _actuallyUpload = true;
-        private PLMPackSR.PLMPackServiceClient _client;
         #endregion
     }
 }

@@ -86,14 +86,14 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Service References\PLMPackSR\PLMPackService.wsdl" />
-    <None Include="Service References\PLMPackSR\PLMPackService.xsd">
+    <None Include="Service References\PLMPackSR\PLMPackService1.wsdl" />
+    <None Include="Service References\PLMPackSR\PLMPackService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PLMPackSR\PLMPackService1.xsd">
+    <None Include="Service References\PLMPackSR\PLMPackService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PLMPackSR\PLMPackService2.xsd">
+    <None Include="Service References\PLMPackSR\PLMPackService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\PLMPackSR\treeDiM.PLMPackLib.PLMPackSR.DCCardboadFormat.datasource">
@@ -140,9 +140,6 @@
     <WCFMetadataStorage Include="Service References\PLMPackSR\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\PLMPackSR\PLMPackService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\PLMPackSR\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +150,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PLMPackSR\PLMPackService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,7 +30,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="RegisterURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://www.google.fr/</Value>
+      <Value Profile="(Default)">http://plmpack.azurewebsites.net/Account/Register</Value>
     </Setting>
   </Settings>
 </SettingsFile>

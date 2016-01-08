@@ -31,6 +31,10 @@ namespace PLMPack
         void AddInterest(string grpId);
         [OperationContract]
         void RemoveInterest(string grpId);
+        [OperationContract]
+        DCGroup GetGroupByName(string grpName);
+        [OperationContract]
+        DCGroup GetGroupEveryone();
         #endregion
 
         #region Cardboard format
@@ -74,6 +78,8 @@ namespace PLMPack
 
         #region Thumbnail
         [OperationContract]
+        Guid UploadDefault(string defName, string fileExt);
+        [OperationContract]
         DCThumbnail CreateNewThumbnailFromFile(DCFile file);
         [OperationContract]
         DCThumbnail CreateNewThumbnail(Guid g, string ext);
@@ -99,7 +105,9 @@ namespace PLMPack
         DCTreeNode CreateNewNodeComponent(DCTreeNode parentNode, string name, string description, DCThumbnail thumb
             , DCFile compFile, Guid compGuid, DCMajorationSet[] majorationSets, DCParamDefaultValue[] defaultValues);
         [OperationContract]
-        void ShareTreeNode(DCTreeNode dcNode, string grpId);
+        void ShareTreeNode(DCTreeNode dcNode, DCGroup dcGroup);
+        [OperationContract]
+        void ShareEveryone(DCTreeNode dcNode);
         #endregion
 
         #region Components

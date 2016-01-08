@@ -38,6 +38,7 @@ namespace PLMPackModel
         #region Current group
         public Group CurrentGroup(PLMPackEntities db)
         {
+            if (string.IsNullOrEmpty(GroupId)) return null;
             return db.Groups.Single(grp => grp.Id == GroupId);
         }
         public void SetCurrentGroup(PLMPackEntities db, Group gp)
@@ -50,23 +51,35 @@ namespace PLMPackModel
         {
             if (string.IsNullOrEmpty(GroupId))
             {
-                string grpName = UserName;
+                string userName = UserName;
                 // create group using user name
                 Group grp = Group.CreateNew(db
-                    , string.Format("{0}_grp", grpName), string.Format("Default group of user {0}", grpName)
-                    , this);
-                grp.AspNetUsers.Add(this);
-                GroupId = grp.Id;
+                    , string.Format("{0}_grp", userName) // group name
+                    , string.Format("Default group of user {0}", userName) // group description
+                    , this  // owner
+                    );
+                // set as current group
+                this.GroupId = grp.Id;
                 db.SaveChanges();
-                // create interest
+                // add group of interest treeDiM
                 Group grp_treeDiM = Group.GetByName(db, "treeDiM");
                 if (null != grp_treeDiM)
                     AddGroupOfInterest(db, grp_treeDiM);
-                db.SaveChanges();
-                // create group root node
-                Thumbnail thumb = Thumbnail.GetDefaultThumbnail(db, "FOLDER");
-                TreeNode tn = TreeNode.CreateNew(db, grp.Id, null, grp.GroupName, grp.GroupDesc, thumb.Id);
+                // share user root node
+                TreeNode tn = TreeNode.GetUserRootNode(db, this);
                 tn.Share(db, this, Group.Everyone(db));
+ 
+                if (null != grp_treeDiM)
+                {
+                    // copy cardboard formats from treeDiM group
+                    CardboardFormat[] cardboardFormats = CardboardFormat.GetAll(db, grp_treeDiM);
+                    foreach (CardboardFormat cf in cardboardFormats)
+                        CardboardFormat.CreateNew(db, grp, cf.Name, cf.Description, cf.Length, cf.Width);
+                    // copy cardboard profile from treeDiM group
+                    CardboardProfile[] cardboardProfiles = CardboardProfile.GetAll(db, grp_treeDiM);
+                    foreach (CardboardProfile cp in cardboardProfiles)
+                        CardboardProfile.CreateNew(db, grp, cp.Name, cp.Description, cp.Code, cp.Thickness);
+                }
             }
         }
         #endregion
@@ -120,6 +133,18 @@ namespace PLMPackModel
     }
     #endregion
 
+    #region Group
+    public partial class Group
+    {
+        #region Non static methods
+        public List<AspNetUser> GetAllUsers(PLMPackEntities db)
+        {
+            return new List<AspNetUser>( db.AspNetUsers.Where(u => u.GroupId == Id) );
+        }
+        #endregion
+    }
+    #endregion
+
     #region TreeNode
     public partial class TreeNode : IEquatable<TreeNode>, IComparable<TreeNode>
     {
@@ -148,7 +173,8 @@ namespace PLMPackModel
             tn.ThumbnailId = thumbId;
             db.TreeNodes.Add(tn);
             db.SaveChanges();
-            return tn;
+
+            return db.TreeNodes.Single(n => n.Id == tn.Id);
         }
 
         public static TreeNode GetById(PLMPackEntities db
@@ -560,7 +586,7 @@ namespace PLMPackModel
 
         public static Thumbnail DefaultFolder(PLMPackEntities db)
         {
-            return db.Thumbnails.Single(tb => tb.Id == 0);
+            return GetDefaultThumbnail(db, "FOLDER");
         }
 
         public static Thumbnail GetByID(PLMPackEntities db, int id)
@@ -588,9 +614,19 @@ namespace PLMPackModel
             }
         }
 
+        public static Guid GetDefaultGuid(string defName)
+        {
+            return Guid.Parse( _tbDictionary[defName] );
+        }
+
         public static Thumbnail GetDefaultThumbnail(PLMPackEntities db, string defName)
         {
-            return db.Thumbnails.Single(tb => tb.FileGuid == _tbDictionary[defName]);
+            if (!_tbDictionary.Keys.Contains(defName))
+                return null;
+            string sGuidThumb = _tbDictionary[defName];
+            if (db.Thumbnails.Count(tb => string.Equals(sGuidThumb, tb.FileGuid)) != 1)
+                return null;
+            return db.Thumbnails.Single(tb => string.Equals(sGuidThumb, tb.FileGuid));
         }
 
         public static string Ext2MimeType(string fileExt)
@@ -606,7 +642,7 @@ namespace PLMPackModel
         }
         #endregion
         #region Data members
-        private static Dictionary<string, string> _tbDictionary = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> _tbDictionary = new Dictionary<string, string>
         {
             {"AI", "170d61ac-f1fe-47c4-91d2-34fa77809a80"},
             {"ARD", "a35e4d06-4690-4b39-937c-f82c97f83ed7"},
@@ -615,7 +651,7 @@ namespace PLMPackModel
             {"DXF", "527bfef2-db22-4189-93d1-27ce43443fc3"},
             {"EPS", "9742cede-798c-4ad0-9481-7cd8373ad1df"},
             {"EXCEL", "a35e4d06-4690-4b39-937c-f82c97f83ed7"},
-            {"FOLDER", "affbf3ec-cca4-4ebe-87c7-03960a7134d6"},
+            {"FOLDER", "707ef9c1-8ebe-4349-821c-f6a52eda8f64"},
             {"IMAGE", "12b59ba9-6367-4e4f-98d8-11abaa26ba5d"},
             {"PDF", "527bfef2-db22-4189-93d1-27ce43443fc3"},
             {"DES3", "50195740-8652-41b0-a767-c11c08c44acd"},

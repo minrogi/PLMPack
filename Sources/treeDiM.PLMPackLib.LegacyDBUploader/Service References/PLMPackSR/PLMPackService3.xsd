@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PLMPack" />
-  <xs:import schemaLocation="https://localhost:44302/PLMPackService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://plmpack.azurewebsites.net/PLMPackService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PLMPack" />
+  <xs:import schemaLocation="https://plmpack.azurewebsites.net/PLMPackService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:element name="get_UserName">
     <xs:complexType>
       <xs:sequence />
@@ -96,6 +96,32 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetGroupByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="grpName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGroupByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetGroupByNameResult" nillable="true" type="q4:DCGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGroupEveryone">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGroupEveryoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetGroupEveryoneResult" nillable="true" type="q5:DCGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAllCardboardFormats">
     <xs:complexType>
       <xs:sequence />
@@ -104,7 +130,7 @@
   <xs:element name="GetAllCardboardFormatsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetAllCardboardFormatsResult" nillable="true" type="q4:ArrayOfDCCardboadFormat" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetAllCardboardFormatsResult" nillable="true" type="q6:ArrayOfDCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -118,7 +144,7 @@
   <xs:element name="GetCardboardFormatByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardFormatByIDResult" nillable="true" type="q5:DCCardboadFormat" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardFormatByIDResult" nillable="true" type="q7:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -146,7 +172,7 @@
   <xs:element name="GetCardboardFormatByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardFormatByNameResult" nillable="true" type="q6:DCCardboadFormat" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardFormatByNameResult" nillable="true" type="q8:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,14 +189,14 @@
   <xs:element name="CreateNewCardboardFormatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewCardboardFormatResult" nillable="true" type="q7:DCCardboadFormat" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewCardboardFormatResult" nillable="true" type="q9:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveCardboardFormat">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbFormat" nillable="true" type="q8:DCCardboadFormat" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbFormat" nillable="true" type="q10:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -182,14 +208,14 @@
   <xs:element name="UpdateCardboardFormat">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbFormat" nillable="true" type="q9:DCCardboadFormat" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbFormat" nillable="true" type="q11:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCardboardFormatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateCardboardFormatResult" nillable="true" type="q10:DCCardboadFormat" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateCardboardFormatResult" nillable="true" type="q12:DCCardboadFormat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,7 +227,7 @@
   <xs:element name="GetAllCardboardProfileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetAllCardboardProfileResult" nillable="true" type="q11:ArrayOfDCCardboardProfile" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetAllCardboardProfileResult" nillable="true" type="q13:ArrayOfDCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -215,7 +241,7 @@
   <xs:element name="GetCardboardProfileByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardProfileByIDResult" nillable="true" type="q12:DCCardboardProfile" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardProfileByIDResult" nillable="true" type="q14:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -243,7 +269,7 @@
   <xs:element name="GetCardboardProfileByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardProfileByNameResult" nillable="true" type="q13:DCCardboardProfile" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetCardboardProfileByNameResult" nillable="true" type="q15:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -260,14 +286,14 @@
   <xs:element name="CreateNewCardboardProfileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewCardboardProfileResult" nillable="true" type="q14:DCCardboardProfile" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewCardboardProfileResult" nillable="true" type="q16:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveCardboardProfile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbProfile" nillable="true" type="q15:DCCardboardProfile" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbProfile" nillable="true" type="q17:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -279,21 +305,21 @@
   <xs:element name="UpdateCardboardProfile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbProfile" nillable="true" type="q16:DCCardboardProfile" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="cbProfile" nillable="true" type="q18:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateCardboardProfileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateCardboardProfileResult" nillable="true" type="q17:DCCardboardProfile" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateCardboardProfileResult" nillable="true" type="q19:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q18:guid" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q20:guid" />
         <xs:element minOccurs="0" name="ext" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -301,28 +327,43 @@
   <xs:element name="CreateNewFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewFileResult" nillable="true" type="q19:DCFile" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewFileResult" nillable="true" type="q21:DCFile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadDefault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="defName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fileExt" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadDefaultResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="UploadDefaultResult" type="q22:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewThumbnailFromFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="file" nillable="true" type="q20:DCFile" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="file" nillable="true" type="q23:DCFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewThumbnailFromFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewThumbnailFromFileResult" nillable="true" type="q21:DCThumbnail" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewThumbnailFromFileResult" nillable="true" type="q24:DCThumbnail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewThumbnail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q22:guid" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q25:guid" />
         <xs:element minOccurs="0" name="ext" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -330,7 +371,7 @@
   <xs:element name="CreateNewThumbnailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewThumbnailResult" nillable="true" type="q23:DCThumbnail" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewThumbnailResult" nillable="true" type="q26:DCThumbnail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -344,7 +385,7 @@
   <xs:element name="GetDefaultThumbnailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetDefaultThumbnailResult" nillable="true" type="q24:DCThumbnail" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetDefaultThumbnailResult" nillable="true" type="q27:DCThumbnail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -358,7 +399,7 @@
   <xs:element name="GetThumbnailByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetThumbnailByIdResult" nillable="true" type="q25:DCThumbnail" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetThumbnailByIdResult" nillable="true" type="q28:DCThumbnail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -370,7 +411,7 @@
   <xs:element name="GetRootNodesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetRootNodesResult" nillable="true" type="q26:ArrayOfDCTreeNode" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetRootNodesResult" nillable="true" type="q29:ArrayOfDCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -382,85 +423,85 @@
   <xs:element name="GetUserRootNodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetUserRootNodeResult" nillable="true" type="q27:DCTreeNode" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetUserRootNodeResult" nillable="true" type="q30:DCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTreeNodeChildrens">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q28:guid" />
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q31:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTreeNodeChildrensResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetTreeNodeChildrensResult" nillable="true" type="q29:ArrayOfDCTreeNode" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetTreeNodeChildrensResult" nillable="true" type="q32:ArrayOfDCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeBranch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q30:DCTreeNode" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q33:DCTreeNode" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q31:DCThumbnail" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q34:DCThumbnail" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeBranchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeBranchResult" nillable="true" type="q32:DCTreeNode" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeBranchResult" nillable="true" type="q35:DCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeDocument">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q33:DCTreeNode" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q36:DCTreeNode" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q34:DCThumbnail" />
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dFile" nillable="true" type="q35:DCFile" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q37:DCThumbnail" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dFile" nillable="true" type="q38:DCFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeDocumentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeDocumentResult" nillable="true" type="q36:DCTreeNode" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeDocumentResult" nillable="true" type="q39:DCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeComponent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q37:DCTreeNode" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="parentNode" nillable="true" type="q40:DCTreeNode" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q38:DCThumbnail" />
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="compFile" nillable="true" type="q39:DCFile" />
-        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="compGuid" type="q40:guid" />
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="majorationSets" nillable="true" type="q41:ArrayOfDCMajorationSet" />
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="defaultValues" nillable="true" type="q42:ArrayOfDCParamDefaultValue" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="thumb" nillable="true" type="q41:DCThumbnail" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="compFile" nillable="true" type="q42:DCFile" />
+        <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="compGuid" type="q43:guid" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="majorationSets" nillable="true" type="q44:ArrayOfDCMajorationSet" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="defaultValues" nillable="true" type="q45:ArrayOfDCParamDefaultValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateNewNodeComponentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeComponentResult" nillable="true" type="q43:DCTreeNode" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="CreateNewNodeComponentResult" nillable="true" type="q46:DCTreeNode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ShareTreeNode">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dcNode" nillable="true" type="q44:DCTreeNode" />
-        <xs:element minOccurs="0" name="grpId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dcNode" nillable="true" type="q47:DCTreeNode" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dcGroup" nillable="true" type="q48:DCGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -469,25 +510,37 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ShareEveryone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="dcNode" nillable="true" type="q49:DCTreeNode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShareEveryoneResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetComponentByGuid">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q45:guid" />
+        <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q50:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetComponentByGuidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetComponentByGuidResult" nillable="true" type="q46:DCComponent" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetComponentByGuidResult" nillable="true" type="q51:DCComponent" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateParamDefaultValues">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q47:guid" />
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="paramDefaultValue" nillable="true" type="q48:ArrayOfDCParamDefaultValue" />
+        <xs:element xmlns:q52="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q52:guid" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="paramDefaultValue" nillable="true" type="q53:ArrayOfDCParamDefaultValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -499,44 +552,44 @@
   <xs:element name="GetParamDefaultValues">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q49:guid" />
+        <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q54:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetParamDefaultValuesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetParamDefaultValuesResult" nillable="true" type="q50:ArrayOfDCParamDefaultValue" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetParamDefaultValuesResult" nillable="true" type="q55:ArrayOfDCParamDefaultValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateMajorationSet">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q51:guid" />
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="majorationSet" nillable="true" type="q52:DCMajorationSet" />
+        <xs:element xmlns:q56="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q56:guid" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="majorationSet" nillable="true" type="q57:DCMajorationSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateMajorationSetResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateMajorationSetResult" nillable="true" type="q53:DCMajorationSet" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="UpdateMajorationSetResult" nillable="true" type="q58:DCMajorationSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetMajorationSet">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q54:guid" />
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="profile" nillable="true" type="q55:DCCardboardProfile" />
+        <xs:element xmlns:q59="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="g" type="q59:guid" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="profile" nillable="true" type="q60:DCCardboardProfile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetMajorationSetResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetMajorationSetResult" nillable="true" type="q56:DCMajorationSet" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/PLMPack" minOccurs="0" name="GetMajorationSetResult" nillable="true" type="q61:DCMajorationSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
